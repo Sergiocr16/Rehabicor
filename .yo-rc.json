@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.aditum.rehabicor",
+            "nativeLanguage": "es"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "rehabicor",
+        "packageName": "com.aditum.rehabicor",
+        "packageFolder": "com/aditum/rehabicor",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": false,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "mysql",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "NmViYTU0N2FhNzQ4ZThkNTk3MTg5ODNhNGExM2M2YzI4YWUwY2EzY2RlZmQzNDRmZmNhZDM1ZGI3MDI5YmQ4ZjU2NmYyNzg1ZDNiMWEwOTExNDYyM2Q5MGUwZDlkZWU3NzFhYTJiMmExOTQ1YjY5ZTg1Y2EwZTM0ZThlZjVmMWU=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "es",
+        "languages": ["es", "en"]
+    }
+}
