@@ -58,6 +58,12 @@ public class NonSpecificPainsSessionService {
             .map(nonSpecificPainsSessionMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Page<NonSpecificPainsSessionDTO> findAllBySession(Pageable pageable, Long sessionId) {
+        log.debug("Request to get all NonSpecificPainsSessions");
+        return nonSpecificPainsSessionRepository.findAllBySessionId(pageable,sessionId)
+            .map(nonSpecificPainsSessionMapper::toDto);
+    }
 
     /**
      * Get one nonSpecificPainsSession by id.

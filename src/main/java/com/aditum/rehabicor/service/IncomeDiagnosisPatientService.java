@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,11 +42,25 @@ public class IncomeDiagnosisPatientService {
      */
     public IncomeDiagnosisPatientDTO save(IncomeDiagnosisPatientDTO incomeDiagnosisPatientDTO) {
         log.debug("Request to save IncomeDiagnosisPatient : {}", incomeDiagnosisPatientDTO);
+
         IncomeDiagnosisPatient incomeDiagnosisPatient = incomeDiagnosisPatientMapper.toEntity(incomeDiagnosisPatientDTO);
+        Optional<IncomeDiagnosisPatient> incomeDiagnosisPatientOld = incomeDiagnosisPatientRepository.findFirstByInitialAssessmentIdAndIncomeDiagnosisRelation(incomeDiagnosisPatientDTO.getInitialAssessmentId(),incomeDiagnosisPatientDTO.getIncomeDiagnosisRelation());
+        if(incomeDiagnosisPatientOld.isPresent()){
+            this.delete(incomeDiagnosisPatientOld.get().getId());
+        }
         incomeDiagnosisPatient = incomeDiagnosisPatientRepository.save(incomeDiagnosisPatient);
         return incomeDiagnosisPatientMapper.toDto(incomeDiagnosisPatient);
     }
 
+    @Transactional(readOnly = true)
+    public List<IncomeDiagnosisPatientDTO> findAllByInitialAsessment(Long initialAsessmentId) {
+        log.debug("Request to get all ComorbiditiesPatients");
+        List<IncomeDiagnosisPatientDTO> formatedIncomeDiagnosis= new ArrayList<>();
+        incomeDiagnosisPatientRepository.findByInitialAssessmentId(initialAsessmentId).forEach(incomeDiagnosisPatient -> {
+            formatedIncomeDiagnosis.add(this.incomeDiagnosisPatientMapper.toDto(incomeDiagnosisPatient));
+        });
+        return formatedIncomeDiagnosis;
+    }
     /**
      * Get all the incomeDiagnosisPatients.
      *

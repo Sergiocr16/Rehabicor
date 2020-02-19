@@ -57,7 +57,12 @@ public class DepressiveSymptomService {
         return depressiveSymptomRepository.findAll(pageable)
             .map(depressiveSymptomMapper::toDto);
     }
-
+    @Transactional(readOnly = true)
+    public Page<DepressiveSymptomDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all DepressiveSymptoms");
+        return depressiveSymptomRepository.findByRehabilitationCenterIdAndAndDeleted(pageable,rehabilitationId, false)
+            .map(depressiveSymptomMapper::toDto);
+    }
 
     /**
      * Get one depressiveSymptom by id.

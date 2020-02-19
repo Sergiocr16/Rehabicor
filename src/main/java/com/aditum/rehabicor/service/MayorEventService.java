@@ -31,7 +31,12 @@ public class MayorEventService {
         this.mayorEventRepository = mayorEventRepository;
         this.mayorEventMapper = mayorEventMapper;
     }
-
+    @Transactional(readOnly = true)
+    public Page<MayorEventDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all MayorEvents");
+        return mayorEventRepository.findByRehabilitationCenterIdAndAndDeleted(pageable,rehabilitationId, false)
+            .map(mayorEventMapper::toDto);
+    }
     /**
      * Save a mayorEvent.
      *

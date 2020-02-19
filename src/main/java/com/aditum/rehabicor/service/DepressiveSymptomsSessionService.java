@@ -58,7 +58,12 @@ public class DepressiveSymptomsSessionService {
             .map(depressiveSymptomsSessionMapper::toDto);
     }
 
-
+    @Transactional(readOnly = true)
+    public Page<DepressiveSymptomsSessionDTO> findAllBySession(Pageable pageable,Long sessionId) {
+        log.debug("Request to get all DepressiveSymptomsSessions");
+        return depressiveSymptomsSessionRepository.findAllBySessionId(pageable,sessionId)
+            .map(depressiveSymptomsSessionMapper::toDto);
+    }
     /**
      * Get one depressiveSymptomsSession by id.
      *

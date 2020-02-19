@@ -27,6 +27,16 @@ public class RehabilitationGroupDTO implements Serializable {
 
     private Long rehabilitationCenterId;
 
+    private PanelDataDTO panelData;
+
+    public PanelDataDTO getPanelData() {
+        return panelData;
+    }
+
+    public void setPanelData(PanelDataDTO panelData) {
+        this.panelData = panelData;
+    }
+
     public Long getId() {
         return id;
     }

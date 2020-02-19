@@ -2,11 +2,13 @@ package com.aditum.rehabicor.service;
 
 import com.aditum.rehabicor.domain.RehabilitationGroup;
 import com.aditum.rehabicor.repository.RehabilitationGroupRepository;
+import com.aditum.rehabicor.service.dto.GroupCharacteristicsDTO;
 import com.aditum.rehabicor.service.dto.RehabilitationGroupDTO;
 import com.aditum.rehabicor.service.mapper.RehabilitationGroupMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,9 +29,12 @@ public class RehabilitationGroupService {
 
     private final RehabilitationGroupMapper rehabilitationGroupMapper;
 
-    public RehabilitationGroupService(RehabilitationGroupRepository rehabilitationGroupRepository, RehabilitationGroupMapper rehabilitationGroupMapper) {
+    private final PanelDataService panelDataService;
+
+    public RehabilitationGroupService(@Lazy PanelDataService panelDataService, RehabilitationGroupRepository rehabilitationGroupRepository, RehabilitationGroupMapper rehabilitationGroupMapper) {
         this.rehabilitationGroupRepository = rehabilitationGroupRepository;
         this.rehabilitationGroupMapper = rehabilitationGroupMapper;
+        this.panelDataService = panelDataService;
     }
 
     /**
@@ -66,20 +71,8 @@ public class RehabilitationGroupService {
     public Page<RehabilitationGroupDTO> findAllWithEagerRelationships(Pageable pageable) {
         return rehabilitationGroupRepository.findAllWithEagerRelationships(pageable).map(rehabilitationGroupMapper::toDto);
     }
-    
 
-    /**
-     * Get one rehabilitationGroup by id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Transactional(readOnly = true)
-    public Optional<RehabilitationGroupDTO> findOne(Long id) {
-        log.debug("Request to get RehabilitationGroup : {}", id);
-        return rehabilitationGroupRepository.findOneWithEagerRelationships(id)
-            .map(rehabilitationGroupMapper::toDto);
-    }
+
 
     /**
      * Delete the rehabilitationGroup by id.
@@ -90,4 +83,42 @@ public class RehabilitationGroupService {
         log.debug("Request to delete RehabilitationGroup : {}", id);
         rehabilitationGroupRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public Page<RehabilitationGroupDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all RehabilitationGroups");
+        return rehabilitationGroupRepository.findByRehabilitationCenterIdAndAndDeleted(pageable,rehabilitationId,false)
+            .map(rehabilitationGroupMapper::toDto);
+    }
+
+
+
+
+    /**
+     * Get one rehabilitationGroup by id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public Optional<RehabilitationGroupDTO> findOne(Long id) {
+        log.debug("Request to get RehabilitationGroup : {}", id);
+        return rehabilitationGroupRepository.findOneWithEagerRelationships(id)
+            .map(rehabilitationGroup -> {
+                RehabilitationGroupDTO rehabilitationGroupDTO =rehabilitationGroupMapper.toDto(rehabilitationGroup);
+                rehabilitationGroupDTO.setPanelData(this.panelDataService.calculatePanelDataPerGroup(rehabilitationGroupDTO));
+                return  rehabilitationGroupDTO;
+            });
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public GroupCharacteristicsDTO findCharacteristics(Long id) {
+        log.debug("Request to get RehabilitationGroup : {}", id);
+        Optional<RehabilitationGroup> rehabilitationGroup = rehabilitationGroupRepository.findOneWithEagerRelationships(id);
+        RehabilitationGroupDTO rehabilitationGroupDTO =rehabilitationGroupMapper.toDto(rehabilitationGroup.get());
+        return this.panelDataService.groupCharacteristics(rehabilitationGroupDTO);
+    }
+
 }

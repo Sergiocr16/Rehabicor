@@ -58,7 +58,12 @@ public class NonSpecificPainService {
             .map(nonSpecificPainMapper::toDto);
     }
 
-
+    @Transactional(readOnly = true)
+    public Page<NonSpecificPainDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all NonSpecificPains");
+        return nonSpecificPainRepository.findByRehabilitationCenterIdAndAndDeleted(pageable,rehabilitationId, false)
+            .map(nonSpecificPainMapper::toDto);
+    }
     /**
      * Get one nonSpecificPain by id.
      *

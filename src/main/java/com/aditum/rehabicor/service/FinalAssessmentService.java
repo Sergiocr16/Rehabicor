@@ -58,7 +58,12 @@ public class FinalAssessmentService {
             .map(finalAssessmentMapper::toDto);
     }
 
-
+    @Transactional(readOnly = true)
+    public Page<FinalAssessmentDTO> findAllByPatient(Pageable pageable, Long patientId) {
+        log.debug("Request to get all FinalAssessments");
+        return finalAssessmentRepository.findAllByPatientId(pageable, patientId)
+            .map(finalAssessmentMapper::toDto);
+    }
     /**
      * Get one finalAssessment by id.
      *

@@ -58,7 +58,12 @@ public class MinorEventService {
             .map(minorEventMapper::toDto);
     }
 
-
+    @Transactional(readOnly = true)
+    public Page<MinorEventDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all MinorEvents");
+        return minorEventRepository.findByRehabilitationCenterIdAndAndDeleted(pageable,rehabilitationId,false)
+            .map(minorEventMapper::toDto);
+    }
     /**
      * Get one minorEvent by id.
      *

@@ -4,6 +4,7 @@ import com.aditum.rehabicor.domain.ComorbiditiesPatient;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -15,5 +16,6 @@ import java.util.Optional;
 public interface ComorbiditiesPatientRepository extends JpaRepository<ComorbiditiesPatient, Long> {
 
     Optional<ComorbiditiesPatient> findFirstByInitialAssessmentIdAndComorbiditieRelation(Long initialAssessmentId, Long comorbiditietId);
+    List<ComorbiditiesPatient> findByInitialAssessmentId(Long initialAssessmentId);
 
 }
