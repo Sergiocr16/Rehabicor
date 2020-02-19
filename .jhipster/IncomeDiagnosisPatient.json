@@ -1,0 +1,38 @@
+{
+    "name": "IncomeDiagnosisPatient",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exist",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "incomeDiagnosisRelation",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "initialAssessment",
+            "otherEntityRelationshipName": "incomeDiagnosisPatient",
+            "relationshipName": "initialAssessment",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024535",
+    "entityTableName": "income_diagnosis_patient",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

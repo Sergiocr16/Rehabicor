@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "minorEventsSession": {
+            "home": {
+                "title": "Minor Events Sessions",
+                "createLabel": "Create a new Minor Events Session",
+                "createOrEditLabel": "Create or edit a Minor Events Session"
+            },
+            "created": "A new Minor Events Session is created with identifier {{ param }}",
+            "updated": "A Minor Events Session is updated with identifier {{ param }}",
+            "deleted": "A Minor Events Session is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Minor Events Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Minor Events Session"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "minorEventRelation": "Minor Event Relation",
+            "session": "Session"
+        }
+    }
+}

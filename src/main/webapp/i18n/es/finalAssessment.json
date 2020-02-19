@@ -1,0 +1,38 @@
+{
+    "rehabicorApp": {
+        "finalAssessment": {
+            "home": {
+                "title": "Final Assessments",
+                "createLabel": "Crear nuevo Final Assessment",
+                "createOrEditLabel": "Crear o editar Final Assessment"
+            },
+            "created": "Un nuevo Final Assessment ha sido creado con el identificador {{ param }}",
+            "updated": "Un Final Assessment ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Final Assessment ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Final Assessment {{ id }}?"
+            },
+            "detail": {
+                "title": "Final Assessment"
+            },
+            "smoking": "Smoking",
+            "weight": "Weight",
+            "size": "Size",
+            "iMC": "I MC",
+            "hbiac": "Hbiac",
+            "baselineFunctionalCapacity": "Baseline Functional Capacity",
+            "lDL": "L DL",
+            "hDL": "H DL",
+            "cardiovascularRisk": "Cardiovascular Risk",
+            "isWorking": "Is Working",
+            "deceased": "Deceased",
+            "abandonment": "Abandonment",
+            "abandonmentMedicCause": "Abandonment Medic Cause",
+            "hospitalized": "Hospitalized",
+            "deleted": "Deleted",
+            "reevaluation": "Reevaluation",
+            "executionDate": "Execution Date",
+            "patient": "Patient"
+        }
+    }
+}

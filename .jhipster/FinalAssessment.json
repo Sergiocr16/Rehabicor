@@ -1,0 +1,91 @@
+{
+    "name": "FinalAssessment",
+    "fields": [
+        {
+            "fieldName": "smoking",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "weight",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iMC",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hbiac",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "baselineFunctionalCapacity",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lDL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hDL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cardiovascularRisk",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isWorking",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "deceased",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "abandonment",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "abandonmentMedicCause",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hospitalized",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "reevaluation",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "executionDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "finalAssessment",
+            "relationshipName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024533",
+    "entityTableName": "final_assessment",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity NonSpecificPainsSession.
+    -->
+    <changeSet id="20200219024542-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="non_specific_pains_session"
+                                 constraintName="fk_non_specific_pains_session_session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"/>
+
+    </changeSet>
+</databaseChangeLog>

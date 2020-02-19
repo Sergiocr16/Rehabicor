@@ -1,0 +1,158 @@
+entity AppUser {
+  name String,
+  lastName String,
+  authorityType Integer required,
+  status Integer
+}
+entity Comorbiditie {
+  description String required,
+  deleted Boolean
+}
+entity ComorbiditiesPatient {
+  description String,
+  exist Boolean required,
+  comorbiditieRelation Long
+}
+entity DepressiveSymptom {
+  description String required,
+  code String,
+  deleted Boolean
+}
+entity DepressiveSymptomsSession {
+  description String,
+  exist Boolean required,
+  depressiveSymptomRelation Long
+}
+entity FinalAssessment {
+  smoking String,
+  weight String,
+  size String,
+  iMC String,
+  hbiac String,
+  baselineFunctionalCapacity String,
+  lDL String,
+  hDL String,
+  cardiovascularRisk String,
+  isWorking Boolean,
+  deceased Boolean,
+  abandonment Boolean,
+  abandonmentMedicCause Boolean,
+  hospitalized Boolean,
+  deleted Boolean,
+  reevaluation Boolean,
+  executionDate ZonedDateTime
+}
+entity IncomeDiagnosis {
+  description String required,
+  deleted Boolean
+}
+entity IncomeDiagnosisPatient {
+  description String,
+  exist Boolean required,
+  incomeDiagnosisRelation Long
+}
+entity InitialAssessment {
+  smoking String required,
+  weight String required,
+  size String required,
+  iMC String required,
+  hbiac String,
+  baselineFunctionalCapacity String,
+  lDL String,
+  hDL String,
+  cardiovascularRisk String,
+  deleted Boolean
+}
+entity MayorEvent {
+  description String required,
+  code String,
+  deleted Boolean
+}
+entity MayorEventsSession {
+  description String,
+  exist Boolean required,
+  mayorEventRelation Long
+}
+entity MinorEvent {
+  description String required,
+  code String,
+  deleted Boolean
+}
+entity MinorEventsSession {
+  description String,
+  exist Boolean required,
+  minorEventRelation Long
+}
+entity NonSpecificPain {
+  description String required,
+  code String,
+  deleted Boolean
+}
+entity NonSpecificPainsSession {
+  description String,
+  exist Boolean required,
+  nonSpecificPainsSessionRelation Long
+}
+entity Patient {
+  code String required,
+  age Integer required,
+  sex String required,
+  ocupation String required,
+  lastEventOcurred Integer required,
+  deceased Boolean,
+  abandonment Boolean,
+  abandonmentMedicCause Boolean,
+  rehabStatus Integer,
+  sessionNumber Integer,
+  deleted Boolean,
+  scholarship String
+}
+entity RehabilitationCenter {
+  name String required,
+  telephone String,
+  deleted Boolean,
+  status Integer
+}
+entity RehabilitationGroup {
+  name String required,
+  creationDate Instant,
+  programStatus Integer,
+  deleted Boolean
+}
+entity Session {
+  code String required,
+  executionDate Instant required,
+  abscence Boolean,
+  hospitalization Boolean,
+  status Integer,
+  deleted Boolean,
+  currentlyWorking Boolean
+}
+relationship OneToMany {
+  RehabilitationCenter{appUser} to AppUser{rehabilitationCenter},
+  RehabilitationCenter{comorbiditie} to Comorbiditie{rehabilitationCenter},
+  InitialAssessment{comorbiditiesPatient} to ComorbiditiesPatient{initialAssessment},
+  RehabilitationCenter{depressiveSymptom} to DepressiveSymptom{rehabilitationCenter},
+  Session{depressiveSymptomsSession} to DepressiveSymptomsSession{session},
+  Patient{finalAssessment} to FinalAssessment{patient},
+  RehabilitationCenter{incomeDiagnosis} to IncomeDiagnosis{rehabilitationCenter},
+  InitialAssessment{incomeDiagnosisPatient} to IncomeDiagnosisPatient{initialAssessment},
+  Patient{initialAssessment} to InitialAssessment{patient},
+  RehabilitationCenter{mayorEvent} to MayorEvent{rehabilitationCenter},
+  Session{mayorEventsSession} to MayorEventsSession{session},
+  RehabilitationCenter{minorEvent} to MinorEvent{rehabilitationCenter},
+  Session{minorEventsSession} to MinorEventsSession{session},
+  RehabilitationCenter{nonSpecificPain} to NonSpecificPain{rehabilitationCenter},
+  Session{nonSpecificPainsSession} to NonSpecificPainsSession{session},
+  RehabilitationCenter{rehabilitationGroup} to RehabilitationGroup{rehabilitationCenter},
+  Patient{session} to Session{patient}
+}
+relationship ManyToOne {
+  AppUser{user(login)} to User
+}
+relationship ManyToMany {
+  RehabilitationGroup{patient} to Patient{rehabilitationGroup}
+}
+service * with serviceClass
+dto AppUser, Comorbiditie, ComorbiditiesPatient, DepressiveSymptom, DepressiveSymptomsSession, FinalAssessment, IncomeDiagnosis, IncomeDiagnosisPatient, InitialAssessment, MayorEvent, MayorEventsSession, MinorEvent, MinorEventsSession, NonSpecificPain, NonSpecificPainsSession, Patient, RehabilitationCenter, RehabilitationGroup, Session with mapstruct
+paginate AppUser, Comorbiditie, ComorbiditiesPatient, DepressiveSymptom, DepressiveSymptomsSession, FinalAssessment, IncomeDiagnosis, IncomeDiagnosisPatient, InitialAssessment, MayorEvent, MayorEventsSession, MinorEvent, MinorEventsSession, NonSpecificPain, NonSpecificPainsSession, Patient, RehabilitationCenter, RehabilitationGroup, Session with infinite-scroll

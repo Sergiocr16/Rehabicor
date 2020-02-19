@@ -1,0 +1,23 @@
+{
+    "rehabicorApp": {
+        "comorbiditie": {
+            "home": {
+                "title": "Comorbidities",
+                "createLabel": "Crear nuevo Comorbiditie",
+                "createOrEditLabel": "Crear o editar Comorbiditie"
+            },
+            "created": "Un nuevo Comorbiditie ha sido creado con el identificador {{ param }}",
+            "updated": "Un Comorbiditie ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Comorbiditie ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Comorbiditie {{ id }}?"
+            },
+            "detail": {
+                "title": "Comorbiditie"
+            },
+            "description": "Description",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

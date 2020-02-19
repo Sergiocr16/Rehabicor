@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-patient-heading" jhiTranslate="rehabicorApp.patient.home.createOrEditLabel">Create or edit a Patient</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!patient.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="patient.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="patient.code" required/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.age" for="field_age">Age</label>
+                    <input type="number" class="form-control" name="age" id="field_age"
+                        [(ngModel)]="patient.age" required/>
+                    <div [hidden]="!(editForm.controls.age?.dirty && editForm.controls.age?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.age?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.age?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.sex" for="field_sex">Sex</label>
+                    <input type="text" class="form-control" name="sex" id="field_sex"
+                        [(ngModel)]="patient.sex" required/>
+                    <div [hidden]="!(editForm.controls.sex?.dirty && editForm.controls.sex?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.sex?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.ocupation" for="field_ocupation">Ocupation</label>
+                    <input type="text" class="form-control" name="ocupation" id="field_ocupation"
+                        [(ngModel)]="patient.ocupation" required/>
+                    <div [hidden]="!(editForm.controls.ocupation?.dirty && editForm.controls.ocupation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ocupation?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.lastEventOcurred" for="field_lastEventOcurred">Last Event Ocurred</label>
+                    <input type="number" class="form-control" name="lastEventOcurred" id="field_lastEventOcurred"
+                        [(ngModel)]="patient.lastEventOcurred" required/>
+                    <div [hidden]="!(editForm.controls.lastEventOcurred?.dirty && editForm.controls.lastEventOcurred?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastEventOcurred?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lastEventOcurred?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.deceased" for="field_deceased">Deceased</label>
+                    <input type="checkbox" class="form-control" name="deceased" id="field_deceased"
+                        [(ngModel)]="patient.deceased" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.abandonment" for="field_abandonment">Abandonment</label>
+                    <input type="checkbox" class="form-control" name="abandonment" id="field_abandonment"
+                        [(ngModel)]="patient.abandonment" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.abandonmentMedicCause" for="field_abandonmentMedicCause">Abandonment Medic Cause</label>
+                    <input type="checkbox" class="form-control" name="abandonmentMedicCause" id="field_abandonmentMedicCause"
+                        [(ngModel)]="patient.abandonmentMedicCause" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.rehabStatus" for="field_rehabStatus">Rehab Status</label>
+                    <input type="number" class="form-control" name="rehabStatus" id="field_rehabStatus"
+                        [(ngModel)]="patient.rehabStatus" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.sessionNumber" for="field_sessionNumber">Session Number</label>
+                    <input type="number" class="form-control" name="sessionNumber" id="field_sessionNumber"
+                        [(ngModel)]="patient.sessionNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.deleted" for="field_deleted">Deleted</label>
+                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
+                        [(ngModel)]="patient.deleted" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.scholarship" for="field_scholarship">Scholarship</label>
+                    <input type="text" class="form-control" name="scholarship" id="field_scholarship"
+                        [(ngModel)]="patient.scholarship" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

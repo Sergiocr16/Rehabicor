@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.incomeDiagnosis.home.title">Income Diagnoses</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-income-diagnosis" [routerLink]="['/income-diagnosis/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.incomeDiagnosis.home.createLabel">
+            Create new Income Diagnosis
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="incomeDiagnoses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.incomeDiagnosis.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.incomeDiagnosis.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.incomeDiagnosis.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let incomeDiagnosis of incomeDiagnoses ;trackBy: trackId">
+                <td><a [routerLink]="['/income-diagnosis', incomeDiagnosis.id, 'view' ]">{{incomeDiagnosis.id}}</a></td>
+                <td>{{incomeDiagnosis.description}}</td>
+                <td>{{incomeDiagnosis.deleted}}</td>
+                <td>
+                    <div *ngIf="incomeDiagnosis.rehabilitationCenterId">
+                        <a [routerLink]="['../rehabilitation-center', incomeDiagnosis.rehabilitationCenterId , 'view' ]" >{{incomeDiagnosis.rehabilitationCenterId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/income-diagnosis', incomeDiagnosis.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/income-diagnosis', incomeDiagnosis.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'income-diagnosis', { outlets: { popup: incomeDiagnosis.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

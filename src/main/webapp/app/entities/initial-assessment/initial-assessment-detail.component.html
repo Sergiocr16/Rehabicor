@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="initialAssessment">
+            <h2><span jhiTranslate="rehabicorApp.initialAssessment.detail.title">Initial Assessment</span> {{initialAssessment.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.smoking">Smoking</span></dt>
+                <dd>
+                    <span>{{initialAssessment.smoking}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.weight">Weight</span></dt>
+                <dd>
+                    <span>{{initialAssessment.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.size">Size</span></dt>
+                <dd>
+                    <span>{{initialAssessment.size}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.iMC">I MC</span></dt>
+                <dd>
+                    <span>{{initialAssessment.iMC}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.hbiac">Hbiac</span></dt>
+                <dd>
+                    <span>{{initialAssessment.hbiac}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.baselineFunctionalCapacity">Baseline Functional Capacity</span></dt>
+                <dd>
+                    <span>{{initialAssessment.baselineFunctionalCapacity}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.lDL">L DL</span></dt>
+                <dd>
+                    <span>{{initialAssessment.lDL}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.hDL">H DL</span></dt>
+                <dd>
+                    <span>{{initialAssessment.hDL}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.cardiovascularRisk">Cardiovascular Risk</span></dt>
+                <dd>
+                    <span>{{initialAssessment.cardiovascularRisk}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{initialAssessment.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.initialAssessment.patient">Patient</span></dt>
+                <dd>
+                    <div *ngIf="initialAssessment.patientId">
+                        <a [routerLink]="['/patient', initialAssessment.patientId, 'view']">{{initialAssessment.patientId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/initial-assessment', initialAssessment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

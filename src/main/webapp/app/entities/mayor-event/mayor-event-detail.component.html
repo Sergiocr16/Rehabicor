@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mayorEvent">
+            <h2><span jhiTranslate="rehabicorApp.mayorEvent.detail.title">Mayor Event</span> {{mayorEvent.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.mayorEvent.description">Description</span></dt>
+                <dd>
+                    <span>{{mayorEvent.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.mayorEvent.code">Code</span></dt>
+                <dd>
+                    <span>{{mayorEvent.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.mayorEvent.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{mayorEvent.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.mayorEvent.rehabilitationCenter">Rehabilitation Center</span></dt>
+                <dd>
+                    <div *ngIf="mayorEvent.rehabilitationCenterId">
+                        <a [routerLink]="['/rehabilitation-center', mayorEvent.rehabilitationCenterId, 'view']">{{mayorEvent.rehabilitationCenterId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mayor-event', mayorEvent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.mayorEventsSession.home.title">Mayor Events Sessions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-mayor-events-session" [routerLink]="['/mayor-events-session/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.mayorEventsSession.home.createLabel">
+            Create new Mayor Events Session
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="mayorEventsSessions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.mayorEventsSession.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="exist"><span jhiTranslate="rehabicorApp.mayorEventsSession.exist">Exist</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mayorEventRelation"><span jhiTranslate="rehabicorApp.mayorEventsSession.mayorEventRelation">Mayor Event Relation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sessionId"><span jhiTranslate="rehabicorApp.mayorEventsSession.session">Session</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let mayorEventsSession of mayorEventsSessions ;trackBy: trackId">
+                <td><a [routerLink]="['/mayor-events-session', mayorEventsSession.id, 'view' ]">{{mayorEventsSession.id}}</a></td>
+                <td>{{mayorEventsSession.description}}</td>
+                <td>{{mayorEventsSession.exist}}</td>
+                <td>{{mayorEventsSession.mayorEventRelation}}</td>
+                <td>
+                    <div *ngIf="mayorEventsSession.sessionId">
+                        <a [routerLink]="['../session', mayorEventsSession.sessionId , 'view' ]" >{{mayorEventsSession.sessionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/mayor-events-session', mayorEventsSession.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/mayor-events-session', mayorEventsSession.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'mayor-events-session', { outlets: { popup: mayorEventsSession.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

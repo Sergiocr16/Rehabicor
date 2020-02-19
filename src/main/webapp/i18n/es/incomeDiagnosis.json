@@ -1,0 +1,23 @@
+{
+    "rehabicorApp": {
+        "incomeDiagnosis": {
+            "home": {
+                "title": "Income Diagnoses",
+                "createLabel": "Crear nuevo Income Diagnosis",
+                "createOrEditLabel": "Crear o editar Income Diagnosis"
+            },
+            "created": "Un nuevo Income Diagnosis ha sido creado con el identificador {{ param }}",
+            "updated": "Un Income Diagnosis ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Income Diagnosis ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Income Diagnosis {{ id }}?"
+            },
+            "detail": {
+                "title": "Income Diagnosis"
+            },
+            "description": "Description",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

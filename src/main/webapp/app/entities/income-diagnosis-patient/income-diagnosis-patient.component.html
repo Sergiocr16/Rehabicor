@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.incomeDiagnosisPatient.home.title">Income Diagnosis Patients</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-income-diagnosis-patient" [routerLink]="['/income-diagnosis-patient/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.incomeDiagnosisPatient.home.createLabel">
+            Create new Income Diagnosis Patient
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="incomeDiagnosisPatients">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.incomeDiagnosisPatient.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="exist"><span jhiTranslate="rehabicorApp.incomeDiagnosisPatient.exist">Exist</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="incomeDiagnosisRelation"><span jhiTranslate="rehabicorApp.incomeDiagnosisPatient.incomeDiagnosisRelation">Income Diagnosis Relation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="initialAssessmentId"><span jhiTranslate="rehabicorApp.incomeDiagnosisPatient.initialAssessment">Initial Assessment</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let incomeDiagnosisPatient of incomeDiagnosisPatients ;trackBy: trackId">
+                <td><a [routerLink]="['/income-diagnosis-patient', incomeDiagnosisPatient.id, 'view' ]">{{incomeDiagnosisPatient.id}}</a></td>
+                <td>{{incomeDiagnosisPatient.description}}</td>
+                <td>{{incomeDiagnosisPatient.exist}}</td>
+                <td>{{incomeDiagnosisPatient.incomeDiagnosisRelation}}</td>
+                <td>
+                    <div *ngIf="incomeDiagnosisPatient.initialAssessmentId">
+                        <a [routerLink]="['../initial-assessment', incomeDiagnosisPatient.initialAssessmentId , 'view' ]" >{{incomeDiagnosisPatient.initialAssessmentId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/income-diagnosis-patient', incomeDiagnosisPatient.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/income-diagnosis-patient', incomeDiagnosisPatient.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'income-diagnosis-patient', { outlets: { popup: incomeDiagnosisPatient.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

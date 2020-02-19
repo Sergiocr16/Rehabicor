@@ -1,0 +1,105 @@
+{
+    "name": "Patient",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sex",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ocupation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastEventOcurred",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "deceased",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "abandonment",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "abandonmentMedicCause",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "rehabStatus",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sessionNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "scholarship",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "finalAssessment",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "finalAssessment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "initialAssessment",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "initialAssessment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "session",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "session"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "rehabilitationGroup",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "rehabilitationGroup",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200219024543",
+    "entityTableName": "patient",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

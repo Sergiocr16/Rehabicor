@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.nonSpecificPain.home.title">Non Specific Pains</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-non-specific-pain" [routerLink]="['/non-specific-pain/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.nonSpecificPain.home.createLabel">
+            Create new Non Specific Pain
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="nonSpecificPains">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.nonSpecificPain.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="rehabicorApp.nonSpecificPain.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.nonSpecificPain.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.nonSpecificPain.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let nonSpecificPain of nonSpecificPains ;trackBy: trackId">
+                <td><a [routerLink]="['/non-specific-pain', nonSpecificPain.id, 'view' ]">{{nonSpecificPain.id}}</a></td>
+                <td>{{nonSpecificPain.description}}</td>
+                <td>{{nonSpecificPain.code}}</td>
+                <td>{{nonSpecificPain.deleted}}</td>
+                <td>
+                    <div *ngIf="nonSpecificPain.rehabilitationCenterId">
+                        <a [routerLink]="['../rehabilitation-center', nonSpecificPain.rehabilitationCenterId , 'view' ]" >{{nonSpecificPain.rehabilitationCenterId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/non-specific-pain', nonSpecificPain.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/non-specific-pain', nonSpecificPain.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'non-specific-pain', { outlets: { popup: nonSpecificPain.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

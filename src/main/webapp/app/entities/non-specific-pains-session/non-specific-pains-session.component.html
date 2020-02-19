@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.nonSpecificPainsSession.home.title">Non Specific Pains Sessions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-non-specific-pains-session" [routerLink]="['/non-specific-pains-session/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.nonSpecificPainsSession.home.createLabel">
+            Create new Non Specific Pains Session
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="nonSpecificPainsSessions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.nonSpecificPainsSession.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="exist"><span jhiTranslate="rehabicorApp.nonSpecificPainsSession.exist">Exist</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nonSpecificPainsSessionRelation"><span jhiTranslate="rehabicorApp.nonSpecificPainsSession.nonSpecificPainsSessionRelation">Non Specific Pains Session Relation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sessionId"><span jhiTranslate="rehabicorApp.nonSpecificPainsSession.session">Session</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let nonSpecificPainsSession of nonSpecificPainsSessions ;trackBy: trackId">
+                <td><a [routerLink]="['/non-specific-pains-session', nonSpecificPainsSession.id, 'view' ]">{{nonSpecificPainsSession.id}}</a></td>
+                <td>{{nonSpecificPainsSession.description}}</td>
+                <td>{{nonSpecificPainsSession.exist}}</td>
+                <td>{{nonSpecificPainsSession.nonSpecificPainsSessionRelation}}</td>
+                <td>
+                    <div *ngIf="nonSpecificPainsSession.sessionId">
+                        <a [routerLink]="['../session', nonSpecificPainsSession.sessionId , 'view' ]" >{{nonSpecificPainsSession.sessionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/non-specific-pains-session', nonSpecificPainsSession.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/non-specific-pains-session', nonSpecificPainsSession.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'non-specific-pains-session', { outlets: { popup: nonSpecificPainsSession.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

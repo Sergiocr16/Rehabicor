@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "mayorEventsSession": {
+            "home": {
+                "title": "Mayor Events Sessions",
+                "createLabel": "Create a new Mayor Events Session",
+                "createOrEditLabel": "Create or edit a Mayor Events Session"
+            },
+            "created": "A new Mayor Events Session is created with identifier {{ param }}",
+            "updated": "A Mayor Events Session is updated with identifier {{ param }}",
+            "deleted": "A Mayor Events Session is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Mayor Events Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Mayor Events Session"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "mayorEventRelation": "Mayor Event Relation",
+            "session": "Session"
+        }
+    }
+}

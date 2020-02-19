@@ -1,0 +1,26 @@
+{
+    "rehabicorApp": {
+        "rehabilitationGroup": {
+            "home": {
+                "title": "Rehabilitation Groups",
+                "createLabel": "Crear nuevo Rehabilitation Group",
+                "createOrEditLabel": "Crear o editar Rehabilitation Group"
+            },
+            "created": "Un nuevo Rehabilitation Group ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rehabilitation Group ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rehabilitation Group ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Rehabilitation Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Rehabilitation Group"
+            },
+            "name": "Name",
+            "creationDate": "Creation Date",
+            "programStatus": "Program Status",
+            "deleted": "Deleted",
+            "patient": "Patient",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

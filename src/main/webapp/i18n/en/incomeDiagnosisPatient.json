@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "incomeDiagnosisPatient": {
+            "home": {
+                "title": "Income Diagnosis Patients",
+                "createLabel": "Create a new Income Diagnosis Patient",
+                "createOrEditLabel": "Create or edit a Income Diagnosis Patient"
+            },
+            "created": "A new Income Diagnosis Patient is created with identifier {{ param }}",
+            "updated": "A Income Diagnosis Patient is updated with identifier {{ param }}",
+            "deleted": "A Income Diagnosis Patient is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Income Diagnosis Patient {{ id }}?"
+            },
+            "detail": {
+                "title": "Income Diagnosis Patient"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "incomeDiagnosisRelation": "Income Diagnosis Relation",
+            "initialAssessment": "Initial Assessment"
+        }
+    }
+}

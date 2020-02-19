@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="minorEvent">
+            <h2><span jhiTranslate="rehabicorApp.minorEvent.detail.title">Minor Event</span> {{minorEvent.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.minorEvent.description">Description</span></dt>
+                <dd>
+                    <span>{{minorEvent.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.minorEvent.code">Code</span></dt>
+                <dd>
+                    <span>{{minorEvent.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.minorEvent.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{minorEvent.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.minorEvent.rehabilitationCenter">Rehabilitation Center</span></dt>
+                <dd>
+                    <div *ngIf="minorEvent.rehabilitationCenterId">
+                        <a [routerLink]="['/rehabilitation-center', minorEvent.rehabilitationCenterId, 'view']">{{minorEvent.rehabilitationCenterId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/minor-event', minorEvent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

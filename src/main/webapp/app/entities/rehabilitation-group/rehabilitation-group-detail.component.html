@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="rehabilitationGroup">
+            <h2><span jhiTranslate="rehabicorApp.rehabilitationGroup.detail.title">Rehabilitation Group</span> {{rehabilitationGroup.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span></dt>
+                <dd>
+                    <span>{{rehabilitationGroup.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{rehabilitationGroup.creationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span></dt>
+                <dd>
+                    <span>{{rehabilitationGroup.programStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{rehabilitationGroup.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.patient">Patient</span></dt>
+                <dd>
+                    <span *ngFor="let patient of rehabilitationGroup.patients; let last = last">
+                        <a [routerLink]="['/patient', patient?.id, 'view' ]">{{patient.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span></dt>
+                <dd>
+                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">
+                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId, 'view']">{{rehabilitationGroup.rehabilitationCenterId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
