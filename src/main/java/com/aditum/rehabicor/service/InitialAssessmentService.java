@@ -44,7 +44,12 @@ public class InitialAssessmentService {
         initialAssessment = initialAssessmentRepository.save(initialAssessment);
         return initialAssessmentMapper.toDto(initialAssessment);
     }
-
+    @Transactional(readOnly = true)
+    public Optional<InitialAssessmentDTO> findOneByPatient(Long patientId) {
+        log.debug("Request to get InitialAssessment : {}", patientId);
+        return initialAssessmentRepository.findByPatientId(patientId)
+            .map(initialAssessmentMapper::toDto);
+    }
     /**
      * Get all the initialAssessments.
      *

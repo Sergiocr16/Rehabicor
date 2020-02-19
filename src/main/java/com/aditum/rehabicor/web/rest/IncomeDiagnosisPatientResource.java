@@ -92,6 +92,12 @@ public class IncomeDiagnosisPatientResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/income-diagnosis-patients/by-asessment/")
+    public ResponseEntity<List<IncomeDiagnosisPatientDTO>> getAllComorbiditiesPatients(Long id) {
+        log.debug("REST request to get a page of ComorbiditiesPatients");
+        List<IncomeDiagnosisPatientDTO> list = incomeDiagnosisPatientService.findAllByInitialAsessment(id);
+        return ResponseEntity.ok().body(list);
+    }
     /**
      * GET  /income-diagnosis-patients/:id : get the "id" incomeDiagnosisPatient.
      *

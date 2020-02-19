@@ -44,6 +44,12 @@ public class MayorEventsSessionService {
         mayorEventsSession = mayorEventsSessionRepository.save(mayorEventsSession);
         return mayorEventsSessionMapper.toDto(mayorEventsSession);
     }
+    @Transactional(readOnly = true)
+    public Page<MayorEventsSessionDTO> findAllBySession(Pageable pageable, Long sessionId) {
+        log.debug("Request to get all MayorEventsSessions");
+        return mayorEventsSessionRepository.findAllBySessionId(pageable,sessionId)
+            .map(mayorEventsSessionMapper::toDto);
+    }
 
     /**
      * Get all the mayorEventsSessions.

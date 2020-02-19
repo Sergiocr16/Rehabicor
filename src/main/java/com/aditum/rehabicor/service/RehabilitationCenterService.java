@@ -51,13 +51,13 @@ public class RehabilitationCenterService {
      * @param pageable the pagination information
      * @return the list of entities
      */
+
     @Transactional(readOnly = true)
     public Page<RehabilitationCenterDTO> findAll(Pageable pageable) {
         log.debug("Request to get all RehabilitationCenters");
-        return rehabilitationCenterRepository.findAll(pageable)
+        return rehabilitationCenterRepository.findByDeleted(pageable,false)
             .map(rehabilitationCenterMapper::toDto);
     }
-
 
     /**
      * Get one rehabilitationCenter by id.
@@ -81,4 +81,6 @@ public class RehabilitationCenterService {
         log.debug("Request to delete RehabilitationCenter : {}", id);
         rehabilitationCenterRepository.deleteById(id);
     }
+
+
 }

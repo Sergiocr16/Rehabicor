@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,11 +42,27 @@ public class ComorbiditiesPatientService {
      */
     public ComorbiditiesPatientDTO save(ComorbiditiesPatientDTO comorbiditiesPatientDTO) {
         log.debug("Request to save ComorbiditiesPatient : {}", comorbiditiesPatientDTO);
+
         ComorbiditiesPatient comorbiditiesPatient = comorbiditiesPatientMapper.toEntity(comorbiditiesPatientDTO);
+        Optional<ComorbiditiesPatient> comorbiditiesPatientOld = comorbiditiesPatientRepository.findFirstByInitialAssessmentIdAndComorbiditieRelation(comorbiditiesPatientDTO.getInitialAssessmentId(),comorbiditiesPatientDTO.getComorbiditieRelation()  );
+        if(comorbiditiesPatientOld.isPresent()){
+            this.delete(comorbiditiesPatientOld.get().getId());
+        }
         comorbiditiesPatient = comorbiditiesPatientRepository.save(comorbiditiesPatient);
+
         return comorbiditiesPatientMapper.toDto(comorbiditiesPatient);
     }
 
+    @Transactional(readOnly = true)
+    public List<ComorbiditiesPatientDTO> findAllByInitialAsessment(Long initialAsessmentId) {
+        log.debug("Request to get all ComorbiditiesPatients");
+        List<ComorbiditiesPatientDTO> formatedComobitites = new ArrayList<>();
+        comorbiditiesPatientRepository.findByInitialAssessmentId(initialAsessmentId).forEach(comorbiditiesPatient -> {
+//            comorbiditiesPatient.setDescription(this.comorbiditieService.findOne(comorbiditiesPatient.getComorbiditietId()).get().getDescription());
+            formatedComobitites.add(this.comorbiditiesPatientMapper.toDto(comorbiditiesPatient));
+        });
+        return formatedComobitites;
+    }
     /**
      * Get all the comorbiditiesPatients.
      *

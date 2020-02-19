@@ -84,6 +84,7 @@ public class MayorEventsSessionResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of mayorEventsSessions in body
      */
+
     @GetMapping("/mayor-events-sessions")
     public ResponseEntity<List<MayorEventsSessionDTO>> getAllMayorEventsSessions(Pageable pageable) {
         log.debug("REST request to get a page of MayorEventsSessions");
@@ -92,6 +93,13 @@ public class MayorEventsSessionResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/mayor-events-sessions/by-session")
+    public ResponseEntity<List<MayorEventsSessionDTO>> getAllMayorEventsSessions(Pageable pageable,Long sessionId) {
+        log.debug("REST request to get a page of MayorEventsSessions");
+        Page<MayorEventsSessionDTO> page = mayorEventsSessionService.findAllBySession(pageable,sessionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/mayor-events-sessions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * GET  /mayor-events-sessions/:id : get the "id" mayorEventsSession.
      *

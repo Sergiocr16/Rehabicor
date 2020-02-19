@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -91,6 +92,14 @@ public class DepressiveSymptomsSessionResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/depressive-symptoms-sessions");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    @GetMapping("/depressive-symptoms-sessions/by-session")
+    public ResponseEntity<List<DepressiveSymptomsSessionDTO>> getAllDepressiveSymptomsSessionsBySession(Pageable pageable,Long sessionId) {
+        log.debug("REST request to get a page of DepressiveSymptomsSessions");
+        Page<DepressiveSymptomsSessionDTO> page = depressiveSymptomsSessionService.findAllBySession(pageable,sessionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/depressive-symptoms-sessions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
 
     /**
      * GET  /depressive-symptoms-sessions/:id : get the "id" depressiveSymptomsSession.

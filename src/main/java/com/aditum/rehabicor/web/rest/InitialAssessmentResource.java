@@ -92,6 +92,12 @@ public class InitialAssessmentResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/initial-assessments/by-patient/{patientId}")
+    public ResponseEntity<InitialAssessmentDTO> getInitialAssessmentByPatient(@PathVariable Long patientId) {
+        log.debug("REST request to get InitialAssessment : {}", patientId);
+        Optional<InitialAssessmentDTO> initialAssessmentDTO = initialAssessmentService.findOneByPatient(patientId);
+        return ResponseUtil.wrapOrNotFound(initialAssessmentDTO);
+    }
     /**
      * GET  /initial-assessments/:id : get the "id" initialAssessment.
      *

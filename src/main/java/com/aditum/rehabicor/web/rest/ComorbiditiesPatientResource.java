@@ -91,7 +91,12 @@ public class ComorbiditiesPatientResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comorbidities-patients");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
+    @GetMapping("/comorbidities-patients/by-asessment/")
+    public ResponseEntity<List<ComorbiditiesPatientDTO>> getAllComorbiditiesPatients(Long id) {
+        log.debug("REST request to get a page of ComorbiditiesPatients");
+        List<ComorbiditiesPatientDTO> list = comorbiditiesPatientService.findAllByInitialAsessment(id);
+        return ResponseEntity.ok().body(list);
+    }
     /**
      * GET  /comorbidities-patients/:id : get the "id" comorbiditiesPatient.
      *

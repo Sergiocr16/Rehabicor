@@ -92,6 +92,13 @@ public class NonSpecificPainsSessionResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/non-specific-pains-sessions/by-session")
+    public ResponseEntity<List<NonSpecificPainsSessionDTO>> getAllNonSpecificPainsSessionsBySession(Pageable pageable,Long sessionId) {
+        log.debug("REST request to get a page of NonSpecificPainsSessions");
+        Page<NonSpecificPainsSessionDTO> page = nonSpecificPainsSessionService.findAllBySession(pageable,sessionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/non-specific-pains-sessions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * GET  /non-specific-pains-sessions/:id : get the "id" nonSpecificPainsSession.
      *

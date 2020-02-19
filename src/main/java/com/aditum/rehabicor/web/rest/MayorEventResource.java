@@ -1,5 +1,6 @@
 package com.aditum.rehabicor.web.rest;
 import com.aditum.rehabicor.service.MayorEventService;
+import com.aditum.rehabicor.service.PanelDataService;
 import com.aditum.rehabicor.web.rest.errors.BadRequestAlertException;
 import com.aditum.rehabicor.web.rest.util.HeaderUtil;
 import com.aditum.rehabicor.web.rest.util.PaginationUtil;
@@ -34,9 +35,14 @@ public class MayorEventResource {
 
     private final MayorEventService mayorEventService;
 
-    public MayorEventResource(MayorEventService mayorEventService) {
+    private final PanelDataService panelDataService;
+
+
+    public MayorEventResource(MayorEventService mayorEventService, PanelDataService panelDataService) {
         this.mayorEventService = mayorEventService;
+        this.panelDataService = panelDataService;
     }
+
 
     /**
      * POST  /mayor-events : Create a new mayorEvent.
@@ -84,14 +90,21 @@ public class MayorEventResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of mayorEvents in body
      */
+
     @GetMapping("/mayor-events")
-    public ResponseEntity<List<MayorEventDTO>> getAllMayorEvents(Pageable pageable) {
+    public ResponseEntity<List<MayorEventDTO>> getAllMayorEvents(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of MayorEvents");
-        Page<MayorEventDTO> page = mayorEventService.findAll(pageable);
+        Page<MayorEventDTO> page = mayorEventService.findAll(pageable,rehabilitationId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/mayor-events");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
+    @GetMapping("/mayor-events/graph")
+    public ResponseEntity<List<MayorEventDTO>> getSessionsPerMayorEvent(Long groupId, Long rehabilitationId,Long mayorEventId) {
+        log.debug("REST request to get a page of MayorEvents");
+        List<MayorEventDTO> result = this.panelDataService.distributionMayorEventPerSessions(groupId,rehabilitationId,mayorEventId);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), null);
+        return ResponseEntity.ok().headers(null).body(result);
+    }
     /**
      * GET  /mayor-events/:id : get the "id" mayorEvent.
      *

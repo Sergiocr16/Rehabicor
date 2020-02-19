@@ -72,6 +72,19 @@ public class AppUserService {
             .map(appUserMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<AppUserDTO> findLoggedIn() {
+        log.debug("Request to get AppUser Logged In");
+        AppUser app = appUserRepository.findByUserIsCurrentUser().get(0);
+        return Optional.of(appUserMapper.toDto(app));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<AppUserDTO> findOneByUserId(Long userId) {
+        log.debug("Request to get AppUser Logged In");
+        return appUserRepository.findAppUserByUserId(userId)
+            .map(appUserMapper::toDto);
+    }
     /**
      * Delete the appUser by id.
      *

@@ -91,6 +91,13 @@ public class FinalAssessmentResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/final-assessments/by-patient")
+    public ResponseEntity<List<FinalAssessmentDTO>> getAllFinalAssessmentsByPatient(Pageable pageable,Long patientId) {
+        log.debug("REST request to get a page of FinalAssessments");
+        Page<FinalAssessmentDTO> page = finalAssessmentService.findAllByPatient(pageable,patientId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/final-assessments");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * GET  /final-assessments/:id : get the "id" finalAssessment.
      *

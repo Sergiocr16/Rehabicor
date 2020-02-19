@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -58,6 +60,23 @@ public class IncomeDiagnosisService {
             .map(incomeDiagnosisMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Page<IncomeDiagnosisDTO> findAll(Pageable pageable, Long rehabilitationId) {
+        log.debug("Request to get all IncomeDiagnoses");
+        return incomeDiagnosisRepository.findByRehabilitationCenterIdAndAndDeleted(pageable, rehabilitationId, false)
+            .map(incomeDiagnosisMapper::toDto);
+    }
+    @Transactional(readOnly = true)
+    public List<IncomeDiagnosisDTO> findAllNoPage(Long rehabilitationId) {
+        log.debug("Request to get all IncomeDiagnoses");
+        List<IncomeDiagnosisDTO> incomeDiagnosisDTOS = new ArrayList<>();
+        incomeDiagnosisRepository.findByRehabilitationCenterIdAndAndDeleted(rehabilitationId, false).forEach(
+            incomeDiagnosis -> {
+                incomeDiagnosisDTOS.add(this.incomeDiagnosisMapper.toDto(incomeDiagnosis));
+            }
+        );
+        return incomeDiagnosisDTOS;
+    }
 
     /**
      * Get one incomeDiagnosis by id.

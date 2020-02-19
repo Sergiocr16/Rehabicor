@@ -58,7 +58,12 @@ public class MinorEventsSessionService {
             .map(minorEventsSessionMapper::toDto);
     }
 
-
+    @Transactional(readOnly = true)
+    public Page<MinorEventsSessionDTO> findAllBySessionId(Pageable pageable, Long sessionId) {
+        log.debug("Request to get all MinorEventsSessions");
+        return minorEventsSessionRepository.findAllBySessionId(pageable,sessionId)
+            .map(minorEventsSessionMapper::toDto);
+    }
     /**
      * Get one minorEventsSession by id.
      *
