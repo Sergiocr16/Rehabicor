@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -84,14 +85,14 @@ public class DepressiveSymptomResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of depressiveSymptoms in body
      */
+
     @GetMapping("/depressive-symptoms")
-    public ResponseEntity<List<DepressiveSymptomDTO>> getAllDepressiveSymptoms(Pageable pageable) {
+    public ResponseEntity<List<DepressiveSymptomDTO>> getAllDepressiveSymptoms(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of DepressiveSymptoms");
-        Page<DepressiveSymptomDTO> page = depressiveSymptomService.findAll(pageable);
+        Page<DepressiveSymptomDTO> page = depressiveSymptomService.findAll(pageable,rehabilitationId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/depressive-symptoms");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
     /**
      * GET  /depressive-symptoms/:id : get the "id" depressiveSymptom.
      *

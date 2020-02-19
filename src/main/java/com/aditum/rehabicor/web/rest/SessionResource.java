@@ -92,6 +92,13 @@ public class SessionResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/sessions/by-patient")
+    public ResponseEntity<List<SessionDTO>> getAllSessions(Pageable pageable, Long patientId) {
+        log.debug("REST request to get a page of Sessions");
+        Page<SessionDTO> page = sessionService.findAllByPatient(pageable,patientId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sessions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * GET  /sessions/:id : get the "id" session.
      *

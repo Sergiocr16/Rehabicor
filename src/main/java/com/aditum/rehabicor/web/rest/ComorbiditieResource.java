@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -78,20 +79,14 @@ public class ComorbiditieResource {
             .body(result);
     }
 
-    /**
-     * GET  /comorbidities : get all the comorbidities.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of comorbidities in body
-     */
+
     @GetMapping("/comorbidities")
-    public ResponseEntity<List<ComorbiditieDTO>> getAllComorbidities(Pageable pageable) {
+    public ResponseEntity<List<ComorbiditieDTO>> getAllComorbidities(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of Comorbidities");
-        Page<ComorbiditieDTO> page = comorbiditieService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comorbidities");
+        Page<ComorbiditieDTO> page = comorbiditieService.findAll(pageable,rehabilitationId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,"/api/comorbidities");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
     /**
      * GET  /comorbidities/:id : get the "id" comorbiditie.
      *

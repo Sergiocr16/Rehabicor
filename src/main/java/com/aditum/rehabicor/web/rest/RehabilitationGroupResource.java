@@ -1,5 +1,6 @@
 package com.aditum.rehabicor.web.rest;
 import com.aditum.rehabicor.service.RehabilitationGroupService;
+import com.aditum.rehabicor.service.dto.GroupCharacteristicsDTO;
 import com.aditum.rehabicor.web.rest.errors.BadRequestAlertException;
 import com.aditum.rehabicor.web.rest.util.HeaderUtil;
 import com.aditum.rehabicor.web.rest.util.PaginationUtil;
@@ -96,6 +97,13 @@ public class RehabilitationGroupResource {
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/rehabilitation-groups?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/rehabilitation-groups/clinical-characteristics/{id}")
+    public GroupCharacteristicsDTO getRehabilitationGroupClinicalCharacteristics(@PathVariable Long id) {
+        log.debug("REST request to get RehabilitationGroup : {}", id);
+        GroupCharacteristicsDTO groupCharacteristicsDTO = rehabilitationGroupService.findCharacteristics(id);
+        return groupCharacteristicsDTO;
     }
 
     /**

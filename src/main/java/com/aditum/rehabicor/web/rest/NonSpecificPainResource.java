@@ -84,14 +84,14 @@ public class NonSpecificPainResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of nonSpecificPains in body
      */
+
     @GetMapping("/non-specific-pains")
-    public ResponseEntity<List<NonSpecificPainDTO>> getAllNonSpecificPains(Pageable pageable) {
+    public ResponseEntity<List<NonSpecificPainDTO>> getAllNonSpecificPains(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of NonSpecificPains");
-        Page<NonSpecificPainDTO> page = nonSpecificPainService.findAll(pageable);
+        Page<NonSpecificPainDTO> page = nonSpecificPainService.findAll(pageable,rehabilitationId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/non-specific-pains");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
     /**
      * GET  /non-specific-pains/:id : get the "id" nonSpecificPain.
      *

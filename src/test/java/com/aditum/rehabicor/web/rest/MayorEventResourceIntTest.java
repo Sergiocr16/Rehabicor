@@ -5,6 +5,7 @@ import com.aditum.rehabicor.RehabicorApp;
 import com.aditum.rehabicor.domain.MayorEvent;
 import com.aditum.rehabicor.repository.MayorEventRepository;
 import com.aditum.rehabicor.service.MayorEventService;
+import com.aditum.rehabicor.service.PanelDataService;
 import com.aditum.rehabicor.service.dto.MayorEventDTO;
 import com.aditum.rehabicor.service.mapper.MayorEventMapper;
 import com.aditum.rehabicor.web.rest.errors.ExceptionTranslator;
@@ -62,6 +63,9 @@ public class MayorEventResourceIntTest {
     private MayorEventService mayorEventService;
 
     @Autowired
+    private PanelDataService panelDataService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -83,7 +87,7 @@ public class MayorEventResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MayorEventResource mayorEventResource = new MayorEventResource(mayorEventService);
+        final MayorEventResource mayorEventResource = new MayorEventResource(mayorEventService,panelDataService);
         this.restMayorEventMockMvc = MockMvcBuilders.standaloneSetup(mayorEventResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -186,7 +190,7 @@ public class MayorEventResourceIntTest {
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].deleted").value(hasItem(DEFAULT_DELETED.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getMayorEvent() throws Exception {

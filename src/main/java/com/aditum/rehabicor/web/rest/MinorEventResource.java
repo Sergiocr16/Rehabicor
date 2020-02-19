@@ -1,5 +1,6 @@
 package com.aditum.rehabicor.web.rest;
 import com.aditum.rehabicor.service.MinorEventService;
+import com.aditum.rehabicor.service.PanelDataService;
 import com.aditum.rehabicor.web.rest.errors.BadRequestAlertException;
 import com.aditum.rehabicor.web.rest.util.HeaderUtil;
 import com.aditum.rehabicor.web.rest.util.PaginationUtil;
@@ -34,8 +35,11 @@ public class MinorEventResource {
 
     private final MinorEventService minorEventService;
 
-    public MinorEventResource(MinorEventService minorEventService) {
+    private final PanelDataService panelDataService;
+
+    public MinorEventResource(MinorEventService minorEventService, PanelDataService panelDataService) {
         this.minorEventService = minorEventService;
+        this.panelDataService = panelDataService;
     }
 
     /**
@@ -78,20 +82,29 @@ public class MinorEventResource {
             .body(result);
     }
 
+
+    @GetMapping("/minor-events/graph")
+    public ResponseEntity<List<MinorEventDTO>> getSessionsPerMinorEvent(Long groupId, Long rehabilitationId,Long minorEventId) {
+        log.debug("REST request to get a page of MinorEvents");
+        List<MinorEventDTO> result = this.panelDataService.distributionMinorEventPerSessions(groupId,rehabilitationId,minorEventId);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), null);
+        return ResponseEntity.ok().headers(null).body(result);
+    }
     /**
-     * GET  /minor-events : get all the minorEvents.
+     * {@code GET  /minor-events} : get all the minorEvents.
      *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of minorEvents in body
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of minorEvents in body.
      */
     @GetMapping("/minor-events")
-    public ResponseEntity<List<MinorEventDTO>> getAllMinorEvents(Pageable pageable) {
+    public ResponseEntity<List<MinorEventDTO>> getAllMinorEvents(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of MinorEvents");
-        Page<MinorEventDTO> page = minorEventService.findAll(pageable);
+        Page<MinorEventDTO> page = minorEventService.findAll(pageable,rehabilitationId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/minor-events");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
     /**
      * GET  /minor-events/:id : get the "id" minorEvent.
      *

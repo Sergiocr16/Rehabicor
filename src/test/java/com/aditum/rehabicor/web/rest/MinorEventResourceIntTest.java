@@ -5,6 +5,7 @@ import com.aditum.rehabicor.RehabicorApp;
 import com.aditum.rehabicor.domain.MinorEvent;
 import com.aditum.rehabicor.repository.MinorEventRepository;
 import com.aditum.rehabicor.service.MinorEventService;
+import com.aditum.rehabicor.service.PanelDataService;
 import com.aditum.rehabicor.service.dto.MinorEventDTO;
 import com.aditum.rehabicor.service.mapper.MinorEventMapper;
 import com.aditum.rehabicor.web.rest.errors.ExceptionTranslator;
@@ -62,6 +63,9 @@ public class MinorEventResourceIntTest {
     private MinorEventService minorEventService;
 
     @Autowired
+    private PanelDataService panelDataService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -83,7 +87,7 @@ public class MinorEventResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MinorEventResource minorEventResource = new MinorEventResource(minorEventService);
+        final MinorEventResource minorEventResource = new MinorEventResource(minorEventService,panelDataService);
         this.restMinorEventMockMvc = MockMvcBuilders.standaloneSetup(minorEventResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -186,7 +190,7 @@ public class MinorEventResourceIntTest {
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].deleted").value(hasItem(DEFAULT_DELETED.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getMinorEvent() throws Exception {

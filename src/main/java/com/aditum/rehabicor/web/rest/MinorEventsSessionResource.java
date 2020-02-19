@@ -92,6 +92,13 @@ public class MinorEventsSessionResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/minor-events-sessions/by-session")
+    public ResponseEntity<List<MinorEventsSessionDTO>> getAllMinorEventsSessionsBySession(Pageable pageable,Long sessionId) {
+        log.debug("REST request to get a page of MinorEventsSessions");
+        Page<MinorEventsSessionDTO> page = minorEventsSessionService.findAllBySessionId(pageable,sessionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/minor-events-sessions");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * GET  /minor-events-sessions/:id : get the "id" minorEventsSession.
      *

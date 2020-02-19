@@ -84,14 +84,14 @@ public class IncomeDiagnosisResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of incomeDiagnoses in body
      */
+
     @GetMapping("/income-diagnoses")
-    public ResponseEntity<List<IncomeDiagnosisDTO>> getAllIncomeDiagnoses(Pageable pageable) {
+    public ResponseEntity<List<IncomeDiagnosisDTO>> getAllIncomeDiagnoses(Pageable pageable, Long rehabilitationId) {
         log.debug("REST request to get a page of IncomeDiagnoses");
-        Page<IncomeDiagnosisDTO> page = incomeDiagnosisService.findAll(pageable);
+        Page<IncomeDiagnosisDTO> page = incomeDiagnosisService.findAll(pageable,rehabilitationId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/income-diagnoses");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
     /**
      * GET  /income-diagnoses/:id : get the "id" incomeDiagnosis.
      *

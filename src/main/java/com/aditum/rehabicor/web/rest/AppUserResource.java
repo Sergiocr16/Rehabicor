@@ -117,4 +117,16 @@ public class AppUserResource {
         appUserService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/app-users/current-user/")
+    public ResponseEntity<AppUserDTO> getAppUserByCurrentUser() {
+        Optional<AppUserDTO> appUserDTO = appUserService.findLoggedIn();
+        return ResponseUtil.wrapOrNotFound(appUserDTO);
+    }
+
+    @GetMapping("/app-users/by-user/{userId}")
+    public ResponseEntity<AppUserDTO> getAppUserByUserId(@PathVariable Long userId ) {
+        Optional<AppUserDTO> appUserDTO = appUserService.findOneByUserId(userId);
+        return ResponseUtil.wrapOrNotFound(appUserDTO);
+    }
 }
