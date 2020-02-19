@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "depressiveSymptomsSession": {
+            "home": {
+                "title": "Depressive Symptoms Sessions",
+                "createLabel": "Crear nuevo Depressive Symptoms Session",
+                "createOrEditLabel": "Crear o editar Depressive Symptoms Session"
+            },
+            "created": "Un nuevo Depressive Symptoms Session ha sido creado con el identificador {{ param }}",
+            "updated": "Un Depressive Symptoms Session ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Depressive Symptoms Session ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Depressive Symptoms Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Depressive Symptoms Session"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "depressiveSymptomRelation": "Depressive Symptom Relation",
+            "session": "Session"
+        }
+    }
+}

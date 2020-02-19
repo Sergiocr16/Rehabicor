@@ -1,0 +1,38 @@
+{
+    "name": "NonSpecificPain",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "rehabilitationCenter",
+            "otherEntityRelationshipName": "nonSpecificPain",
+            "relationshipName": "rehabilitationCenter",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024541",
+    "entityTableName": "non_specific_pain",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "nonSpecificPain": {
+            "home": {
+                "title": "Non Specific Pains",
+                "createLabel": "Create a new Non Specific Pain",
+                "createOrEditLabel": "Create or edit a Non Specific Pain"
+            },
+            "created": "A new Non Specific Pain is created with identifier {{ param }}",
+            "updated": "A Non Specific Pain is updated with identifier {{ param }}",
+            "deleted": "A Non Specific Pain is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Non Specific Pain {{ id }}?"
+            },
+            "detail": {
+                "title": "Non Specific Pain"
+            },
+            "description": "Description",
+            "code": "Code",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

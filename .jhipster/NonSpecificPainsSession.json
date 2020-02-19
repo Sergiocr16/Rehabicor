@@ -1,0 +1,38 @@
+{
+    "name": "NonSpecificPainsSession",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exist",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nonSpecificPainsSessionRelation",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "session",
+            "otherEntityRelationshipName": "nonSpecificPainsSession",
+            "relationshipName": "session",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024542",
+    "entityTableName": "non_specific_pains_session",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

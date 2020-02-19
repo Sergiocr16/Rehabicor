@@ -1,0 +1,92 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.finalAssessment.home.title">Final Assessments</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-final-assessment" [routerLink]="['/final-assessment/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.finalAssessment.home.createLabel">
+            Create new Final Assessment
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="finalAssessments">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="smoking"><span jhiTranslate="rehabicorApp.finalAssessment.smoking">Smoking</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="weight"><span jhiTranslate="rehabicorApp.finalAssessment.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="size"><span jhiTranslate="rehabicorApp.finalAssessment.size">Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="iMC"><span jhiTranslate="rehabicorApp.finalAssessment.iMC">I MC</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hbiac"><span jhiTranslate="rehabicorApp.finalAssessment.hbiac">Hbiac</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="baselineFunctionalCapacity"><span jhiTranslate="rehabicorApp.finalAssessment.baselineFunctionalCapacity">Baseline Functional Capacity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lDL"><span jhiTranslate="rehabicorApp.finalAssessment.lDL">L DL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hDL"><span jhiTranslate="rehabicorApp.finalAssessment.hDL">H DL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cardiovascularRisk"><span jhiTranslate="rehabicorApp.finalAssessment.cardiovascularRisk">Cardiovascular Risk</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="isWorking"><span jhiTranslate="rehabicorApp.finalAssessment.isWorking">Is Working</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deceased"><span jhiTranslate="rehabicorApp.finalAssessment.deceased">Deceased</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="abandonment"><span jhiTranslate="rehabicorApp.finalAssessment.abandonment">Abandonment</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="abandonmentMedicCause"><span jhiTranslate="rehabicorApp.finalAssessment.abandonmentMedicCause">Abandonment Medic Cause</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hospitalized"><span jhiTranslate="rehabicorApp.finalAssessment.hospitalized">Hospitalized</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.finalAssessment.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reevaluation"><span jhiTranslate="rehabicorApp.finalAssessment.reevaluation">Reevaluation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="executionDate"><span jhiTranslate="rehabicorApp.finalAssessment.executionDate">Execution Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="patientId"><span jhiTranslate="rehabicorApp.finalAssessment.patient">Patient</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let finalAssessment of finalAssessments ;trackBy: trackId">
+                <td><a [routerLink]="['/final-assessment', finalAssessment.id, 'view' ]">{{finalAssessment.id}}</a></td>
+                <td>{{finalAssessment.smoking}}</td>
+                <td>{{finalAssessment.weight}}</td>
+                <td>{{finalAssessment.size}}</td>
+                <td>{{finalAssessment.iMC}}</td>
+                <td>{{finalAssessment.hbiac}}</td>
+                <td>{{finalAssessment.baselineFunctionalCapacity}}</td>
+                <td>{{finalAssessment.lDL}}</td>
+                <td>{{finalAssessment.hDL}}</td>
+                <td>{{finalAssessment.cardiovascularRisk}}</td>
+                <td>{{finalAssessment.isWorking}}</td>
+                <td>{{finalAssessment.deceased}}</td>
+                <td>{{finalAssessment.abandonment}}</td>
+                <td>{{finalAssessment.abandonmentMedicCause}}</td>
+                <td>{{finalAssessment.hospitalized}}</td>
+                <td>{{finalAssessment.deleted}}</td>
+                <td>{{finalAssessment.reevaluation}}</td>
+                <td>{{finalAssessment.executionDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="finalAssessment.patientId">
+                        <a [routerLink]="['../patient', finalAssessment.patientId , 'view' ]" >{{finalAssessment.patientId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/final-assessment', finalAssessment.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/final-assessment', finalAssessment.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'final-assessment', { outlets: { popup: finalAssessment.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

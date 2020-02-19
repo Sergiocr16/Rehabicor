@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-income-diagnosis-patient-heading" jhiTranslate="rehabicorApp.incomeDiagnosisPatient.home.createOrEditLabel">Create or edit a Income Diagnosis Patient</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!incomeDiagnosisPatient.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="incomeDiagnosisPatient.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosisPatient.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="incomeDiagnosisPatient.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosisPatient.exist" for="field_exist">Exist</label>
+                    <input type="checkbox" class="form-control" name="exist" id="field_exist"
+                        [(ngModel)]="incomeDiagnosisPatient.exist" />
+                    <div [hidden]="!(editForm.controls.exist?.dirty && editForm.controls.exist?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.exist?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosisPatient.incomeDiagnosisRelation" for="field_incomeDiagnosisRelation">Income Diagnosis Relation</label>
+                    <input type="number" class="form-control" name="incomeDiagnosisRelation" id="field_incomeDiagnosisRelation"
+                        [(ngModel)]="incomeDiagnosisPatient.incomeDiagnosisRelation" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosisPatient.initialAssessment" for="field_initialAssessment">Initial Assessment</label>
+                    <select class="form-control" id="field_initialAssessment" name="initialAssessment" [(ngModel)]="incomeDiagnosisPatient.initialAssessmentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="initialAssessmentOption.id" *ngFor="let initialAssessmentOption of initialassessments; trackBy: trackInitialAssessmentById">{{initialAssessmentOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="session">
+            <h2><span jhiTranslate="rehabicorApp.session.detail.title">Session</span> {{session.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.session.code">Code</span></dt>
+                <dd>
+                    <span>{{session.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.executionDate">Execution Date</span></dt>
+                <dd>
+                    <span>{{session.executionDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.abscence">Abscence</span></dt>
+                <dd>
+                    <span>{{session.abscence}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.hospitalization">Hospitalization</span></dt>
+                <dd>
+                    <span>{{session.hospitalization}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.status">Status</span></dt>
+                <dd>
+                    <span>{{session.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{session.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.currentlyWorking">Currently Working</span></dt>
+                <dd>
+                    <span>{{session.currentlyWorking}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.session.patient">Patient</span></dt>
+                <dd>
+                    <div *ngIf="session.patientId">
+                        <a [routerLink]="['/patient', session.patientId, 'view']">{{session.patientId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/session', session.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

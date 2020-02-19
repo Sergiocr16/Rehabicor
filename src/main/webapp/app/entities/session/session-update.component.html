@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-session-heading" jhiTranslate="rehabicorApp.session.home.createOrEditLabel">Create or edit a Session</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!session.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="session.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="session.code" required/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.executionDate" for="field_executionDate">Execution Date</label>
+                    <div class="d-flex">
+                        <input id="field_executionDate" type="datetime-local" class="form-control" name="executionDate" [(ngModel)]="executionDate" placeholder="YYYY-MM-DD HH:mm"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.executionDate?.dirty && editForm.controls.executionDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.executionDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.executionDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.abscence" for="field_abscence">Abscence</label>
+                    <input type="checkbox" class="form-control" name="abscence" id="field_abscence"
+                        [(ngModel)]="session.abscence" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.hospitalization" for="field_hospitalization">Hospitalization</label>
+                    <input type="checkbox" class="form-control" name="hospitalization" id="field_hospitalization"
+                        [(ngModel)]="session.hospitalization" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="session.status" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.deleted" for="field_deleted">Deleted</label>
+                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
+                        [(ngModel)]="session.deleted" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.currentlyWorking" for="field_currentlyWorking">Currently Working</label>
+                    <input type="checkbox" class="form-control" name="currentlyWorking" id="field_currentlyWorking"
+                        [(ngModel)]="session.currentlyWorking" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.session.patient" for="field_patient">Patient</label>
+                    <select class="form-control" id="field_patient" name="patient" [(ngModel)]="session.patientId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

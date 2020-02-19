@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "comorbiditiesPatient": {
+            "home": {
+                "title": "Comorbidities Patients",
+                "createLabel": "Crear nuevo Comorbidities Patient",
+                "createOrEditLabel": "Crear o editar Comorbidities Patient"
+            },
+            "created": "Un nuevo Comorbidities Patient ha sido creado con el identificador {{ param }}",
+            "updated": "Un Comorbidities Patient ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Comorbidities Patient ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Comorbidities Patient {{ id }}?"
+            },
+            "detail": {
+                "title": "Comorbidities Patient"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "comorbiditieRelation": "Comorbiditie Relation",
+            "initialAssessment": "Initial Assessment"
+        }
+    }
+}

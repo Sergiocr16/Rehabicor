@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "nonSpecificPainsSession": {
+            "home": {
+                "title": "Non Specific Pains Sessions",
+                "createLabel": "Crear nuevo Non Specific Pains Session",
+                "createOrEditLabel": "Crear o editar Non Specific Pains Session"
+            },
+            "created": "Un nuevo Non Specific Pains Session ha sido creado con el identificador {{ param }}",
+            "updated": "Un Non Specific Pains Session ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Non Specific Pains Session ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Non Specific Pains Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Non Specific Pains Session"
+            },
+            "description": "Description",
+            "exist": "Exist",
+            "nonSpecificPainsSessionRelation": "Non Specific Pains Session Relation",
+            "session": "Session"
+        }
+    }
+}

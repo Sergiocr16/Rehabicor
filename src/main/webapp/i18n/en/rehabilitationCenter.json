@@ -1,0 +1,32 @@
+{
+    "rehabicorApp": {
+        "rehabilitationCenter": {
+            "home": {
+                "title": "Rehabilitation Centers",
+                "createLabel": "Create a new Rehabilitation Center",
+                "createOrEditLabel": "Create or edit a Rehabilitation Center"
+            },
+            "created": "A new Rehabilitation Center is created with identifier {{ param }}",
+            "updated": "A Rehabilitation Center is updated with identifier {{ param }}",
+            "deleted": "A Rehabilitation Center is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Rehabilitation Center {{ id }}?"
+            },
+            "detail": {
+                "title": "Rehabilitation Center"
+            },
+            "name": "Name",
+            "telephone": "Telephone",
+            "deleted": "Deleted",
+            "status": "Status",
+            "appUser": "App User",
+            "comorbiditie": "Comorbiditie",
+            "depressiveSymptom": "Depressive Symptom",
+            "incomeDiagnosis": "Income Diagnosis",
+            "mayorEvent": "Mayor Event",
+            "minorEvent": "Minor Event",
+            "nonSpecificPain": "Non Specific Pain",
+            "rehabilitationGroup": "Rehabilitation Group"
+        }
+    }
+}

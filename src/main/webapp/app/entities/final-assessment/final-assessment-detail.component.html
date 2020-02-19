@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="finalAssessment">
+            <h2><span jhiTranslate="rehabicorApp.finalAssessment.detail.title">Final Assessment</span> {{finalAssessment.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.smoking">Smoking</span></dt>
+                <dd>
+                    <span>{{finalAssessment.smoking}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.weight">Weight</span></dt>
+                <dd>
+                    <span>{{finalAssessment.weight}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.size">Size</span></dt>
+                <dd>
+                    <span>{{finalAssessment.size}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.iMC">I MC</span></dt>
+                <dd>
+                    <span>{{finalAssessment.iMC}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.hbiac">Hbiac</span></dt>
+                <dd>
+                    <span>{{finalAssessment.hbiac}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.baselineFunctionalCapacity">Baseline Functional Capacity</span></dt>
+                <dd>
+                    <span>{{finalAssessment.baselineFunctionalCapacity}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.lDL">L DL</span></dt>
+                <dd>
+                    <span>{{finalAssessment.lDL}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.hDL">H DL</span></dt>
+                <dd>
+                    <span>{{finalAssessment.hDL}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.cardiovascularRisk">Cardiovascular Risk</span></dt>
+                <dd>
+                    <span>{{finalAssessment.cardiovascularRisk}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.isWorking">Is Working</span></dt>
+                <dd>
+                    <span>{{finalAssessment.isWorking}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.deceased">Deceased</span></dt>
+                <dd>
+                    <span>{{finalAssessment.deceased}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.abandonment">Abandonment</span></dt>
+                <dd>
+                    <span>{{finalAssessment.abandonment}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.abandonmentMedicCause">Abandonment Medic Cause</span></dt>
+                <dd>
+                    <span>{{finalAssessment.abandonmentMedicCause}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.hospitalized">Hospitalized</span></dt>
+                <dd>
+                    <span>{{finalAssessment.hospitalized}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{finalAssessment.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.reevaluation">Reevaluation</span></dt>
+                <dd>
+                    <span>{{finalAssessment.reevaluation}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.executionDate">Execution Date</span></dt>
+                <dd>
+                    <span>{{finalAssessment.executionDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.finalAssessment.patient">Patient</span></dt>
+                <dd>
+                    <div *ngIf="finalAssessment.patientId">
+                        <a [routerLink]="['/patient', finalAssessment.patientId, 'view']">{{finalAssessment.patientId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/final-assessment', finalAssessment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

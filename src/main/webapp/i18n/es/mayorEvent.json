@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "mayorEvent": {
+            "home": {
+                "title": "Mayor Events",
+                "createLabel": "Crear nuevo Mayor Event",
+                "createOrEditLabel": "Crear o editar Mayor Event"
+            },
+            "created": "Un nuevo Mayor Event ha sido creado con el identificador {{ param }}",
+            "updated": "Un Mayor Event ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Mayor Event ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Mayor Event {{ id }}?"
+            },
+            "detail": {
+                "title": "Mayor Event"
+            },
+            "description": "Description",
+            "code": "Code",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

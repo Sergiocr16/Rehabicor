@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="rehabilitationCenter">
+            <h2><span jhiTranslate="rehabicorApp.rehabilitationCenter.detail.title">Rehabilitation Center</span> {{rehabilitationCenter.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationCenter.name">Name</span></dt>
+                <dd>
+                    <span>{{rehabilitationCenter.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationCenter.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{rehabilitationCenter.telephone}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationCenter.deleted">Deleted</span></dt>
+                <dd>
+                    <span>{{rehabilitationCenter.deleted}}</span>
+                </dd>
+                <dt><span jhiTranslate="rehabicorApp.rehabilitationCenter.status">Status</span></dt>
+                <dd>
+                    <span>{{rehabilitationCenter.status}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/rehabilitation-center', rehabilitationCenter.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

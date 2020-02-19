@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.patient.home.title">Patients</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-patient" [routerLink]="['/patient/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.patient.home.createLabel">
+            Create new Patient
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="patients">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="rehabicorApp.patient.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="age"><span jhiTranslate="rehabicorApp.patient.age">Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sex"><span jhiTranslate="rehabicorApp.patient.sex">Sex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ocupation"><span jhiTranslate="rehabicorApp.patient.ocupation">Ocupation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastEventOcurred"><span jhiTranslate="rehabicorApp.patient.lastEventOcurred">Last Event Ocurred</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deceased"><span jhiTranslate="rehabicorApp.patient.deceased">Deceased</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="abandonment"><span jhiTranslate="rehabicorApp.patient.abandonment">Abandonment</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="abandonmentMedicCause"><span jhiTranslate="rehabicorApp.patient.abandonmentMedicCause">Abandonment Medic Cause</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rehabStatus"><span jhiTranslate="rehabicorApp.patient.rehabStatus">Rehab Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sessionNumber"><span jhiTranslate="rehabicorApp.patient.sessionNumber">Session Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.patient.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="scholarship"><span jhiTranslate="rehabicorApp.patient.scholarship">Scholarship</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let patient of patients ;trackBy: trackId">
+                <td><a [routerLink]="['/patient', patient.id, 'view' ]">{{patient.id}}</a></td>
+                <td>{{patient.code}}</td>
+                <td>{{patient.age}}</td>
+                <td>{{patient.sex}}</td>
+                <td>{{patient.ocupation}}</td>
+                <td>{{patient.lastEventOcurred}}</td>
+                <td>{{patient.deceased}}</td>
+                <td>{{patient.abandonment}}</td>
+                <td>{{patient.abandonmentMedicCause}}</td>
+                <td>{{patient.rehabStatus}}</td>
+                <td>{{patient.sessionNumber}}</td>
+                <td>{{patient.deleted}}</td>
+                <td>{{patient.scholarship}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/patient', patient.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/patient', patient.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'patient', { outlets: { popup: patient.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

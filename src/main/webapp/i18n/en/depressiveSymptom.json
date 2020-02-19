@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "depressiveSymptom": {
+            "home": {
+                "title": "Depressive Symptoms",
+                "createLabel": "Create a new Depressive Symptom",
+                "createOrEditLabel": "Create or edit a Depressive Symptom"
+            },
+            "created": "A new Depressive Symptom is created with identifier {{ param }}",
+            "updated": "A Depressive Symptom is updated with identifier {{ param }}",
+            "deleted": "A Depressive Symptom is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Depressive Symptom {{ id }}?"
+            },
+            "detail": {
+                "title": "Depressive Symptom"
+            },
+            "description": "Description",
+            "code": "Code",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

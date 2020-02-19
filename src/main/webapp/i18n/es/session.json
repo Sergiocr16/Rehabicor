@@ -1,0 +1,32 @@
+{
+    "rehabicorApp": {
+        "session": {
+            "home": {
+                "title": "Sessions",
+                "createLabel": "Crear nuevo Session",
+                "createOrEditLabel": "Crear o editar Session"
+            },
+            "created": "Un nuevo Session ha sido creado con el identificador {{ param }}",
+            "updated": "Un Session ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Session ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Session"
+            },
+            "code": "Code",
+            "executionDate": "Execution Date",
+            "abscence": "Abscence",
+            "hospitalization": "Hospitalization",
+            "status": "Status",
+            "deleted": "Deleted",
+            "currentlyWorking": "Currently Working",
+            "depressiveSymptomsSession": "Depressive Symptoms Session",
+            "mayorEventsSession": "Mayor Events Session",
+            "minorEventsSession": "Minor Events Session",
+            "nonSpecificPainsSession": "Non Specific Pains Session",
+            "patient": "Patient"
+        }
+    }
+}

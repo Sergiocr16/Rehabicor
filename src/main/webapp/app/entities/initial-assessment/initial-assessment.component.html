@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.initialAssessment.home.title">Initial Assessments</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-initial-assessment" [routerLink]="['/initial-assessment/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.initialAssessment.home.createLabel">
+            Create new Initial Assessment
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="initialAssessments">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="smoking"><span jhiTranslate="rehabicorApp.initialAssessment.smoking">Smoking</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="weight"><span jhiTranslate="rehabicorApp.initialAssessment.weight">Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="size"><span jhiTranslate="rehabicorApp.initialAssessment.size">Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="iMC"><span jhiTranslate="rehabicorApp.initialAssessment.iMC">I MC</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hbiac"><span jhiTranslate="rehabicorApp.initialAssessment.hbiac">Hbiac</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="baselineFunctionalCapacity"><span jhiTranslate="rehabicorApp.initialAssessment.baselineFunctionalCapacity">Baseline Functional Capacity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lDL"><span jhiTranslate="rehabicorApp.initialAssessment.lDL">L DL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hDL"><span jhiTranslate="rehabicorApp.initialAssessment.hDL">H DL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cardiovascularRisk"><span jhiTranslate="rehabicorApp.initialAssessment.cardiovascularRisk">Cardiovascular Risk</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.initialAssessment.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="patientId"><span jhiTranslate="rehabicorApp.initialAssessment.patient">Patient</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let initialAssessment of initialAssessments ;trackBy: trackId">
+                <td><a [routerLink]="['/initial-assessment', initialAssessment.id, 'view' ]">{{initialAssessment.id}}</a></td>
+                <td>{{initialAssessment.smoking}}</td>
+                <td>{{initialAssessment.weight}}</td>
+                <td>{{initialAssessment.size}}</td>
+                <td>{{initialAssessment.iMC}}</td>
+                <td>{{initialAssessment.hbiac}}</td>
+                <td>{{initialAssessment.baselineFunctionalCapacity}}</td>
+                <td>{{initialAssessment.lDL}}</td>
+                <td>{{initialAssessment.hDL}}</td>
+                <td>{{initialAssessment.cardiovascularRisk}}</td>
+                <td>{{initialAssessment.deleted}}</td>
+                <td>
+                    <div *ngIf="initialAssessment.patientId">
+                        <a [routerLink]="['../patient', initialAssessment.patientId , 'view' ]" >{{initialAssessment.patientId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/initial-assessment', initialAssessment.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/initial-assessment', initialAssessment.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'initial-assessment', { outlets: { popup: initialAssessment.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

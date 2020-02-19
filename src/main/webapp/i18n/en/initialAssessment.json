@@ -1,0 +1,33 @@
+{
+    "rehabicorApp": {
+        "initialAssessment": {
+            "home": {
+                "title": "Initial Assessments",
+                "createLabel": "Create a new Initial Assessment",
+                "createOrEditLabel": "Create or edit a Initial Assessment"
+            },
+            "created": "A new Initial Assessment is created with identifier {{ param }}",
+            "updated": "A Initial Assessment is updated with identifier {{ param }}",
+            "deleted": "A Initial Assessment is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Initial Assessment {{ id }}?"
+            },
+            "detail": {
+                "title": "Initial Assessment"
+            },
+            "smoking": "Smoking",
+            "weight": "Weight",
+            "size": "Size",
+            "iMC": "I MC",
+            "hbiac": "Hbiac",
+            "baselineFunctionalCapacity": "Baseline Functional Capacity",
+            "lDL": "L DL",
+            "hDL": "H DL",
+            "cardiovascularRisk": "Cardiovascular Risk",
+            "deleted": "Deleted",
+            "comorbiditiesPatient": "Comorbidities Patient",
+            "incomeDiagnosisPatient": "Income Diagnosis Patient",
+            "patient": "Patient"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "ComorbiditiesPatient",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exist",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "comorbiditieRelation",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "initialAssessment",
+            "otherEntityRelationshipName": "comorbiditiesPatient",
+            "relationshipName": "initialAssessment",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024530",
+    "entityTableName": "comorbidities_patient",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

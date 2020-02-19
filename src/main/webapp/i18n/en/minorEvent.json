@@ -1,0 +1,24 @@
+{
+    "rehabicorApp": {
+        "minorEvent": {
+            "home": {
+                "title": "Minor Events",
+                "createLabel": "Create a new Minor Event",
+                "createOrEditLabel": "Create or edit a Minor Event"
+            },
+            "created": "A new Minor Event is created with identifier {{ param }}",
+            "updated": "A Minor Event is updated with identifier {{ param }}",
+            "deleted": "A Minor Event is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Minor Event {{ id }}?"
+            },
+            "detail": {
+                "title": "Minor Event"
+            },
+            "description": "Description",
+            "code": "Code",
+            "deleted": "Deleted",
+            "rehabilitationCenter": "Rehabilitation Center"
+        }
+    }
+}

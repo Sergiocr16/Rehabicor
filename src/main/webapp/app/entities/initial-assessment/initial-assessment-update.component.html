@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-initial-assessment-heading" jhiTranslate="rehabicorApp.initialAssessment.home.createOrEditLabel">Create or edit a Initial Assessment</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!initialAssessment.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="initialAssessment.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.smoking" for="field_smoking">Smoking</label>
+                    <input type="text" class="form-control" name="smoking" id="field_smoking"
+                        [(ngModel)]="initialAssessment.smoking" required/>
+                    <div [hidden]="!(editForm.controls.smoking?.dirty && editForm.controls.smoking?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.smoking?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.weight" for="field_weight">Weight</label>
+                    <input type="text" class="form-control" name="weight" id="field_weight"
+                        [(ngModel)]="initialAssessment.weight" required/>
+                    <div [hidden]="!(editForm.controls.weight?.dirty && editForm.controls.weight?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.weight?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.size" for="field_size">Size</label>
+                    <input type="text" class="form-control" name="size" id="field_size"
+                        [(ngModel)]="initialAssessment.size" required/>
+                    <div [hidden]="!(editForm.controls.size?.dirty && editForm.controls.size?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.size?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.iMC" for="field_iMC">I MC</label>
+                    <input type="text" class="form-control" name="iMC" id="field_iMC"
+                        [(ngModel)]="initialAssessment.iMC" required/>
+                    <div [hidden]="!(editForm.controls.iMC?.dirty && editForm.controls.iMC?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.iMC?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.hbiac" for="field_hbiac">Hbiac</label>
+                    <input type="text" class="form-control" name="hbiac" id="field_hbiac"
+                        [(ngModel)]="initialAssessment.hbiac" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.baselineFunctionalCapacity" for="field_baselineFunctionalCapacity">Baseline Functional Capacity</label>
+                    <input type="text" class="form-control" name="baselineFunctionalCapacity" id="field_baselineFunctionalCapacity"
+                        [(ngModel)]="initialAssessment.baselineFunctionalCapacity" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.lDL" for="field_lDL">L DL</label>
+                    <input type="text" class="form-control" name="lDL" id="field_lDL"
+                        [(ngModel)]="initialAssessment.lDL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.hDL" for="field_hDL">H DL</label>
+                    <input type="text" class="form-control" name="hDL" id="field_hDL"
+                        [(ngModel)]="initialAssessment.hDL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.cardiovascularRisk" for="field_cardiovascularRisk">Cardiovascular Risk</label>
+                    <input type="text" class="form-control" name="cardiovascularRisk" id="field_cardiovascularRisk"
+                        [(ngModel)]="initialAssessment.cardiovascularRisk" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.deleted" for="field_deleted">Deleted</label>
+                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
+                        [(ngModel)]="initialAssessment.deleted" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rehabicorApp.initialAssessment.patient" for="field_patient">Patient</label>
+                    <select class="form-control" id="field_patient" name="patient" [(ngModel)]="initialAssessment.patientId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

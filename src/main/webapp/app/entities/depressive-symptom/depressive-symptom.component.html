@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="rehabicorApp.depressiveSymptom.home.title">Depressive Symptoms</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-depressive-symptom" [routerLink]="['/depressive-symptom/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="rehabicorApp.depressiveSymptom.home.createLabel">
+            Create new Depressive Symptom
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="depressiveSymptoms">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.depressiveSymptom.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="rehabicorApp.depressiveSymptom.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.depressiveSymptom.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.depressiveSymptom.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let depressiveSymptom of depressiveSymptoms ;trackBy: trackId">
+                <td><a [routerLink]="['/depressive-symptom', depressiveSymptom.id, 'view' ]">{{depressiveSymptom.id}}</a></td>
+                <td>{{depressiveSymptom.description}}</td>
+                <td>{{depressiveSymptom.code}}</td>
+                <td>{{depressiveSymptom.deleted}}</td>
+                <td>
+                    <div *ngIf="depressiveSymptom.rehabilitationCenterId">
+                        <a [routerLink]="['../rehabilitation-center', depressiveSymptom.rehabilitationCenterId , 'view' ]" >{{depressiveSymptom.rehabilitationCenterId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/depressive-symptom', depressiveSymptom.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/depressive-symptom', depressiveSymptom.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'depressive-symptom', { outlets: { popup: depressiveSymptom.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

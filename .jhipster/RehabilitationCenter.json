@@ -1,0 +1,83 @@
+{
+    "name": "RehabilitationCenter",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "appUser",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "appUser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "comorbiditie",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "comorbiditie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "depressiveSymptom",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "depressiveSymptom"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "incomeDiagnosis",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "incomeDiagnosis"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "mayorEvent",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "mayorEvent"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "minorEvent",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "minorEvent"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "nonSpecificPain",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "nonSpecificPain"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "rehabilitationGroup",
+            "otherEntityRelationshipName": "rehabilitationCenter",
+            "relationshipName": "rehabilitationGroup"
+        }
+    ],
+    "changelogDate": "20200219024544",
+    "entityTableName": "rehabilitation_center",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

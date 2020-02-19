@@ -1,0 +1,87 @@
+{
+    "name": "InitialAssessment",
+    "fields": [
+        {
+            "fieldName": "smoking",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "weight",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "iMC",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "hbiac",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "baselineFunctionalCapacity",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lDL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hDL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cardiovascularRisk",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "comorbiditiesPatient",
+            "otherEntityRelationshipName": "initialAssessment",
+            "relationshipName": "comorbiditiesPatient"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "incomeDiagnosisPatient",
+            "otherEntityRelationshipName": "initialAssessment",
+            "relationshipName": "incomeDiagnosisPatient"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "initialAssessment",
+            "relationshipName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024536",
+    "entityTableName": "initial_assessment",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

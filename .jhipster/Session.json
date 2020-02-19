@@ -1,0 +1,81 @@
+{
+    "name": "Session",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "executionDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "abscence",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hospitalization",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "deleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "currentlyWorking",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "depressiveSymptomsSession",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "depressiveSymptomsSession"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "mayorEventsSession",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "mayorEventsSession"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "minorEventsSession",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "minorEventsSession"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "nonSpecificPainsSession",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "nonSpecificPainsSession"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219024546",
+    "entityTableName": "session",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
