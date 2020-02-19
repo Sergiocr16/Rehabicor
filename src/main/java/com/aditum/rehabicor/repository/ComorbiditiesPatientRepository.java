@@ -4,6 +4,8 @@ import com.aditum.rehabicor.domain.ComorbiditiesPatient;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 /**
  * Spring Data  repository for the ComorbiditiesPatient entity.
@@ -11,5 +13,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ComorbiditiesPatientRepository extends JpaRepository<ComorbiditiesPatient, Long> {
+
+    Optional<ComorbiditiesPatient> findFirstByInitialAssessmentIdAndComorbiditieRelation(Long initialAssessmentId, Long comorbiditietId);
 
 }

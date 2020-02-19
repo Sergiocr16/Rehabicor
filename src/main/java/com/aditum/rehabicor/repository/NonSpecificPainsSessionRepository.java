@@ -1,6 +1,8 @@
 package com.aditum.rehabicor.repository;
 
 import com.aditum.rehabicor.domain.NonSpecificPainsSession;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface NonSpecificPainsSessionRepository extends JpaRepository<NonSpecificPainsSession, Long> {
+    Page<NonSpecificPainsSession> findAllBySessionId(Pageable page, Long sessionId);
 
 }
