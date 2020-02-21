@@ -24,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmDialogComponent } from 'app/shared/util/confirm-dialog/confirm-dialog.component';
+import { LoginComponent } from 'app/shared/login/login-cardio.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -44,9 +46,11 @@ import { ConfirmDialogComponent } from 'app/shared/util/confirm-dialog/confirm-d
         RehabicorEntityModule,
         RehabicorAppRoutingModule,
         FlexLayoutModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule
     ],
     declarations: [
+        LoginComponent,
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,
