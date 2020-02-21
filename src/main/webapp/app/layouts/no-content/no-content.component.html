@@ -1,0 +1,19 @@
+<div fxFill fxLayout="row" fxLayoutAlign="center center">
+    <div style="display: flex;
+    height: 50vh;
+    min-height: 100%;
+    min-width: 100%;
+    width: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center center;
+    align-items: center">
+        <div class="text-center">
+            <i class="material-icons md-48 md-inactive md-dark circle-icon">{{icon}}</i>
+            <h3 class="text-center" style="font-weight: 400;color: rgba(0, 0, 0, 0.50);margin-top:10px">{{text}}</h3>
+            <h4 *ngIf="text2!=null" class="text-center"
+                style="font-weight: 400;color: rgba(0, 0, 0, 0.50);">{{text2}}</h4>
+        </div>
+    </div>
+</div>
