@@ -3,24 +3,13 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgbDateMomentAdapter } from './util/datepicker-adapter';
 import { RehabicorSharedLibsModule, RehabicorSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
-import { MaterialModule } from 'app/shared/util/material.module';
-import { ChartsModule } from 'ng2-charts';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { NoContentComponent } from 'app/layouts/no-content/no-content.component';
 
 @NgModule({
-    imports: [RehabicorSharedLibsModule, RehabicorSharedCommonModule, MaterialModule, FlexLayoutModule, ChartsModule],
-    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, NoContentComponent],
+    imports: [RehabicorSharedLibsModule, RehabicorSharedCommonModule],
+    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent],
-    exports: [
-        RehabicorSharedCommonModule,
-        JhiLoginModalComponent,
-        HasAnyAuthorityDirective,
-        MaterialModule,
-        FlexLayoutModule,
-        NoContentComponent
-    ],
+    exports: [RehabicorSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RehabicorSharedModule {
