@@ -13,9 +13,10 @@ import {
     SettingsComponent,
     accountState
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(accountState)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(accountState), ReactiveFormsModule],
     declarations: [
         ActivateComponent,
         RegisterComponent,

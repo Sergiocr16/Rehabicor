@@ -25,7 +25,7 @@ import { GlobalVariablesService } from 'app/shared/util/global-variables.service
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmDialogComponent } from 'app/shared/util/confirm-dialog/confirm-dialog.component';
 import { LoginComponent } from 'app/shared/login/login-cardio.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -47,7 +47,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         RehabicorAppRoutingModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     declarations: [
         LoginComponent,

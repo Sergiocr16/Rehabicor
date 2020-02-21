@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError, ActivatedRoute, NavigationStart } from '@angular/router';
 import { AccountService } from 'app/core/auth/account.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
@@ -54,14 +54,15 @@ export class JhiMainComponent implements OnInit {
                 this.determineLayoutGap();
             });
 
-        this.router.events.subscribe(event => {
+        this.router.events.subscribe((event: NavigationStart) => {
             if (event instanceof NavigationEnd) {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
             if (event instanceof NavigationError && event.error.status === 404) {
                 this.router.navigate(['/404']);
             }
-            this.isCreatingNewPassWord = this.router.url.split('?')[0] === '/account/reset/finish';
+            const state = event.url.split('?')[0];
+            this.isCreatingNewPassWord = state === '/reset/finish';
         });
     }
 
