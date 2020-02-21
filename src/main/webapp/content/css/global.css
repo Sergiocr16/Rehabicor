@@ -225,3 +225,392 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* ==========================================================================
+MY CSS
+========================================================================== */
+.tableMaterialDesign {
+    margin-bottom: 50px;
+    margin-top: 15px;
+}
+
+.tableMaterialDesign table,
+.tableMaterialDesign th,
+.tableMaterialDesign td {
+    border: 1px solid #f8f8f8 !important;
+    padding: 15px !important;
+    font-weight: 400;
+    font-size: 15px;
+    border-collapse: collapse;
+    color: #616161;
+}
+
+.tableMaterialDesign table,
+.tableMaterialDesign th {
+    font-weight: 500;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.font-green {
+    color: #4caf50;
+}
+
+.font-red {
+    color: #e53935;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.table-title {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+.margin-top-30 {
+    margin-top: 30px !important;
+}
+
+.font-size-16 {
+    font-size: 16px !important;
+}
+
+.font-size-18 {
+    font-size: 18px !important;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.no-outline {
+    outline: none !important;
+}
+
+.md-fab-bottom-right {
+    position: fixed !important;
+    right: 19px;
+    bottom: 19px; /* Add this and change value to set the margin you want */
+    z-index: 1;
+}
+
+//SCROLL
+@media only screen and (max-width: 600px) {
+    ::-webkit-scrollbar {
+        width: 0px !important;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #8d8d8d;
+}
+
+.flexcroll {
+    scrollbar-face-color: #367cd2;
+    scrollbar-shadow-color: #ffffff;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #ffffff;
+    scrollbar-arrow-color: #ffffff;
+}
+
+//
+.text-icon {
+    vertical-align: middle !important;
+    margin-right: 5px;
+}
+
+.text-icon-sm {
+    vertical-align: middle !important;
+}
+
+button {
+    outline: none !important;
+}
+
+.big-icon {
+    font-size: 35px !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.app-sidebar {
+    position: fixed;
+    position: -webkit-fixed; /* For macOS/iOS Safari */
+    top: 0;
+    z-index: 3; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 2; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.circle-icon {
+    background: #f7f7f7;
+    padding: 40px;
+    border-radius: 50%;
+    font-size: 60px;
+    color: #a9a7a7;
+}
+
+.mat-progress-bar {
+    z-index: 4;
+}
+
+.form-title {
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+    height: 64px;
+    font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: calc(100% + 32px);
+    margin: -16px;
+    margin-bottom: 16px;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.form-title-middle {
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+    height: 64px;
+    font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: calc(100% + 32px);
+    margin: -16px;
+    margin-bottom: 16px;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    margin-top: 10px;
+}
+
+.primary-color {
+    color: #b71c1c !important;
+}
+
+.mat-card-form {
+    margin: -16px;
+}
+
+.mat-form-field {
+    margin-bottom: 3px;
+}
+
+.mat-form-field-hint-wrapper {
+    //margin-top: -9px;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.disabled {
+    pointer-events: none !important;
+}
+
+.margin-left-20 {
+    margin-left: 20px !important;
+}
+
+.margin-top-20 {
+    margin-top: 5px !important;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-form-field {
+    margin-right: 12px;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff !important;
+    background-color: #b71c1c !important;
+    border-color: #b71c1c !important;
+    padding: 5px 10px;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.page-item.disabled .page-link {
+    color: #dee2e6 !important;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+    padding: 5px 10px;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+}
+
+.jhi-item-count {
+    color: rgba(0, 0, 0, 0.54);
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+}
+
+.page-item .page-link {
+    color: #b71c1c !important;
+    cursor: pointer;
+    background-color: #fff;
+    border-color: #dee2e6;
+    padding: 5px 10px;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+}
+
+.container-fluid {
+    height: calc(100vh - 64px);
+}
+@media (max-width: 600px) {
+    .container-fluid {
+        height: calc(100vh - 56px);
+    }
+}
+
+/*loading heart*/
+.lds-heart {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform: rotate(45deg);
+    transform-origin: 40px 40px;
+}
+.lds-heart div {
+    top: 32px;
+    left: 32px;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: #b71c1c !important;
+    animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.lds-heart div:after,
+.lds-heart div:before {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: #b71c1c !important;
+}
+.lds-heart div:before {
+    left: -24px;
+    border-radius: 50% 0 0 50%;
+}
+.lds-heart div:after {
+    top: -24px;
+    border-radius: 50% 50% 0 0;
+}
+@keyframes lds-heart {
+    0% {
+        transform: scale(0.95);
+    }
+    5% {
+        transform: scale(1.1);
+    }
+    39% {
+        transform: scale(0.85);
+    }
+    45% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 108px;
+    height: 108px;
+    margin: 8px;
+    border: 10px solid #b71c1c;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #b71c1c transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

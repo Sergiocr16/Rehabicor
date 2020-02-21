@@ -28,21 +28,21 @@ export class GlobalVariablesService implements OnInit, AfterContentChecked {
     userApp = new Subject<any>();
 
     constructor(
-        private accountService: AccountService,
+        // private accountService: AccountService,
         private appUserService: AppUserService,
         private rehabilitationCenterService: RehabilitationCenterService
-    ) {
-        this.rehabilitationCenters = [];
-        this.accountService.getAuthenticationState().subscribe(data => {
-            if (data) {
-                if (data.authorities[0] !== 'ROLE_ADMIN') {
-                    this.defineGlobalRehabCenter();
-                }
-            }
-        });
-    }
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.rehabilitationCenters = [];
+        // this.accountService.getAuthenticationState().subscribe(data => {
+        //     if (data) {
+        //         if (data.authorities[0] !== 'ROLE_ADMIN') {
+        //             this.defineGlobalRehabCenter();
+        //         }
+        //     }
+        // });
+    }
 
     ngAfterContentChecked() {
         // this.cdRef.detectChanges();

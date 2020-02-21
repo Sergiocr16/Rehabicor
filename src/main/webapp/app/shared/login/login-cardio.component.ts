@@ -37,8 +37,7 @@ export class LoginComponent implements AfterViewInit {
         private renderer: Renderer,
         private router: Router,
         private fb: FormBuilder,
-        private passwordResetInitService: PasswordResetInitService,
-        public activeModal: NgbActiveModal
+        private passwordResetInitService: PasswordResetInitService
     ) {}
 
     ngAfterViewInit() {
@@ -51,23 +50,8 @@ export class LoginComponent implements AfterViewInit {
                 password: this.loginForm.get('password').value,
                 rememberMe: this.loginForm.get('rememberMe').value
             })
-            .then(user => {
-                switch (user.authorities[0]) {
-                    case 'ROLE_ADMIN':
-                        this.router.navigateByUrl('/admin/user-management');
-                        break;
-                    case 'ROLE_MANAGER':
-                        this.router.navigateByUrl('/panel-data');
-                        break;
-                    case 'ROLE_CONSULTANT':
-                        this.router.navigateByUrl('/panel-data');
-                        break;
-                    case 'ROLE_USER':
-                        this.router.navigateByUrl('/evaluation');
-                        break;
-                }
+            .then(() => {
                 this.authenticationError = false;
-                this.activeModal.dismiss('login success');
                 if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
                     this.router.navigate(['']);
                 }

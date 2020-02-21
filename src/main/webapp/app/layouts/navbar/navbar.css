@@ -87,3 +87,12 @@ Logo styles
     vertical-align: middle;
     width: 70px;
 }
+
+.active {
+    color: #b71c1c !important;
+    background: #b71c1c1c !important;
+}
+.mat-nav-side-menu a {
+    color: #37474f;
+    background: white;
+}
