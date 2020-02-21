@@ -1,3 +1,9 @@
+@import 'bootstrap-variables';
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/materia/variables';
+@import '~bootstrap/scss/variables';
+@import './cardio-rehab.theme.scss';
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -10,20 +16,13 @@ h4 {
     font-weight: 300;
 }
 
-body {
-    background: #e4e5e6;
-}
-
-a {
-    color: #533f03;
-    font-weight: bold;
-}
-
 a:hover {
-    color: #533f03;
-    font-weight: bold;
     /* make sure browsers use the pointer cursor for anchors, even with no href */
     cursor: pointer;
+}
+
+.dropdown-item:hover {
+    color: $dropdown-link-hover-color;
 }
 
 /* ==========================================================================
@@ -39,16 +38,6 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
-
-/* Error highlight on input fields */
-.ng-valid[required],
-.ng-valid.required {
-    border-left: 5px solid green;
-}
-
-.ng-invalid:not(form) {
-    border-left: 5px solid red;
-}
 
 /* other generic styles */
 
@@ -97,103 +86,72 @@ Generic styles
 /* ==========================================================================
 Custom alerts for notification
 ========================================================================== */
-.alerts .alert {
-    text-overflow: ellipsis;
-}
-.alert pre {
-    background: none;
-    border: none;
-    font: inherit;
-    color: inherit;
-    padding: 0;
-    margin: 0;
-}
+.alerts {
+    .alert {
+        text-overflow: ellipsis;
 
-.alert .popover pre {
-    font-size: 10px;
-}
+        pre {
+            background: none;
+            border: none;
+            font: inherit;
+            color: inherit;
+            padding: 0;
+            margin: 0;
+        }
 
-.alerts .toast {
-    position: fixed;
-    width: 100%;
-}
+        .popover pre {
+            font-size: 10px;
+        }
+    }
 
-.alerts .toast.left {
-    left: 5px;
-}
+    .jhi-toast {
+        position: fixed;
+        width: 100%;
 
-.alerts .toast.right {
-    right: 5px;
-}
+        &.left {
+            left: 5px;
+        }
 
-.alerts .toast.top {
-    top: 55px;
-}
+        &.right {
+            right: 5px;
+        }
 
-.alerts .toast.bottom {
-    bottom: 55px;
+        &.top {
+            top: 55px;
+        }
+
+        &.bottom {
+            bottom: 55px;
+        }
+    }
 }
 
 @media screen and (min-width: 480px) {
-    .alerts .toast {
+    .alerts .jhi-toast {
         width: 50%;
     }
 }
 
 /* ==========================================================================
-entity tables helpers
-========================================================================== */
-/* Remove Bootstrap padding from the element
-http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-.no-padding-left {
-    padding-left: 0 !important;
-}
-.no-padding-right {
-    padding-right: 0 !important;
-}
-.no-padding-top {
-    padding-top: 0 !important;
-}
-.no-padding-bottom {
-    padding-bottom: 0 !important;
-}
-.no-padding {
-    padding: 0 !important;
-}
-
-/* bootstrap 3 input-group 100% width
-http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min {
-    width: 1% !important;
-}
-
-/* Makes toolbar not wrap on smaller screens
-http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
-.flex-btn-group-container {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
-}
-
-/* ==========================================================================
 entity detail page css
 ========================================================================== */
-.row.jh-entity-details > dd {
-    margin-bottom: 15px;
+.row.jh-entity-details > {
+    dd {
+        margin-bottom: 15px;
+    }
 }
 
 @media screen and (min-width: 768px) {
-    .row.jh-entity-details > dt {
-        margin-bottom: 15px;
-    }
+    .row.jh-entity-details > {
+        dt {
+            margin-bottom: 15px;
+        }
 
-    .row.jh-entity-details > dd {
-        border-bottom: 1px solid #eee;
-        padding-left: 180px;
-        margin-left: 0;
+        dd {
+            border-bottom: 1px solid #eee;
+            padding-left: 180px;
+            margin-left: 0;
+        }
     }
 }
 
@@ -203,18 +161,8 @@ ui bootstrap tweaks
 .nav,
 .pagination,
 .carousel,
-.card-title a {
+.panel-title a {
     cursor: pointer;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-secondary,
-.uib-datepicker-popup > li > div.uib-datepicker > table .btn-secondary {
-    border: 0;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
-    outline: none;
 }
 
 .thread-dump-modal-lock {
@@ -224,10 +172,11 @@ ui bootstrap tweaks
     white-space: nowrap;
 }
 
-/* jhipster-needle-css-add-main JHipster will add new css style */
+/* jhipster-needle-scss-add-main JHipster will add new css style */
 
-/*MY CSS*/
-
+/* ==========================================================================
+MY CSS
+========================================================================== */
 .tableMaterialDesign {
     margin-bottom: 50px;
     margin-top: 15px;
@@ -305,7 +254,7 @@ ui bootstrap tweaks
     z-index: 1;
 }
 
-/*SCROLL*/
+//SCROLL
 @media only screen and (max-width: 600px) {
     ::-webkit-scrollbar {
         width: 0px !important;
@@ -341,6 +290,7 @@ ui bootstrap tweaks
     scrollbar-arrow-color: #ffffff;
 }
 
+//
 .text-icon {
     vertical-align: middle !important;
     margin-right: 5px;
@@ -428,7 +378,7 @@ button {
 }
 
 .primary-color {
-    color: #b71c1c !important;
+    color: mat-color($cardiorehab-primary) !important;
 }
 
 .mat-card-form {
@@ -476,8 +426,8 @@ mat-form-field {
 .page-item.active .page-link {
     z-index: 1;
     color: #fff !important;
-    background-color: #b71c1c !important;
-    border-color: #b71c1c !important;
+    background-color: mat-color($cardiorehab-primary) !important;
+    border-color: mat-color($cardiorehab-primary) !important;
     padding: 5px 10px;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
     font-size: 15px;
@@ -502,7 +452,7 @@ mat-form-field {
 }
 
 .page-item .page-link {
-    color: #b71c1c !important;
+    color: mat-color($cardiorehab-primary) !important;
     cursor: pointer;
     background-color: #fff;
     border-color: #dee2e6;
@@ -535,7 +485,7 @@ mat-form-field {
     position: absolute;
     width: 32px;
     height: 32px;
-    background: #b71c1c !important;
+    background: mat-color($cardiorehab-primary) !important;
     animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .lds-heart div:after,
@@ -545,7 +495,7 @@ mat-form-field {
     display: block;
     width: 32px;
     height: 32px;
-    background: #b71c1c !important;
+    background: mat-color($cardiorehab-primary) !important;
 }
 .lds-heart div:before {
     left: -24px;
@@ -589,10 +539,10 @@ mat-form-field {
     width: 108px;
     height: 108px;
     margin: 8px;
-    border: 10px solid #b71c1c;
+    border: 10px solid mat-color($cardiorehab-primary);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #b71c1c transparent transparent transparent;
+    border-color: mat-color($cardiorehab-primary) transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;

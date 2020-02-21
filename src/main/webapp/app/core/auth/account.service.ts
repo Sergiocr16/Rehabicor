@@ -11,6 +11,7 @@ import { Account } from 'app/core/user/account.model';
 export class AccountService {
     private userIdentity: any;
     private authenticated = false;
+    private loadedAccount = false;
     private authenticationState = new Subject<any>();
 
     constructor(private languageService: JhiLanguageService, private sessionStorage: SessionStorageService, private http: HttpClient) {}
@@ -26,6 +27,7 @@ export class AccountService {
     authenticate(identity) {
         this.userIdentity = identity;
         this.authenticated = identity !== null;
+        this.loadedAccount = true;
         this.authenticationState.next(this.userIdentity);
     }
 
@@ -77,6 +79,7 @@ export class AccountService {
                 if (account) {
                     this.userIdentity = account;
                     this.authenticated = true;
+                    this.loadedAccount = true;
                     // After retrieve the account info, the language will be changed to
                     // the user's preferred language configured in the account setting
                     const langKey = this.sessionStorage.retrieve('locale') || this.userIdentity.langKey;
@@ -91,6 +94,7 @@ export class AccountService {
             .catch(err => {
                 this.userIdentity = null;
                 this.authenticated = false;
+                this.loadedAccount = true;
                 this.authenticationState.next(this.userIdentity);
                 return null;
             });
@@ -99,7 +103,9 @@ export class AccountService {
     isAuthenticated(): boolean {
         return this.authenticated;
     }
-
+    isAccountChecked(): boolean {
+        return this.loadedAccount;
+    }
     isIdentityResolved(): boolean {
         return this.userIdentity !== undefined;
     }
