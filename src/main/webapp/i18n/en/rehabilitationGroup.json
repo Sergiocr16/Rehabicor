@@ -2,7 +2,7 @@
     "rehabicorApp": {
         "rehabilitationGroup": {
             "home": {
-                "title": "Rehabilitation Groups",
+                "title": "Grupos de rehabilitación",
                 "createLabel": "Create a new Rehabilitation Group",
                 "createOrEditLabel": "Create or edit a Rehabilitation Group"
             },
@@ -15,11 +15,11 @@
             "detail": {
                 "title": "Rehabilitation Group"
             },
-            "name": "Name",
+            "name": "Nombre",
             "creationDate": "Creation Date",
             "programStatus": "Program Status",
             "deleted": "Deleted",
-            "patient": "Patient",
+            "patient": "Pacientes",
             "rehabilitationCenter": "Rehabilitation Center"
         }
     }

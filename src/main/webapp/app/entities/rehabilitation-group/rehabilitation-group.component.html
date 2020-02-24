@@ -1,9 +1,9 @@
 <!--<div>-->
 <!--    <h2 id="page-heading">-->
-<!--        <span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.home.title">Rehabilitation Groups</span>-->
+<!--        <span jhiTranslate="rehabicorApp.rehabilitationGroup.home.title">Rehabilitation Groups</span>-->
 <!--        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rehabilitation-group" [routerLink]="['/rehabilitation-group/new']">-->
 <!--            <fa-icon [icon]="'plus'"></fa-icon>-->
-<!--            <span  jhiTranslate="cardioRehabCrApp.rehabilitationGroup.home.createLabel">-->
+<!--            <span  jhiTranslate="rehabicorApp.rehabilitationGroup.home.createLabel">-->
 <!--            Create a new Rehabilitation Group-->
 <!--            </span>-->
 <!--        </button>-->
@@ -12,18 +12,18 @@
 <!--    <jhi-alert></jhi-alert>-->
 <!--    <br/>-->
 <!--    <div class="alert alert-warning" *ngIf="rehabilitationGroups?.length === 0">-->
-<!--        <span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.home.notFound">No rehabilitationGroups found</span>-->
+<!--        <span jhiTranslate="rehabicorApp.rehabilitationGroup.home.notFound">No rehabilitationGroups found</span>-->
 <!--    </div>-->
 <!--    <div class="table-responsive" *ngIf="rehabilitationGroups?.length > 0">-->
 <!--        <table class="table table-striped" aria-describedby="page-heading">-->
 <!--            <thead>-->
 <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">-->
 <!--            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-<!--            <th scope="col"  jhiSortBy="name"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-<!--            <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.creationDate">Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-<!--            <th scope="col"  jhiSortBy="programStatus"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.programStatus">Program Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-<!--            <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-<!--            <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="name"><span jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate">Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="programStatus"><span jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
 <!--            <th scope="col"></th>-->
 <!--            </tr>-->
 <!--            </thead>-->
@@ -69,7 +69,7 @@
 <!--<div>-->
 <div>
     <h2 id="page-heading" class="margin-top-20">
-        <span class="primary-color table-title" jhiTranslate="cardioRehabCrApp.rehabilitationGroup.home.title">Rehabilitation Groups</span>
+        <span class="primary-color table-title" >Grupos de rehabilitación</span>
     </h2>
     <div *ngIf="!ready" fxLayout="column" fxLayoutAlign="center center" style="height: 400px">
         <mat-spinner></mat-spinner>
@@ -84,17 +84,17 @@
                 <thead class="bold" style="background-color: #fafafa;">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
                     <th scope="col" jhiSortBy="name"><span
-                        jhiTranslate="cardioRehabCrApp.rehabilitationGroup.name">Name</span>
+                        jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="programStatus"><span
-                        jhiTranslate="cardioRehabCrApp.rehabilitationGroup.programStatus">Program Status</span>
+                        jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="programStatus"><span>Número de pacientes</span>
                     </th>
-                    <!--                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                    <!--                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                    <!--                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                    <!--                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                     <th scope="col">Opciones</th>
                 </tr>
                 </thead>
