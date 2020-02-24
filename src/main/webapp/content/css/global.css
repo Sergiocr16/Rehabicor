@@ -307,7 +307,7 @@ MY CSS
     z-index: 1;
 }
 
-//SCROLL
+/*//SCROLL*/
 @media only screen and (max-width: 600px) {
     ::-webkit-scrollbar {
         width: 0px !important;
@@ -343,7 +343,7 @@ MY CSS
     scrollbar-arrow-color: #ffffff;
 }
 
-//
+/*//*/
 .text-icon {
     vertical-align: middle !important;
     margin-right: 5px;
@@ -579,42 +579,6 @@ mat-form-field {
     }
 }
 
-.lds-ring {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-.lds-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 108px;
-    height: 108px;
-    margin: 8px;
-    border: 10px solid #b71c1c;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #b71c1c transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 .ng-invalid:not(form) {
     border-left: unset !important;
 }
@@ -625,4 +589,8 @@ mat-form-field {
 
 .mat-tab-header {
     margin: -20px -20px 0;
+}
+.mat-nav-side-menu[_ngcontent-c6] a[_ngcontent-c6] {
+    color: #37474f;
+    background: unset !important;
 }

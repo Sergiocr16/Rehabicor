@@ -33,8 +33,8 @@ export const patientRoute: Routes = [
         path: '',
         component: PatientComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.patient.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_CONSULTANT'],
+            pageTitle: 'cardioRehabCrApp.patient.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const patientRoute: Routes = [
             patient: PatientResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.patient.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_CONSULTANT'],
+            pageTitle: 'cardioRehabCrApp.patient.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const patientRoute: Routes = [
             patient: PatientResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.patient.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.patient.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const patientRoute: Routes = [
             patient: PatientResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.patient.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.patient.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

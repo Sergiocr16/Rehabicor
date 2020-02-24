@@ -22,7 +22,9 @@ export class InitialAssessmentService {
     update(initialAssessment: IInitialAssessment): Observable<EntityResponseType> {
         return this.http.put<IInitialAssessment>(this.resourceUrl, initialAssessment, { observe: 'response' });
     }
-
+    findByPatient(patientId: number): Observable<EntityResponseType> {
+        return this.http.get<IInitialAssessment>(`${this.resourceUrl}/by-patient/${patientId}`, { observe: 'response' });
+    }
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IInitialAssessment>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

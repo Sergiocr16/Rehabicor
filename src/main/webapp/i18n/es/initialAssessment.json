@@ -4,7 +4,8 @@
             "home": {
                 "title": "Initial Assessments",
                 "createLabel": "Crear nuevo Initial Assessment",
-                "createOrEditLabel": "Crear o editar Initial Assessment"
+                "createOrEditLabel": "Crear o editar Initial Assessment",
+                "notFound": "No Initial Assessments found"
             },
             "created": "Un nuevo Initial Assessment ha sido creado con el identificador {{ param }}",
             "updated": "Un Initial Assessment ha sido actualizado con el identificador {{ param }}",
@@ -15,18 +16,18 @@
             "detail": {
                 "title": "Initial Assessment"
             },
-            "smoking": "Smoking",
-            "weight": "Weight",
-            "size": "Size",
-            "iMC": "I MC",
-            "hbiac": "Hbiac",
-            "baselineFunctionalCapacity": "Baseline Functional Capacity",
-            "lDL": "L DL",
-            "hDL": "H DL",
-            "cardiovascularRisk": "Cardiovascular Risk",
+            "smoking": "Tabaquismo",
+            "weight": "Peso basal",
+            "size": "Talla",
+            "iMC": "IMC",
+            "hbiac": "Valores Hb1Ac",
+            "baselineFunctionalCapacity": "Capacidad funcional basal",
+            "lDL": "Valores LDL",
+            "hDL": "Valores HDL",
+            "cardiovascularRisk": "Riesgo cardiovascular asociado al ejercicio",
             "deleted": "Deleted",
-            "comorbiditiesPatient": "Comorbidities Patient",
             "incomeDiagnosisPatient": "Income Diagnosis Patient",
+            "comorbiditiesPatient": "Comorbidities Patient",
             "patient": "Patient"
         }
     }

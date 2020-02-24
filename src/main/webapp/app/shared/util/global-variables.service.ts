@@ -8,6 +8,7 @@ import { AppUser } from 'app/shared/model/app-user.model';
 import { Subject } from 'rxjs';
 import { IRehabilitationCenter } from 'app/shared/model/rehabilitation-center.model';
 import { RehabilitationCenterService } from 'app/entities/rehabilitation-center/rehabilitation-center.service';
+import { LoginService } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalVariablesService implements OnInit, AfterContentChecked {
@@ -28,21 +29,21 @@ export class GlobalVariablesService implements OnInit, AfterContentChecked {
     userApp = new Subject<any>();
 
     constructor(
-        // private accountService: AccountService,
+        private loginService: LoginService,
         private appUserService: AppUserService,
         private rehabilitationCenterService: RehabilitationCenterService
-    ) {}
-
-    ngOnInit(): void {
+    ) {
         this.rehabilitationCenters = [];
-        // this.accountService.getAuthenticationState().subscribe(data => {
-        //     if (data) {
-        //         if (data.authorities[0] !== 'ROLE_ADMIN') {
-        //             this.defineGlobalRehabCenter();
-        //         }
-        //     }
-        // });
+        this.loginService.identity().then(account => {
+            if (account) {
+                if (account.authorities[0] !== 'ROLE_ADMIN') {
+                    this.defineGlobalRehabCenter();
+                }
+            }
+        });
     }
+
+    ngOnInit(): void {}
 
     ngAfterContentChecked() {
         // this.cdRef.detectChanges();
@@ -75,6 +76,7 @@ export class GlobalVariablesService implements OnInit, AfterContentChecked {
     public getRehabilitationCenter() {
         return this.rehabilitationCenters;
     }
+
     public defineGlobalRehabCenter() {
         this.appUserService
             .findByCurrentUser()

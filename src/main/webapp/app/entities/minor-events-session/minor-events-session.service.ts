@@ -27,6 +27,11 @@ export class MinorEventsSessionService {
         return this.http.get<IMinorEventsSession>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    queryBySession(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IMinorEventsSession[]>(this.resourceUrl + '/by-session', { params: options, observe: 'response' });
+    }
+
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IMinorEventsSession[]>(this.resourceUrl, { params: options, observe: 'response' });

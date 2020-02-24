@@ -4,7 +4,8 @@
             "home": {
                 "title": "Patients",
                 "createLabel": "Crear nuevo Patient",
-                "createOrEditLabel": "Crear o editar Patient"
+                "createOrEditLabel": "Crear o editar Patient",
+                "notFound": "No Patients found"
             },
             "created": "Un nuevo Patient ha sido creado con el identificador {{ param }}",
             "updated": "Un Patient ha sido actualizado con el identificador {{ param }}",
@@ -15,22 +16,22 @@
             "detail": {
                 "title": "Patient"
             },
-            "code": "Code",
-            "age": "Age",
-            "sex": "Sex",
-            "ocupation": "Ocupation",
-            "lastEventOcurred": "Last Event Ocurred",
+            "code": "Código",
+            "age": "Edad",
+            "sex": "Sexo",
+            "ocupation": "Ocupación",
+            "lastEventOcurred": "Tiempo del último evento coronario previo",
             "deceased": "Deceased",
             "abandonment": "Abandonment",
             "abandonmentMedicCause": "Abandonment Medic Cause",
             "rehabStatus": "Rehab Status",
             "sessionNumber": "Session Number",
             "deleted": "Deleted",
-            "scholarship": "Scholarship",
-            "finalAssessment": "Final Assessment",
             "initialAssessment": "Initial Assessment",
+            "finalAssessment": "Final Assessment",
             "session": "Session",
-            "rehabilitationGroup": "Rehabilitation Group"
+            "rehabilitationGroup": "Rehabilitation Group",
+            "scholarship": "Escolaridad"
         }
     }
 }

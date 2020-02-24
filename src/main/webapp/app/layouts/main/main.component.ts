@@ -37,7 +37,7 @@ export class JhiMainComponent implements OnInit {
         //   title = this.getPageTitle(routeSnapshot.firstChild) || title;
         // }
 
-        return 'RehabiCor CR';
+        return 'RehabiCor';
     }
 
     ngOnInit() {

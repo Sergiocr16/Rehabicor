@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IPatient } from 'app/shared/model/patient.model';
-import { AccountService } from 'app/core';
+import { AccountService } from 'app/core/auth/account.service';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PatientService } from './patient.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'jhi-patient',
@@ -18,22 +19,31 @@ export class PatientComponent implements OnInit, OnDestroy {
     patients: IPatient[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    routeData: Subscription;
     itemsPerPage: number;
     links: any;
     page: any;
     predicate: any;
     reverse: any;
     totalItems: number;
-
+    previousPage: any;
+    ready = false;
     constructor(
         protected patientService: PatientService,
-        protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
         protected parseLinks: JhiParseLinks,
-        protected accountService: AccountService
+        protected accountService: AccountService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
     ) {
         this.patients = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
+        this.routeData = this.activatedRoute.data.subscribe(data => {
+            this.page = data.pagingParams.page;
+            this.previousPage = data.pagingParams.page;
+            this.reverse = data.pagingParams.ascending;
+            this.predicate = data.pagingParams.predicate;
+        });
         this.page = 0;
         this.links = {
             last: 0
@@ -41,17 +51,19 @@ export class PatientComponent implements OnInit, OnDestroy {
         this.predicate = 'id';
         this.reverse = true;
     }
-
+    trackIdentity(index, item) {
+        return item.id;
+    }
     loadAll() {
         this.patientService
             .query({
-                page: this.page,
+                page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<IPatient[]>) => this.paginatePatients(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<IPatient[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpResponse<any>) => this.onError(res.body)
             );
     }
 
@@ -62,10 +74,21 @@ export class PatientComponent implements OnInit, OnDestroy {
     }
 
     loadPage(page) {
-        this.page = page;
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.transition();
+        }
+    }
+    transition() {
+        this.router.navigate(['./'], {
+            relativeTo: this.activatedRoute.parent,
+            queryParams: {
+                page: this.page,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        });
         this.loadAll();
     }
-
     ngOnInit() {
         this.loadAll();
         this.accountService.identity().then(account => {
@@ -94,15 +117,12 @@ export class PatientComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    protected paginatePatients(data: IPatient[], headers: HttpHeaders) {
+    private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        for (let i = 0; i < data.length; i++) {
-            this.patients.push(data[i]);
-        }
+        this.totalItems = headers.get('X-Total-Count');
+        this.patients = data;
+        this.ready = true;
     }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+    private onError(error) {}
 }
