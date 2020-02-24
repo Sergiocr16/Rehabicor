@@ -1,0 +1,76 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2 id="page-heading" class="margin-top-20">
+            <span class="primary-color table-title">
+           <mat-icon (click)="previousState()" class="text-icon pointer">arrow_back</mat-icon>
+                {{rehabilitationGroup.name}}</span>
+            </h2>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-left:38px"><span>Creado el {{rehabilitationGroup.creationDate | date}}</span>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+        <h5>
+            <mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">face</mat-icon>
+            Pacientes evaluados:  {{rehabilitationGroup.patients.length}}</h5>
+        <!--        <mat-accordion class="example-headers-align">-->
+        <!--            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>-->
+        <h2 class="margin-top-20">
+            <span class="primary-color table-title">
+           Pacientes</span>
+        </h2>
+        <mat-card *ngFor="let patient of rehabilitationGroup.patients;" style="margin-bottom: 5px">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <mat-card-title style="font-size: 19px">Código:{{patient.code}}</mat-card-title>
+                    <mat-card-subtitle><span>Estado en el programa:
+                         <span *ngIf="patient.rehabStatus==0">Sin iniciar</span>
+                        <span *ngIf="patient.rehabStatus==1">En rehabilitación</span>
+                        <span *ngIf="patient.rehabStatus==2 || patient.rehabStatus==3">Finalizado</span>
+                    </span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Progreso de sesiones: <span
+                        *ngIf="patient.sessionNumber>0">{{patient.sessionNumber}}/60</span> <span
+                        *ngIf="patient.sessionNumber==0">Ninguna</span></span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Sexo: {{patient.sex}}</span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Edad: {{patient.age}}</span></mat-card-subtitle>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start stretch">
+                    <div fxLayout="column"  fxLayoutAlign="start stretch">
+                        <button style="margin-bottom:5px" color="accent" mat-raised-button
+                                [routerLink]="['/patient', patient.id, 'view' ]">
+                            <mat-icon class="text-icon">visibility</mat-icon>
+                            <span fxHide.xs="true">Detalle</span>
+                        </button>
+                        <div fxLayout="column" *jhiHasAnyAuthority="['ROLE_USER','ROLE_MANAGER']">
+                            <button style="margin-bottom:5px" *ngIf="patient.rehabStatus<2" mat-raised-button
+                                    color="primary"
+                                    [routerLink]="['/session/',patient.id,'new']">
+                                <mat-icon class="text-icon-sm ">fitness_center</mat-icon>
+                                <span fxHide.xs="true">Evaluar sesión</span>
+                            </button>
+                            <button style="margin-bottom:5px" *ngIf="patient.rehabStatus==1" mat-raised-button
+                                    color="primary"
+                                    [routerLink]="['/final-assessment/',patient.id,'new']">
+                                <mat-icon class="text-icon-sm ">assignment_turned_in</mat-icon>
+                                <span fxHide.xs="true">Realizar Mantenimiento</span>
+                            </button>
+                            <button style="margin-bottom:5px" *ngIf="patient.rehabStatus==2" mat-raised-button
+                                    color="primary"
+                                    [routerLink]="['/final-assessment/',patient.id,'new-reevaluation']">
+                                <mat-icon class="text-icon-sm ">assignment</mat-icon>
+                                <span fxHide.xs="true">Reevaluar Mantenimiento</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-card-content>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+    <!--    <mat-card-actions>-->
+    <!--        <button mat-button>LIKE</button>-->
+    <!--        <button mat-button>SHARE</button>-->
+    <!--    </mat-card-actions>-->
+</mat-card>

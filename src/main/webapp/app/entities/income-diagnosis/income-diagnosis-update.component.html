@@ -1,47 +1,105 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-income-diagnosis-heading" jhiTranslate="rehabicorApp.incomeDiagnosis.home.createOrEditLabel">Create or edit a Income Diagnosis</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!incomeDiagnosis.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="incomeDiagnosis.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosis.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="incomeDiagnosis.description" required/>
-                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosis.deleted" for="field_deleted">Deleted</label>
-                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
-                        [(ngModel)]="incomeDiagnosis.deleted" />
-                </div>
+<!--<div class="row justify-content-center">-->
+<!--    <div class="col-8">-->
+<!--        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">-->
+<!--            <h2 id="jhi-income-diagnosis-heading" jhiTranslate="cardioRehabCrApp.incomeDiagnosis.home.createOrEditLabel">Create or edit a Income Diagnosis</h2>-->
+<!--            <div>-->
+<!--                <jhi-alert-error></jhi-alert-error>-->
+<!--                <div class="form-group" [hidden]="!editForm.get('id').value">-->
+<!--                    <label for="id" jhiTranslate="global.field.id">ID</label>-->
+<!--                    <input type="text" class="form-control" id="id" name="id" formControlName="id"-->
+<!--                        readonly />-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="cardioRehabCrApp.incomeDiagnosis.description" for="field_description">Description</label>-->
+<!--                    <input type="text" class="form-control" name="description" id="field_description"-->
+<!--                           formControlName="description"/>-->
+<!--                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">-->
+<!--                        <small class="form-text text-danger"-->
+<!--                               *ngIf="editForm.get('description').errors.required" jhiTranslate="entity.validation.required">-->
+<!--                        This field is required.-->
+<!--                        </small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="cardioRehabCrApp.incomeDiagnosis.deleted" for="field_deleted">Deleted</label>-->
+<!--                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"-->
+<!--                           formControlName="deleted"/>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.incomeDiagnosis.rehabilitationCenter" for="field_rehabilitationCenter">Rehabilitation Center</label>
-                    <select class="form-control" id="field_rehabilitationCenter" name="rehabilitationCenter" [(ngModel)]="incomeDiagnosis.rehabilitationCenterId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rehabilitationCenterOption.id" *ngFor="let rehabilitationCenterOption of rehabilitationcenters; trackBy: trackRehabilitationCenterById">{{rehabilitationCenterOption.id}}</option>
-                    </select>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="cardioRehabCrApp.incomeDiagnosis.rehabilitationCenter" for="field_rehabilitationCenter">Rehabilitation Center</label>-->
+<!--                    <select class="form-control" id="field_rehabilitationCenter" name="rehabilitationCenter" formControlName="rehabilitationCenterId">-->
+<!--                        <option [ngValue]="null"></option>-->
+<!--                        <option [ngValue]="rehabilitationCenterOption.id" *ngFor="let rehabilitationCenterOption of rehabilitationcenters; trackBy: trackRehabilitationCenterById">{{rehabilitationCenterOption.id}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+<!--                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>-->
+<!--                </button>-->
+<!--                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">-->
+<!--                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<mat-card class="mat-card-form margin-top-10">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+        <div id="myComorbilityLabel"  class="form-title primary-color"
+             fxHide.xs="true">
+            {{title}}
+        </div>
+        <mat-card-content fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="20px" fxLayoutGap.xs="0px">
+            <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxFlex>
+                <mat-form-field appearance="outline">
+                    <mat-label >Descripción</mat-label>
+                    <input matInput type="text" name="description"
+                           formControlName="description" required>
+                    <mat-hint
+                        *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('description').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+            <div fxLayout="column" fxFlex>
+                <mat-form-field appearance="outline">
+                    <mat-label for="field_rehabilitationCenter">Centro de rehabilitación</mat-label>
+                    <mat-select id="field_rehabilitationCenter" name="rehabilitationCenter" formControlName="rehabilitationCenterId" required>
+                        <mat-option  *ngFor="let rehabilitationCenterOption of rehabilitationcenters; trackBy: trackRehabilitationCenterById" [value]="rehabilitationCenterOption.id">
+                            {{rehabilitationCenterOption.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint
+                        *ngIf="editForm.get('rehabilitationCenterId').invalid && (editForm.get('rehabilitationCenterId').dirty || editForm.get('rehabilitationCenterId').touched)"
+                        class="form-text text-danger">
+                        <span *ngIf="editForm.get('rehabilitationCenterId').errors.required"
+                              jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+
             </div>
-        </form>
-    </div>
-</div>
+        </mat-card-content>
+
+        <mat-card-actions fxLayout="row" fxLayoutAlign="end center" fxHide.xs="true">
+            <button mat-raised-button (click)="previousState()">
+                <span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="editForm.invalid || isSaving" >
+                <span jhiTranslate="entity.action.save"> Save</span>
+            </button>
+        </mat-card-actions>
+        <button mat-raised-button color="accent" type="submit" [disabled]="editForm.invalid || isSaving" fxFill fxHide.xl="true" fxHide.lg="true" fxHide.md="true"  fxHide.sm="true">
+            <span jhiTranslate="entity.action.save"> Save</span>
+        </button>
+    </form>
+</mat-card>

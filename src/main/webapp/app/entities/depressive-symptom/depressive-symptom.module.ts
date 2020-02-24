@@ -13,11 +13,12 @@ import {
     depressiveSymptomRoute,
     depressiveSymptomPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...depressiveSymptomRoute, ...depressiveSymptomPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         DepressiveSymptomComponent,
         DepressiveSymptomDetailComponent,

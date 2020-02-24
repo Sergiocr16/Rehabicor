@@ -77,6 +77,16 @@ import { RouterModule } from '@angular/router';
                 loadChildren: './rehabilitation-group/rehabilitation-group.module#RehabicorRehabilitationGroupModule'
             },
             {
+                path: 'evaluation',
+                loadChildren: () =>
+                    import('./evaluation/rehabilitation-group-evaluation.module').then(m => m.CardioRehabCrRehabilitationGroupModule)
+            },
+            {
+                path: 'panel-data',
+                loadChildren: () =>
+                    import('./panel-data/rehabilitation-group-panel-data.module').then(m => m.CardioRehabCrRehabilitationGroupModule)
+            },
+            {
                 path: 'session',
                 loadChildren: './session/session.module#RehabicorSessionModule'
             }

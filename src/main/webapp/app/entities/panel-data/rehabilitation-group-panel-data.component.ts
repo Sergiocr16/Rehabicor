@@ -9,15 +9,15 @@ import { IRehabilitationGroup } from 'app/shared/model/rehabilitation-group.mode
 import { AccountService } from 'app/core/auth/account.service';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { RehabilitationGroupService } from './rehabilitation-group.service';
+import { RehabilitationGroupService } from './rehabilitation-group-panel-data.service';
 import { ModalService } from 'app/shared/util/modal.service';
 import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
 
 @Component({
     selector: 'jhi-rehabilitation-group',
-    templateUrl: './rehabilitation-group.component.html'
+    templateUrl: './rehabilitation-group-panel-data.component.html'
 })
-export class RehabilitationGroupComponent implements OnInit, OnDestroy {
+export class RehabilitationGroupPanelDataComponent implements OnInit, OnDestroy {
     rehabilitationGroups: IRehabilitationGroup[];
     currentAccount: any;
     eventSubscriber: Subscription;
@@ -27,7 +27,7 @@ export class RehabilitationGroupComponent implements OnInit, OnDestroy {
     predicate: any;
     reverse: any;
     totalItems: number;
-    ready;
+
     constructor(
         protected rehabilitationGroupService: RehabilitationGroupService,
         protected eventManager: JhiEventManager,
@@ -111,6 +111,5 @@ export class RehabilitationGroupComponent implements OnInit, OnDestroy {
         for (let i = 0; i < data.length; i++) {
             this.rehabilitationGroups.push(data[i]);
         }
-        this.ready = true;
     }
 }

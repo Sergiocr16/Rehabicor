@@ -19,6 +19,8 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
     success: string;
     modalRef: NgbModalRef;
     key: string;
+    confirmPassword: any;
+    resetAccount: any;
 
     passwordForm = this.fb.group({
         newPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -48,10 +50,12 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
             this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#password'), 'focus', []);
         }
     }
+
     goLogin() {
         this.router.navigate(['/']);
         this.main.isCreatingNewPassWord = false;
     }
+
     finishReset() {
         this.doNotMatch = null;
         this.error = null;

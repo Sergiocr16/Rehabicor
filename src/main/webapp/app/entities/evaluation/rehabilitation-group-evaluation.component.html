@@ -1,0 +1,36 @@
+<div>
+    <h2 id="page-heading" class="margin-top-20" style="margin-bottom: 15px">
+        <span class="primary-color table-title">Realizar evaluación</span>
+    </h2>
+    <div *ngIf="!ready" fxLayout="column" fxLayoutAlign="center center" style="height: 400px">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="ready">
+        <jhi-no-content *ngIf="rehabilitationGroups?.length === 0"
+                        [text]="'No hay grupos de rehabilitación registrados'"
+                        [icon]="'supervised_user_circle'"></jhi-no-content>
+        <div *ngIf="rehabilitationGroups?.length > 0">
+            <mat-card *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">
+                <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="margin-left:0px!important">
+                    <mat-card-title>
+                        <mat-icon class="text-icon">face</mat-icon>
+                        Grupo: {{rehabilitationGroup.name}}
+                        <mat-card-subtitle style="margin-left: 3px;
+                                       margin-top: 15px;">
+                            <span>Pacientes evaluados: {{rehabilitationGroup.patients.length}}</span>
+                        </mat-card-subtitle>
+                    </mat-card-title>
+                    <div fxLayoutAlign="center center">
+                        <button [routerLink]="['/evaluation', rehabilitationGroup.id , 'view' ]" mat-flat-button
+                                color="accent">
+                            <mat-icon>fitness_center</mat-icon>
+                            Realizar evaluación
+                        </button>
+                    </div>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+</div>
+

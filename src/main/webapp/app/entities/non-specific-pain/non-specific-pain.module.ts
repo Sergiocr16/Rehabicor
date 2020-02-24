@@ -13,11 +13,12 @@ import {
     nonSpecificPainRoute,
     nonSpecificPainPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...nonSpecificPainRoute, ...nonSpecificPainPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         NonSpecificPainComponent,
         NonSpecificPainDetailComponent,

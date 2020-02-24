@@ -13,11 +13,12 @@ import {
     rehabilitationGroupRoute,
     rehabilitationGroupPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...rehabilitationGroupRoute, ...rehabilitationGroupPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         RehabilitationGroupComponent,
         RehabilitationGroupDetailComponent,

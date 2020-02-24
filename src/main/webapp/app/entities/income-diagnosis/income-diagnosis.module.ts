@@ -13,11 +13,12 @@ import {
     incomeDiagnosisRoute,
     incomeDiagnosisPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...incomeDiagnosisRoute, ...incomeDiagnosisPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         IncomeDiagnosisComponent,
         IncomeDiagnosisDetailComponent,

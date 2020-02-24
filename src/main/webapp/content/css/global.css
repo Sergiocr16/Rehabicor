@@ -11,7 +11,7 @@ h4 {
 }
 
 body {
-    background: #e4e5e6;
+    background: #ffffff;
 }
 
 a {
@@ -617,4 +617,12 @@ mat-form-field {
 
 .ng-invalid:not(form) {
     border-left: unset !important;
+}
+.ng-valid[required],
+.ng-valid.required {
+    border-left: unset !important;
+}
+
+.mat-tab-header {
+    margin: -20px -20px 0;
 }

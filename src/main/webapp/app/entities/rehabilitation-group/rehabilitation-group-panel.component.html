@@ -1,0 +1,185 @@
+<!--<div class="row justify-content-center">-->
+<!--    <div class="col-8">-->
+<!--        <div *ngIf="rehabilitationGroup">-->
+<!--            <h2><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.detail.title">Rehabilitation Group</span> {{rehabilitationGroup.id}}</h2>-->
+<!--            <hr>-->
+<!--            <jhi-alert-error></jhi-alert-error>-->
+<!--            <dl class="row-md jh-entity-details">-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.name">Name</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{rehabilitationGroup.name}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.creationDate">Creation Date</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{rehabilitationGroup.creationDate}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.programStatus">Program Status</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{rehabilitationGroup.programStatus}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.deleted">Deleted</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{rehabilitationGroup.deleted}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.patient">Patient</span></dt>-->
+<!--                <dd>-->
+<!--                    <span *ngFor="let patient of rehabilitationGroup.patients; let last = last">-->
+<!--                        <a [routerLink]="['/patient', patient?.id, 'view' ]">{{patient.id}}</a>{{last ? '' : ', '}}-->
+<!--                    </span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span></dt>-->
+<!--                <dd>-->
+<!--                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">-->
+<!--                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId, 'view']">{{rehabilitationGroup.rehabilitationCenterId}}</a>-->
+<!--                    </div>-->
+<!--                </dd>-->
+<!--            </dl>-->
+
+<!--            <button type="submit"-->
+<!--                    (click)="previousState()"-->
+<!--                    class="btn btn-info">-->
+<!--                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>-->
+<!--            </button>-->
+
+<!--            <button type="button"-->
+<!--                    [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'edit']"-->
+<!--                    class="btn btn-primary">-->
+<!--                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2 id="page-heading" class="margin-top-20">
+            <span class="primary-color table-title">
+           <mat-icon (click)="previousState()" class="text-icon pointer">arrow_back</mat-icon>
+                {{rehabilitationGroup.name}}</span>
+            </h2>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-left:38px"><span>Creado el {{rehabilitationGroup.creationDate | date}}</span>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <!--        <mat-accordion class="example-headers-align">-->
+        <!--            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>-->
+        <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+                                  Instrumento de panel de datos <mat-icon class="text-icon">equalizer</mat-icon></span>
+
+        <div style="display: block" style="margin-bottom: 20px">
+            <canvas baseChart height="100"
+                    [datasets]="barChartDataStadistics"
+                    [labels]="barChartLabelsStadistics"
+                    [options]="barChartOptionsStadistics"
+                    [colors]="lineChartColorsStadistics"
+                    [legend]="barChartLegendStadistics"
+                    [chartType]="barChartTypeStadistics">
+            </canvas>
+        </div>
+
+        <div style="display: block;margin-top:20px">
+                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+                                  Distribución de eventos por sesión</span>
+            <canvas baseChart height="100"
+                    [datasets]="barChartDataDistribution"
+                    [labels]="barChartLabelsDistribution"
+                    [options]="barChartOptionsDistribution"
+                    [legend]="barChartLegendDistribution"
+                    [chartType]="barChartTypeDistribution"
+                    [colors]="lineChartColorsDistribution">
+            </canvas>
+
+            <h4>Distribución de eventos por sesión</h4>
+            <mat-form-field>
+                <mat-label>Seleccionar sesión</mat-label>
+                <mat-select [(ngModel)]="selectedSesion" (ngModelChange)="selectSesion($event)" >
+                    <mat-option
+                        *ngFor="let event of rehabilitationGroup.panelData.distributionMinorEvents;let i = index;"
+                        [value]="i">
+                        {{i + 1}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div fxLayout="row" fxLayout.xs="column">
+                <div *ngIf="selectedSesion>=0">
+                <mat-card>
+                    <h6>Eventos menores</h6>
+                    <canvas baseChart height="100"
+                            [datasets]="barChartDataDistribution"
+                            [labels]="barChartLabelsDistribution"
+                            [options]="barChartOptionsDistribution"
+                            [legend]="barChartLegendDistribution"
+                            [chartType]="barChartTypeDistribution"
+                            [colors]="lineChartColorsDistribution">
+                    </canvas>
+                </mat-card>
+                </div>
+                <div *ngIf="selectedSesion>=0">
+                    <mat-card>
+                        <h6>Eventos mayores</h6>
+                        <canvas baseChart height="100"
+                                [datasets]="barChartDataDistribution"
+                                [labels]="barChartLabelsDistribution"
+                                [options]="barChartOptionsDistribution"
+                                [legend]="barChartLegendDistribution"
+                                [chartType]="barChartTypeDistribution"
+                                [colors]="lineChartColorsDistribution">
+                        </canvas>
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+        <!--            </mat-expansion-panel>-->
+        <!--        </mat-accordion>-->
+        <mat-card style="margin-top: 25px">
+            <h2 class="margin-top-20">
+            <span class="primary-color table-title">
+           Pacientes</span>
+            </h2>
+            <mat-card *ngFor="let patient of rehabilitationGroup.patients;" style="margin-bottom: 5px">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>
+                        <mat-card-title style="font-size: 19px">Código:{{patient.code}}</mat-card-title>
+                        <mat-card-subtitle><span>Estado en el programa:
+                         <span *ngIf="patient.rehabStatus==0">Sin iniciar</span>
+                        <span *ngIf="patient.rehabStatus==1">En rehabilitación</span>
+                        <span *ngIf="patient.rehabStatus==2 || patient.rehabStatus==3">Finalizado</span>
+                    </span></mat-card-subtitle>
+                        <mat-card-subtitle><span>Progreso de sesiones: <span
+                            *ngIf="patient.sessionNumber>0">{{patient.sessionNumber}}/60</span> <span
+                            *ngIf="patient.sessionNumber==0">Ninguna</span></span></mat-card-subtitle>
+                        <mat-card-subtitle><span>Sexo: {{patient.sex}}</span></mat-card-subtitle>
+                        <mat-card-subtitle><span>Edad: {{patient.age}}</span></mat-card-subtitle>
+                    </div>
+                    <div>
+                        <button *ngIf="patient.rehabStatus>=1" color="primary" mat-raised-button
+                                [routerLink]="['/patient', patient.id, 'view' ]">
+                            Sesiones
+                        </button>
+                        <button *ngIf="patient.rehabStatus<2" mat-raised-button color="accent"
+                                [routerLink]="['/session/',patient.id,'new']">
+                            Evaluar sesión
+                        </button>
+                        <button *ngIf="patient.rehabStatus==1" mat-raised-button color="accent"
+                                [routerLink]="['/final-assessment/',patient.id,'new']">
+                            Realizar Fase de Mantenimiento
+                        </button>
+                        <button *ngIf="patient.rehabStatus==2" mat-raised-button color="accent"
+                                [routerLink]="['/final-assessment/',patient.id,'new-reevaluation']">
+                            Reevaluar Fase Mantenimiento
+                        </button>
+                    </div>
+                </div>
+                <mat-card-content>
+                </mat-card-content>
+            </mat-card>
+        </mat-card>
+    </mat-card-content>
+    <!--    <mat-card-actions>-->
+    <!--        <button mat-button>LIKE</button>-->
+    <!--        <button mat-button>SHARE</button>-->
+    <!--    </mat-card-actions>-->
+</mat-card>

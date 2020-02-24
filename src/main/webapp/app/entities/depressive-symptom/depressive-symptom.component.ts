@@ -1,20 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { GlobalVariablesService } from '../../shared/util/global-variables.service';
+import { ModalService } from 'app/shared/util/modal.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IDepressiveSymptom } from 'app/shared/model/depressive-symptom.model';
-import { AccountService } from 'app/core';
+import { AccountService } from 'app/core/auth/account.service';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { DepressiveSymptomService } from './depressive-symptom.service';
+import { IRehabilitationCenter } from 'app/shared/model/rehabilitation-center.model';
+import { RehabilitationCenterService } from 'app/entities/rehabilitation-center/rehabilitation-center.service';
+import { IMayorEvent } from 'app/shared/model/mayor-event.model';
 
 @Component({
     selector: 'jhi-depressive-symptom',
     templateUrl: './depressive-symptom.component.html'
 })
 export class DepressiveSymptomComponent implements OnInit, OnDestroy {
+    rehabilitationCenters: IRehabilitationCenter[];
     depressiveSymptoms: IDepressiveSymptom[];
     currentAccount: any;
     eventSubscriber: Subscription;
@@ -24,14 +31,18 @@ export class DepressiveSymptomComponent implements OnInit, OnDestroy {
     predicate: any;
     reverse: any;
     totalItems: number;
+    rcId: number;
 
     constructor(
         protected depressiveSymptomService: DepressiveSymptomService,
-        protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
         protected parseLinks: JhiParseLinks,
-        protected accountService: AccountService
+        protected accountService: AccountService,
+        protected global: GlobalVariablesService,
+        protected modal: ModalService,
+        protected rehabilitationCenterService: RehabilitationCenterService
     ) {
+        this.rehabilitationCenters = [];
         this.depressiveSymptoms = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.page = 0;
@@ -47,12 +58,23 @@ export class DepressiveSymptomComponent implements OnInit, OnDestroy {
             .query({
                 page: this.page,
                 size: this.itemsPerPage,
+                sort: this.sort(),
+                rehabilitationId: this.rcId
+            })
+            .subscribe((res: HttpResponse<IDepressiveSymptom[]>) => this.paginateDepressiveSymptoms(res.body, res.headers));
+    }
+    loadRC() {
+        this.rehabilitationCenterService
+            .query({
+                page: this.page,
+                size: this.itemsPerPage,
                 sort: this.sort()
             })
-            .subscribe(
-                (res: HttpResponse<IDepressiveSymptom[]>) => this.paginateDepressiveSymptoms(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            .subscribe((res: HttpResponse<IRehabilitationCenter[]>) => this.getRehabilitationCenter(res.body));
+    }
+
+    protected getRehabilitationCenter(data: IRehabilitationCenter[]) {
+        this.rehabilitationCenters = this.global.paginateRehabilitationCenters(data);
     }
 
     reset() {
@@ -63,11 +85,17 @@ export class DepressiveSymptomComponent implements OnInit, OnDestroy {
 
     loadPage(page) {
         this.page = page;
-        this.loadAll();
+
+        this.loadRC();
+    }
+
+    changeRC(index) {
+        this.rcId = this.rehabilitationCenters[index].id;
+        this.reset();
     }
 
     ngOnInit() {
-        this.loadAll();
+        this.loadRC();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
@@ -94,15 +122,31 @@ export class DepressiveSymptomComponent implements OnInit, OnDestroy {
         return result;
     }
 
+    delete(depressiveSymptom) {
+        this.modal.confirmDialog('delete', () => {
+            depressiveSymptom.deleted = true;
+            this.subscribeToSaveResponse(this.depressiveSymptomService.update(depressiveSymptom));
+        });
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IMayorEvent>>) {
+        result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+    }
+
+    protected onSaveSuccess() {
+        this.reset();
+        this.modal.message('El evento mayor se ha eliminado correctamente.');
+    }
+
+    protected onSaveError() {
+        this.modal.message('Ups! Sucedió un error.');
+    }
+
     protected paginateDepressiveSymptoms(data: IDepressiveSymptom[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         for (let i = 0; i < data.length; i++) {
             this.depressiveSymptoms.push(data[i]);
         }
-    }
-
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
     }
 }

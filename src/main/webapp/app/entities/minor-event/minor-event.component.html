@@ -1,64 +1,92 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="rehabicorApp.minorEvent.home.title">Minor Events</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-minor-event" [routerLink]="['/minor-event/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="rehabicorApp.minorEvent.home.createLabel">
-            Create new Minor Event
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="minorEvents">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="description"><span jhiTranslate="rehabicorApp.minorEvent.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="code"><span jhiTranslate="rehabicorApp.minorEvent.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.minorEvent.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.minorEvent.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-            <tr *ngFor="let minorEvent of minorEvents ;trackBy: trackId">
-                <td><a [routerLink]="['/minor-event', minorEvent.id, 'view' ]">{{minorEvent.id}}</a></td>
-                <td>{{minorEvent.description}}</td>
-                <td>{{minorEvent.code}}</td>
-                <td>{{minorEvent.deleted}}</td>
-                <td>
-                    <div *ngIf="minorEvent.rehabilitationCenterId">
-                        <a [routerLink]="['../rehabilitation-center', minorEvent.rehabilitationCenterId , 'view' ]" >{{minorEvent.rehabilitationCenterId}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/minor-event', minorEvent.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/minor-event', minorEvent.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'minor-event', { outlets: { popup: minorEvent.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<mat-tab-group (selectedIndexChange)="changeRC($event)">
+    <mat-tab *ngFor="let rehabilitationCenter of rehabilitationCenters ;trackBy: trackId"
+             label="{{rehabilitationCenter.name}}">
+
+        <h2 id="page-heading" class="margin-top-20">
+            <span class="primary-color table-title">Eventos menores </span>
+
+        </h2>
+
+
+        <div>
+            <jhi-no-content *ngIf="minorEvents?.length === 0" [text]="'No hay eventos menores registrados'"
+                            [icon]="'arrow_downward'"></jhi-no-content>
+            <div class="table-responsive" *ngIf="minorEvents?.length > 0">
+                <table class="table table-bordered tableMaterialDesign" aria-describedby="page-heading">
+                    <thead class="bold" style="background-color: #fafafa;">
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                        <th scope="col" jhiSortBy="description"><span>Descripción</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th scope="col" jhiSortBy="code"><span>Código</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th scope="col" class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody infinite-scroll (scrolled)="loadPage(page + 1)"
+                           [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                    <tr *ngFor="let minorEvent of minorEvents ;trackBy: trackId">
+                        <td>{{minorEvent.description}}</td>
+                        <td>{{minorEvent.code}}</td>
+                        <td>
+
+                            <div fxLayoutAlign="center center">
+
+                                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center">
+                                    <mat-icon aria-hidden="false" class="text-icon big-icon">more_vert</mat-icon>
+                                </button>
+
+                                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                    <button mat-menu-item
+                                            [routerLink]="['/minor-event', minorEvent.id, 'edit']">
+                                        <mat-icon>create</mat-icon>
+                                        <span jhiTranslate="entity.action.edit">Editar</span>
+                                    </button>
+                                    <button (click)="delete(minorEvent)" mat-menu-item id="logout">
+                                        <mat-icon>delete</mat-icon>
+                                        <span jhiTranslate="entity.action.delete">Eliminar</span>
+                                    </button>
+                                </mat-menu>
+
+                            </div>
+                        </td>
+
+                        <!--                <td class="text-right">-->
+                        <!--                    <div class="btn-group">-->
+                        <!--                        <button type="submit"-->
+                        <!--                                [routerLink]="['/minor-event', minorEvent.id, 'view' ]"-->
+                        <!--                                class="btn btn-info btn-sm">-->
+                        <!--                            <fa-icon [icon]="'eye'"></fa-icon>-->
+                        <!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+                        <!--                        </button>-->
+                        <!--                        <button type="submit"-->
+                        <!--                                [routerLink]="['/minor-event', minorEvent.id, 'edit']"-->
+                        <!--                                class="btn btn-primary btn-sm">-->
+                        <!--                            <fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                        <!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
+                        <!--                        </button>-->
+                        <!--                        <button type="submit"-->
+                        <!--                                [routerLink]="['/minor-event', { outlets: { popup: minorEvent.id + '/delete'} }]"-->
+                        <!--                                replaceUrl="true"-->
+                        <!--                                queryParamsHandling="merge"-->
+                        <!--                                class="btn btn-danger btn-sm">-->
+                        <!--                            <fa-icon [icon]="'times'"></fa-icon>-->
+                        <!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                        <!--                        </button>-->
+                        <!--                    </div>-->
+                        <!--                </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>
+
+<button [routerLink]="['/minor-event/new']" mat-fab class="md-fab-bottom-right"
+        matTooltip="Registrar evento menor"
+        [matTooltipPosition]="'before'">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+</button>

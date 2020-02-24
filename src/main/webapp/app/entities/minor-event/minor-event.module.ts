@@ -13,11 +13,12 @@ import {
     minorEventRoute,
     minorEventPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...minorEventRoute, ...minorEventPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         MinorEventComponent,
         MinorEventDetailComponent,
