@@ -594,3 +594,77 @@ mat-form-field {
     color: #37474f;
     background: unset !important;
 }
+
+/*THEMEING*/
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+    background-color: #b71c1c !important;
+}
+.mat-toolbar.mat-primary {
+    background: #b71c1c !important;
+    color: white !important;
+}
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+    background-color: #3f51b5 !important;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: #b71c1c !important;
+    color: white !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #3f51b5 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #3f51b5 !important;
+}
+
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: #3f51b5 !important;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #3f51b5 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .table-title {
+        font-size: 22px;
+        font-weight: 500;
+    }
+    .no-content-title {
+        font-size: 16px !important;
+    }
+}
+
+.mat-fab.mat-accent[disabled],
+.mat-fab.mat-primary[disabled],
+.mat-fab.mat-warn[disabled],
+.mat-fab[disabled][disabled],
+.mat-flat-button.mat-accent[disabled],
+.mat-flat-button.mat-primary[disabled],
+.mat-flat-button.mat-warn[disabled],
+.mat-flat-button[disabled][disabled],
+.mat-mini-fab.mat-accent[disabled],
+.mat-mini-fab.mat-primary[disabled],
+.mat-mini-fab.mat-warn[disabled],
+.mat-mini-fab[disabled][disabled],
+.mat-raised-button.mat-accent[disabled],
+.mat-raised-button.mat-primary[disabled],
+.mat-raised-button.mat-warn[disabled],
+.mat-raised-button[disabled][disabled] {
+    color: rgba(255, 255, 255, 0.52) !important;
+}

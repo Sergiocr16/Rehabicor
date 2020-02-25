@@ -3,6 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-home',
@@ -16,12 +17,27 @@ export class HomeComponent implements OnInit {
     constructor(
         private accountService: AccountService,
         private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private router: Router
     ) {}
 
     ngOnInit() {
         this.accountService.identity().then((account: Account) => {
             this.account = account;
+            switch (account.authorities[0]) {
+                case 'ROLE_ADMIN':
+                    this.router.navigateByUrl('/admin/user-management');
+                    break;
+                case 'ROLE_MANAGER':
+                    this.router.navigateByUrl('/panel-data');
+                    break;
+                case 'ROLE_CONSULTANT':
+                    this.router.navigateByUrl('/panel-data');
+                    break;
+                case 'ROLE_USER':
+                    this.router.navigateByUrl('/evaluation');
+                    break;
+            }
         });
         this.registerAuthenticationSuccess();
     }

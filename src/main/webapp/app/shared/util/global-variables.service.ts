@@ -34,6 +34,12 @@ export class GlobalVariablesService implements OnInit, AfterContentChecked {
         private rehabilitationCenterService: RehabilitationCenterService
     ) {
         this.rehabilitationCenters = [];
+        this.loadRehabId();
+    }
+
+    ngOnInit(): void {}
+
+    loadRehabId() {
         this.loginService.identity().then(account => {
             if (account) {
                 if (account.authorities[0] !== 'ROLE_ADMIN') {
@@ -42,8 +48,6 @@ export class GlobalVariablesService implements OnInit, AfterContentChecked {
             }
         });
     }
-
-    ngOnInit(): void {}
 
     ngAfterContentChecked() {
         // this.cdRef.detectChanges();

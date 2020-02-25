@@ -33,7 +33,7 @@ export const rehabilitationCenterRoute: Routes = [
         path: '',
         component: RehabilitationCenterComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.rehabilitationCenter.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const rehabilitationCenterRoute: Routes = [
             rehabilitationCenter: RehabilitationCenterResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.rehabilitationCenter.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const rehabilitationCenterRoute: Routes = [
             rehabilitationCenter: RehabilitationCenterResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.rehabilitationCenter.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const rehabilitationCenterRoute: Routes = [
             rehabilitationCenter: RehabilitationCenterResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.rehabilitationCenter.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const rehabilitationCenterPopupRoute: Routes = [
             rehabilitationCenter: RehabilitationCenterResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.rehabilitationCenter.home.title'
         },
         canActivate: [UserRouteAccessService],

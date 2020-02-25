@@ -33,6 +33,8 @@
         "otherModules": [],
         "enableTranslation": true,
         "nativeLanguage": "es",
-        "languages": ["es", "en"]
+        "languages": ["es", "en"],
+        "herokuAppName": "rehabicor",
+        "herokuDeployType": "jar"
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,7 +18,7 @@ import { GlobalVariablesService } from 'app/shared/util/global-variables.service
     selector: 'jhi-non-specific-pain-update',
     templateUrl: './non-specific-pain-update.component.html'
 })
-export class NonSpecificPainUpdateComponent implements OnInit {
+export class NonSpecificPainUpdateComponent implements OnInit, OnDestroy {
     isSaving: boolean;
     title;
     nonSpecificPain: NonSpecificPain;
@@ -70,7 +70,9 @@ export class NonSpecificPainUpdateComponent implements OnInit {
     setInvalidForm(isSaving) {
         this.global.setFormStatus(isSaving);
     }
-
+    ngOnDestroy() {
+        this.global.leavingForm();
+    }
     updateForm(nonSpecificPain: INonSpecificPain) {
         this.editForm.patchValue({
             id: nonSpecificPain.id,

@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Rehabicor",
+        "title": "RehabiCor",
         "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
         "menu": {
             "home": "Inicio",
@@ -62,7 +62,8 @@
             "confirmpassword": "Confirmación de la nueva contraseña",
             "confirmpassword.placeholder": "Confirmación de la nueva contraseña",
             "email": "Correo electrónico",
-            "email.placeholder": "Su correo electrónico"
+            "email.placeholder": "Su correo electrónico",
+            "email.label": "Correo electrónico"
         },
         "messages": {
             "info": {

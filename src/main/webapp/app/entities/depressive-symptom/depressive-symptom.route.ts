@@ -33,7 +33,7 @@ export const depressiveSymptomRoute: Routes = [
         path: '',
         component: DepressiveSymptomComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.depressiveSymptom.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const depressiveSymptomRoute: Routes = [
             depressiveSymptom: DepressiveSymptomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.depressiveSymptom.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const depressiveSymptomRoute: Routes = [
             depressiveSymptom: DepressiveSymptomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.depressiveSymptom.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const depressiveSymptomRoute: Routes = [
             depressiveSymptom: DepressiveSymptomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.depressiveSymptom.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const depressiveSymptomPopupRoute: Routes = [
             depressiveSymptom: DepressiveSymptomResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.depressiveSymptom.home.title'
         },
         canActivate: [UserRouteAccessService],

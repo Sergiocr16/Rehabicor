@@ -33,7 +33,7 @@ export const minorEventRoute: Routes = [
         path: '',
         component: MinorEventComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.minorEvent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const minorEventRoute: Routes = [
             minorEvent: MinorEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.minorEvent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const minorEventRoute: Routes = [
             minorEvent: MinorEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.minorEvent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const minorEventRoute: Routes = [
             minorEvent: MinorEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.minorEvent.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const minorEventPopupRoute: Routes = [
             minorEvent: MinorEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.minorEvent.home.title'
         },
         canActivate: [UserRouteAccessService],
