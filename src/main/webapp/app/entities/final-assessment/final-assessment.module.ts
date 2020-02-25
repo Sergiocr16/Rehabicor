@@ -13,11 +13,12 @@ import {
     finalAssessmentRoute,
     finalAssessmentPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...finalAssessmentRoute, ...finalAssessmentPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         FinalAssessmentComponent,
         FinalAssessmentDetailComponent,

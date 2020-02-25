@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:text="#{email.activation.title}">JHipster creation</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
-    </head>
-    <body>
-        <p th:text="#{email.activation.greeting(${user.login})}">
-            Dear
-        </p>
-        <p th:text="#{email.creation.text1}">
-            Your JHipster account has been created, please click on the URL below to access it:
-        </p>
-        <p>
-            <a th:with="url=(@{|${baseUrl}/#/reset/finish?key=${user.resetKey}|})" th:href="${url}"
-            th:text="${url}">Login link</a>
-        </p>
-        <p>
-            <span th:text="#{email.activation.text2}">Regards, </span>
-            <br/>
-            <em th:text="#{email.signature}">JHipster.</em>
-        </p>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <title th:text="#{email.activation.title}">JHipster creation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p th:text="#{email.activation.greeting(${user.login})}">
+    Dear
+</p>
+<p>
+    Su cuenta en RehabiCor ha sido creada con el usuario <b th:text="${user.login}"></b>. Por favor, haga clic en el siguiente enlace para utilizarla:
+</p>
+<p>
+    <a th:with="url=(@{|${baseUrl}/#/reset/finish?key=${user.resetKey}|})" th:href="${url}"
+    >Establecer su contraseña</a>
+</p>
+<p>
+    <span th:text="#{email.activation.text2}">Regards, </span>
+    <br/>
+    <em>Equipo de RehabiCor</em>
+</p>
+</body>
 </html>

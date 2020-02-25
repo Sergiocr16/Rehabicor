@@ -1,76 +1,80 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="rehabicorApp.patient.home.title">Patients</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-patient" [routerLink]="['/patient/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="rehabicorApp.patient.home.createLabel">
-            Create new Patient
-            </span>
-        </button>
+
+    <h2 id="page-heading" class="margin-top-20">
+        <span class="primary-color table-title">Pacientes</span>
+
     </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="patients">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="code"><span jhiTranslate="rehabicorApp.patient.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="age"><span jhiTranslate="rehabicorApp.patient.age">Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="sex"><span jhiTranslate="rehabicorApp.patient.sex">Sex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ocupation"><span jhiTranslate="rehabicorApp.patient.ocupation">Ocupation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastEventOcurred"><span jhiTranslate="rehabicorApp.patient.lastEventOcurred">Last Event Ocurred</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="deceased"><span jhiTranslate="rehabicorApp.patient.deceased">Deceased</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="abandonment"><span jhiTranslate="rehabicorApp.patient.abandonment">Abandonment</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="abandonmentMedicCause"><span jhiTranslate="rehabicorApp.patient.abandonmentMedicCause">Abandonment Medic Cause</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rehabStatus"><span jhiTranslate="rehabicorApp.patient.rehabStatus">Rehab Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="sessionNumber"><span jhiTranslate="rehabicorApp.patient.sessionNumber">Session Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.patient.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="scholarship"><span jhiTranslate="rehabicorApp.patient.scholarship">Scholarship</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-            <tr *ngFor="let patient of patients ;trackBy: trackId">
-                <td><a [routerLink]="['/patient', patient.id, 'view' ]">{{patient.id}}</a></td>
-                <td>{{patient.code}}</td>
-                <td>{{patient.age}}</td>
-                <td>{{patient.sex}}</td>
-                <td>{{patient.ocupation}}</td>
-                <td>{{patient.lastEventOcurred}}</td>
-                <td>{{patient.deceased}}</td>
-                <td>{{patient.abandonment}}</td>
-                <td>{{patient.abandonmentMedicCause}}</td>
-                <td>{{patient.rehabStatus}}</td>
-                <td>{{patient.sessionNumber}}</td>
-                <td>{{patient.deleted}}</td>
-                <td>{{patient.scholarship}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/patient', patient.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+    <div *ngIf="!ready" fxLayout="column" fxLayoutAlign="center center" style="height: 400px">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="ready">
+        <jhi-no-content *ngIf="patients?.length === 0" [text]="'No hay pacientes registrados'"
+                        [icon]="'face'"></jhi-no-content>
+        <div *ngIf="patients?.length > 0">
+            <mat-card class="example-card" *ngFor="let patient of patients; trackBy: trackIdentity"
+                      style="margin-bottom: 10px">
+                <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="margin-left:0px!important">
+                    <mat-card-title>
+                        <mat-icon class="text-icon">face</mat-icon>
+                        Código: {{patient.code}}</mat-card-title>
+                    <div fxLayoutAlign="center center">
+                        <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center">
+                            <mat-icon aria-hidden="false" class="text-icon big-icon">more_vert</mat-icon>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/patient', patient.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'patient', { outlets: { popup: patient.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                        <mat-menu #beforeMenu="matMenu" xPosition="before">
+                            <button mat-menu-item
+                                    [routerLink]="['/patient', patient.id, 'view']">
+                                <mat-icon>remove_red_eye</mat-icon>
+                                <span jhiTranslate="entity.action.view">Ver</span>
+                            </button>
+                            <button mat-menu-item *jhiHasAnyAuthority="['ROLE_MANAGER']"
+                                    [routerLink]="['/patient', patient.id, 'edit']">
+                                <mat-icon>create</mat-icon>
+                                <span jhiTranslate="entity.action.edit">Editar</span>
+                            </button>
+                        </mat-menu>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </mat-card-header>
+                <mat-card-content>
+
+                    <mat-card-subtitle><span>Sesión actual: {{patient.sessionNumber}}/60</span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Sexo: {{patient.sex}}</span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Ocupación: {{patient.ocupation}} </span></mat-card-subtitle>
+                    <mat-card-subtitle><span>Abandono:                              <mat-icon
+                        *ngIf="patient.abandonmentMedicCause" aria-hidden="false" aria-label="Example home icon"
+                        class="font-green" matTooltip="Sí"
+                        [matTooltipPosition]="'before'">fiber_manual_record</mat-icon>
+                        <mat-icon *ngIf="!patient.abandonmentMedicCause" aria-hidden="false"
+                                  aria-label="Example home icon" class="text-icon font-red text-icon" matTooltip="No"
+                                  [matTooltipPosition]="'before'">fiber_manual_record</mat-icon></span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle><span>Mortalidad:         <mat-icon *ngIf="patient.deceased" aria-hidden="false"
+                                                                           aria-label="Example home icon"
+                                                                           class="text-icon font-green"
+                                                                           matTooltip="Sí">
+                                                      [matTooltipPosition]="'before'">fiber_manual_record</mat-icon>
+                                            <mat-icon *ngIf="!patient.deceased" aria-hidden="false"
+                                                      aria-label="Example home icon" class="text-icon font-red"
+                                                      matTooltip="No"
+                                                      [matTooltipPosition]="'before'">fiber_manual_record</mat-icon> </span>
+                    </mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div *ngIf="patients">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
     </div>
 </div>
+<button *jhiHasAnyAuthority="['ROLE_MANAGER']" [routerLink]="['/patient/new']" mat-fab class="md-fab-bottom-right"
+        matTooltip="Registrar paciente"
+        [matTooltipPosition]="'before'">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+</button>

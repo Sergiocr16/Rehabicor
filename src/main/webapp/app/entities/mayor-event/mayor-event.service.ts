@@ -31,7 +31,10 @@ export class MayorEventService {
         const options = createRequestOption(req);
         return this.http.get<IMayorEvent[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
-
+    graphicMayorEventSession(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<[]>('api/mayor-events/graph/', { params: options, observe: 'response' });
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

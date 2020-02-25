@@ -32,6 +32,11 @@ export class NonSpecificPainsSessionService {
         return this.http.get<INonSpecificPainsSession[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
+    queryBySession(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<INonSpecificPainsSession[]>(this.resourceUrl + '/by-session', { params: options, observe: 'response' });
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

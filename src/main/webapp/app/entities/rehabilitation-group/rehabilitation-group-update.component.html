@@ -1,65 +1,144 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-rehabilitation-group-heading" jhiTranslate="rehabicorApp.rehabilitationGroup.home.createOrEditLabel">Create or edit a Rehabilitation Group</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!rehabilitationGroup.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="rehabilitationGroup.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="rehabilitationGroup.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate" for="field_creationDate">Creation Date</label>
-                    <div class="d-flex">
-                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="creationDate" placeholder="YYYY-MM-DD HH:mm"
-                        />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus" for="field_programStatus">Program Status</label>
-                    <input type="number" class="form-control" name="programStatus" id="field_programStatus"
-                        [(ngModel)]="rehabilitationGroup.programStatus" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.deleted" for="field_deleted">Deleted</label>
-                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
-                        [(ngModel)]="rehabilitationGroup.deleted" />
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="rehabicorApp.rehabilitationGroup.patient" for="field_patient">Patient</label>
-                    <select class="form-control" id="field_patient" multiple name="patient" [(ngModel)]="rehabilitationGroup.patients">
-                        <option [ngValue]="getSelected(rehabilitationGroup.patients, patientOption)" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter" for="field_rehabilitationCenter">Rehabilitation Center</label>
-                    <select class="form-control" id="field_rehabilitationCenter" name="rehabilitationCenter" [(ngModel)]="rehabilitationGroup.rehabilitationCenterId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rehabilitationCenterOption.id" *ngFor="let rehabilitationCenterOption of rehabilitationcenters; trackBy: trackRehabilitationCenterById">{{rehabilitationCenterOption.id}}</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+<mat-card class="mat-card-form margin-top-20" style="padding-top: 0">
+    <div id="myUserLabel" class="form-title primary-color"
+         fxHide.xs="true">
+        {{title}}
     </div>
-</div>
+    <form name="initialInfoForm" role="form" [formGroup]="editForm">
+        <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+        <ng-template matStepLabel>Información general</ng-template>
+        <div fxLayout="column" fxLayoutAlign="center stretch">
+            <mat-form-field appearance="outline">
+                <mat-label for="field_name">Nombre</mat-label>
+                <input matInput type="text" name="name" id="field_name"
+                       formControlName="name">
+                <mat-hint
+                    *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)"
+                    class="form-text text-danger">
+                    <span *ngIf="editForm.get('name').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label >Estado en el programa de rehabilitación
+                </mat-label>
+                <mat-select name="programStatus" formControlName="programStatus">
+                    <mat-option *ngFor="let o of programStatusArray" [value]="o.v">
+                        {{o.d}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint
+                    *ngIf="editForm.get('programStatus').invalid && (editForm.get('programStatus').dirty || editForm.get('programStatus').touched)"
+                    class="form-text text-danger">
+                    <span *ngIf="editForm.get('programStatus').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                </mat-hint>
+            </mat-form-field>
+            <!--                    <mat-form-field appearance="outline">-->
+            <!--                        <mat-label jhiTranslate="rehabicorApp.patient.age" for="field_age">Age</mat-label>-->
+            <!--                        <input matInput type="number" name="age" id="field_age"-->
+            <!--                               formControlName="age">-->
+            <!--                        <mat-hint-->
+            <!--                            *ngIf="initialInfoForm.get('age').invalid && (initialInfoForm.get('age').dirty || initialInfoForm.get('age').touched)"-->
+            <!--                            class="form-text text-danger">-->
+            <!--                    <span *ngIf="initialInfoForm.get('age').errors.required"-->
+            <!--                          jhiTranslate="entity.validation.required">-->
+            <!--                        This field is required.-->
+            <!--                    </span>-->
+            <!--                        </mat-hint>-->
+            <!--                    </mat-form-field>-->
+            <!--                    <div class="form-group">-->
+            <!--                        <label jhiTranslate="rehabicorApp.rehabilitationGroup.patient" for="field_patients">Patient</label>-->
+            <!--                        <select class="form-control" id="field_patients" multiple name="patients" formControlName="patients">-->
+            <!--                            <option [ngValue]="getSelected(editForm.get('patients').value, patientOption)" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>-->
+            <!--                        </select>-->
+            <!--                    </div>-->
+            <mat-form-field appearance="outline">
+                <mat-label for="field_patients">Pacientes</mat-label>
+                <mat-select multiple name="patients" formControlName="patients"  placeholder="patients">
+                    <mat-option *ngFor="let patientOption of patients; trackBy: trackPatientById" [value]="getSelected(editForm.get('patients').value, patientOption)">
+                        {{patientOption.code}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button (click)="previousState()">
+                <span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="editForm.invalid || isSaving"
+                    (click)="save()">
+                <span jhiTranslate="entity.action.save"> Save</span>
+            </button>
+        </div>
+    </form>
+</mat-card>
+
+
+<!--<div class="row justify-content-center">-->
+<!--    <div class="col-8">-->
+<!--        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">-->
+<!--            <h2 id="jhi-rehabilitation-group-heading" jhiTranslate="rehabicorApp.rehabilitationGroup.home.createOrEditLabel">Create or edit a Rehabilitation Group</h2>-->
+<!--            <div>-->
+<!--                <jhi-alert-error></jhi-alert-error>-->
+<!--                <div class="form-group" [hidden]="!editForm.get('id').value">-->
+<!--                    <label for="id" jhiTranslate="global.field.id">ID</label>-->
+<!--                    <input type="text" class="form-control" id="id" name="id" formControlName="id"-->
+<!--                        readonly />-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.name" for="field_name">Name</label>-->
+<!--                    <input type="text" class="form-control" name="name" id="field_name"-->
+<!--                           formControlName="name"/>-->
+<!--                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">-->
+<!--                        <small class="form-text text-danger"-->
+<!--                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">-->
+<!--                        This field is required.-->
+<!--                        </small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--&lt;!&ndash;                <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate" for="field_creationDate">Creation Date</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="d-flex">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" formControlName="creationDate" placeholder="YYYY-MM-DD HH:mm"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus" for="field_programStatus">Program Status</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="number" class="form-control" name="programStatus" id="field_programStatus"&ndash;&gt;-->
+<!--&lt;!&ndash;                           formControlName="programStatus"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.deleted" for="field_deleted">Deleted</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"&ndash;&gt;-->
+<!--&lt;!&ndash;                           formControlName="deleted"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--                <div class="form-group">-->
+<!--                    <label jhiTranslate="rehabicorApp.rehabilitationGroup.patient" for="field_patients">Patient</label>-->
+<!--                    <select class="form-control" id="field_patients" multiple name="patients" formControlName="patients">-->
+<!--                        <option [ngValue]="getSelected(editForm.get('patients').value, patientOption)" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter" for="field_rehabilitationCenter">Rehabilitation Center</label>-->
+<!--                    <select class="form-control" id="field_rehabilitationCenter" name="rehabilitationCenter" formControlName="rehabilitationCenterId">-->
+<!--                        <option [ngValue]="null"></option>-->
+<!--                        <option [ngValue]="rehabilitationCenterOption.id" *ngFor="let rehabilitationCenterOption of rehabilitationcenters; trackBy: trackRehabilitationCenterById">{{rehabilitationCenterOption.id}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+<!--                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>-->
+<!--                </button>-->
+<!--                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">-->
+<!--                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->

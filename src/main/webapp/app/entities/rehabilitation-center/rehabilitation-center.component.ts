@@ -1,14 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { GlobalVariablesService } from '../../shared/util/global-variables.service';
+import { ModalService } from 'app/shared/util/modal.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IRehabilitationCenter } from 'app/shared/model/rehabilitation-center.model';
-import { AccountService } from 'app/core';
+import { AccountService } from 'app/core/auth/account.service';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { RehabilitationCenterService } from './rehabilitation-center.service';
+// import { IComorbiditie } from 'app/shared/model/comorbiditie.model';
 
 @Component({
     selector: 'jhi-rehabilitation-center',
@@ -24,13 +28,15 @@ export class RehabilitationCenterComponent implements OnInit, OnDestroy {
     predicate: any;
     reverse: any;
     totalItems: number;
-
+    rehabCenterId;
+    rehabilitationCenter: any;
     constructor(
         protected rehabilitationCenterService: RehabilitationCenterService,
-        protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
         protected parseLinks: JhiParseLinks,
-        protected accountService: AccountService
+        protected accountService: AccountService,
+        protected global: GlobalVariablesService,
+        protected modal: ModalService
     ) {
         this.rehabilitationCenters = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -43,16 +49,14 @@ export class RehabilitationCenterComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.global.loading();
         this.rehabilitationCenterService
             .query({
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
-            .subscribe(
-                (res: HttpResponse<IRehabilitationCenter[]>) => this.paginateRehabilitationCenters(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            .subscribe((res: HttpResponse<IRehabilitationCenter[]>) => this.paginateRehabilitationCenters(res.body, res.headers));
     }
 
     reset() {
@@ -72,6 +76,8 @@ export class RehabilitationCenterComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInRehabilitationCenters();
+        this.global.setTitle('Centros de rehabilitación');
+        this.rehabCenterId = this.global.rehabCenter;
     }
 
     ngOnDestroy() {
@@ -102,7 +108,23 @@ export class RehabilitationCenterComponent implements OnInit, OnDestroy {
         }
     }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
+    delete(rehabilitationCenter) {
+        this.modal.confirmDialog('delete', () => {
+            rehabilitationCenter.deleted = true;
+            this.subscribeToSaveResponse(this.rehabilitationCenterService.update(rehabilitationCenter));
+        });
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IRehabilitationCenter>>) {
+        result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+    }
+
+    protected onSaveSuccess() {
+        this.reset();
+        this.modal.message('El centro de rehabilitación se ha eliminado correctamente.');
+    }
+
+    protected onSaveError() {
+        this.modal.message('Ups! Sucedió un error.');
     }
 }

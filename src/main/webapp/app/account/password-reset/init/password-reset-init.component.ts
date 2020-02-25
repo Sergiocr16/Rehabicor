@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
 import { EMAIL_NOT_FOUND_TYPE } from 'app/shared';
 import { PasswordResetInitService } from './password-reset-init.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { count } from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-password-reset-init',
@@ -9,10 +11,19 @@ import { PasswordResetInitService } from './password-reset-init.service';
 export class PasswordResetInitComponent implements OnInit, AfterViewInit {
     error: string;
     errorEmailNotExists: string;
-    resetAccount: any;
     success: string;
+    resetAccount: any;
 
-    constructor(private passwordResetInitService: PasswordResetInitService, private elementRef: ElementRef, private renderer: Renderer) {}
+    resetRequestForm = this.fb.group({
+        email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]]
+    });
+
+    constructor(
+        private passwordResetInitService: PasswordResetInitService,
+        private elementRef: ElementRef,
+        private renderer: Renderer,
+        private fb: FormBuilder
+    ) {}
 
     ngOnInit() {
         this.resetAccount = {};
@@ -25,8 +36,7 @@ export class PasswordResetInitComponent implements OnInit, AfterViewInit {
     requestReset() {
         this.error = null;
         this.errorEmailNotExists = null;
-
-        this.passwordResetInitService.save(this.resetAccount.email).subscribe(
+        this.passwordResetInitService.save(this.resetRequestForm.get(['email']).value).subscribe(
             () => {
                 this.success = 'OK';
             },

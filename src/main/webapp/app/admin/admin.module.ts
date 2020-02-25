@@ -19,11 +19,13 @@ import {
     JhiConfigurationComponent,
     JhiDocsComponent
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         RehabicorSharedModule,
-        RouterModule.forChild(adminState)
+        RouterModule.forChild(adminState),
+        ReactiveFormsModule
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     ],
     declarations: [

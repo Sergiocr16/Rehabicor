@@ -10,7 +10,7 @@ import { Account } from 'app/core/user/account.model';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userIdentity: any;
-    private authenticated = false;
+    public authenticated = false;
     private authenticationState = new Subject<any>();
 
     constructor(private languageService: JhiLanguageService, private sessionStorage: SessionStorageService, private http: HttpClient) {}
@@ -96,7 +96,7 @@ export class AccountService {
             });
     }
 
-    isAuthenticated(): boolean {
+    public isAuthenticated(): boolean {
         return this.authenticated;
     }
 
@@ -110,5 +110,9 @@ export class AccountService {
 
     getImageUrl(): string {
         return this.isIdentityResolved() ? this.userIdentity.imageUrl : null;
+    }
+
+    isAccountChecked() {
+        return true;
     }
 }

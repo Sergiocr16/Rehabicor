@@ -11,6 +11,8 @@ import { RehabilitationGroupDetailComponent } from './rehabilitation-group-detai
 import { RehabilitationGroupUpdateComponent } from './rehabilitation-group-update.component';
 import { RehabilitationGroupDeletePopupComponent } from './rehabilitation-group-delete-dialog.component';
 import { IRehabilitationGroup } from 'app/shared/model/rehabilitation-group.model';
+import { RehabilitationGroupClinicalCharacteristicsComponent } from 'app/entities/rehabilitation-group/rehabilitation-group-clinical-characteristics.component';
+import { RehabilitationGroupPanelComponent } from 'app/entities/rehabilitation-group/rehabilitation-group-panel.component';
 
 @Injectable({ providedIn: 'root' })
 export class RehabilitationGroupResolve implements Resolve<IRehabilitationGroup> {
@@ -33,8 +35,8 @@ export const rehabilitationGroupRoute: Routes = [
         path: '',
         component: RehabilitationGroupComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.rehabilitationGroup.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_CONSULTANT'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +47,32 @@ export const rehabilitationGroupRoute: Routes = [
             rehabilitationGroup: RehabilitationGroupResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.rehabilitationGroup.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_CONSULTANT'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':id/panel-data',
+        component: RehabilitationGroupPanelComponent,
+        resolve: {
+            rehabilitationGroup: RehabilitationGroupResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':id/clinical-characteristics',
+        component: RehabilitationGroupClinicalCharacteristicsComponent,
+        resolve: {
+            rehabilitationGroup: RehabilitationGroupResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_CONSULTANT'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +83,8 @@ export const rehabilitationGroupRoute: Routes = [
             rehabilitationGroup: RehabilitationGroupResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.rehabilitationGroup.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +95,8 @@ export const rehabilitationGroupRoute: Routes = [
             rehabilitationGroup: RehabilitationGroupResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.rehabilitationGroup.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.rehabilitationGroup.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

@@ -26,7 +26,10 @@ export class ComorbiditiesPatientService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IComorbiditiesPatient>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-
+    findByAssesment(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IComorbiditiesPatient[]>(`${this.resourceUrl}/by-asessment/`, { params: options, observe: 'response' });
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IComorbiditiesPatient[]>(this.resourceUrl, { params: options, observe: 'response' });

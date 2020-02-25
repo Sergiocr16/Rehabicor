@@ -34,7 +34,7 @@ export const finalAssessmentRoute: Routes = [
         component: FinalAssessmentComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.finalAssessment.home.title'
+            pageTitle: 'cardioRehabCrApp.finalAssessment.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,19 +46,31 @@ export const finalAssessmentRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.finalAssessment.home.title'
+            pageTitle: 'cardioRehabCrApp.finalAssessment.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'new',
+        path: ':patientId/new-reevaluation',
         component: FinalAssessmentUpdateComponent,
         resolve: {
             finalAssessment: FinalAssessmentResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.finalAssessment.home.title'
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.finalAssessment.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: ':patientId/new',
+        component: FinalAssessmentUpdateComponent,
+        resolve: {
+            finalAssessment: FinalAssessmentResolve
+        },
+        data: {
+            authorities: ['ROLE_USER', 'ROLE_MANAGER'],
+            pageTitle: 'cardioRehabCrApp.finalAssessment.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +82,7 @@ export const finalAssessmentRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'rehabicorApp.finalAssessment.home.title'
+            pageTitle: 'cardioRehabCrApp.finalAssessment.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

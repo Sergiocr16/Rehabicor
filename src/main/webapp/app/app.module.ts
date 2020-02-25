@@ -20,6 +20,12 @@ import { RehabicorEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ConfirmDialogComponent } from 'app/shared/util/confirm-dialog/confirm-dialog.component';
+import { LoginComponent } from 'app/shared/login/login-cardio.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -38,10 +44,24 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         RehabicorAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         RehabicorEntityModule,
-        RehabicorAppRoutingModule
+        RehabicorAppRoutingModule,
+        FlexLayoutModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [
+        LoginComponent,
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        ActiveMenuDirective,
+        FooterComponent,
+        ConfirmDialogComponent
+    ],
     providers: [
+        GlobalVariablesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -63,7 +83,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             multi: true
         }
     ],
-    bootstrap: [JhiMainComponent]
+    bootstrap: [JhiMainComponent],
+    entryComponents: [ConfirmDialogComponent]
 })
 export class RehabicorAppModule {
     constructor(private dpConfig: NgbDatepickerConfig) {

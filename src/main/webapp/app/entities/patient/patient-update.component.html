@@ -1,122 +1,311 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-patient-heading" jhiTranslate="rehabicorApp.patient.home.createOrEditLabel">Create or edit a Patient</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!patient.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="patient.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.code" for="field_code">Code</label>
-                    <input type="text" class="form-control" name="code" id="field_code"
-                        [(ngModel)]="patient.code" required/>
-                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.age" for="field_age">Age</label>
-                    <input type="number" class="form-control" name="age" id="field_age"
-                        [(ngModel)]="patient.age" required/>
-                    <div [hidden]="!(editForm.controls.age?.dirty && editForm.controls.age?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.age?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.age?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.sex" for="field_sex">Sex</label>
-                    <input type="text" class="form-control" name="sex" id="field_sex"
-                        [(ngModel)]="patient.sex" required/>
-                    <div [hidden]="!(editForm.controls.sex?.dirty && editForm.controls.sex?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.sex?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.ocupation" for="field_ocupation">Ocupation</label>
-                    <input type="text" class="form-control" name="ocupation" id="field_ocupation"
-                        [(ngModel)]="patient.ocupation" required/>
-                    <div [hidden]="!(editForm.controls.ocupation?.dirty && editForm.controls.ocupation?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.ocupation?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.lastEventOcurred" for="field_lastEventOcurred">Last Event Ocurred</label>
-                    <input type="number" class="form-control" name="lastEventOcurred" id="field_lastEventOcurred"
-                        [(ngModel)]="patient.lastEventOcurred" required/>
-                    <div [hidden]="!(editForm.controls.lastEventOcurred?.dirty && editForm.controls.lastEventOcurred?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.lastEventOcurred?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.lastEventOcurred?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.deceased" for="field_deceased">Deceased</label>
-                    <input type="checkbox" class="form-control" name="deceased" id="field_deceased"
-                        [(ngModel)]="patient.deceased" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.abandonment" for="field_abandonment">Abandonment</label>
-                    <input type="checkbox" class="form-control" name="abandonment" id="field_abandonment"
-                        [(ngModel)]="patient.abandonment" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.abandonmentMedicCause" for="field_abandonmentMedicCause">Abandonment Medic Cause</label>
-                    <input type="checkbox" class="form-control" name="abandonmentMedicCause" id="field_abandonmentMedicCause"
-                        [(ngModel)]="patient.abandonmentMedicCause" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.rehabStatus" for="field_rehabStatus">Rehab Status</label>
-                    <input type="number" class="form-control" name="rehabStatus" id="field_rehabStatus"
-                        [(ngModel)]="patient.rehabStatus" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.sessionNumber" for="field_sessionNumber">Session Number</label>
-                    <input type="number" class="form-control" name="sessionNumber" id="field_sessionNumber"
-                        [(ngModel)]="patient.sessionNumber" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.deleted" for="field_deleted">Deleted</label>
-                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
-                        [(ngModel)]="patient.deleted" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.patient.scholarship" for="field_scholarship">Scholarship</label>
-                    <input type="text" class="form-control" name="scholarship" id="field_scholarship"
-                        [(ngModel)]="patient.scholarship" />
-                </div>
-
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+<mat-card class="mat-card-form margin-top-20" style="padding-top: 0">
+    <div id="myUserLabel" class="form-title primary-color"
+         fxHide.xs="true">
+        {{title}}
     </div>
-</div>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="initialInfoForm">
+            <form name="initialInfoForm" role="form" [formGroup]="initialInfoForm">
+                <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+                <ng-template matStepLabel>Información general</ng-template>
+                <div fxLayout="column" fxLayoutAlign="center stretch">
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.code" for="field_code">Code</mat-label>
+                        <input matInput type="text" ame="code" id="field_code"
+                               formControlName="code">
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('code').invalid && (initialInfoForm.get('code').dirty || initialInfoForm.get('code').touched)"
+                            class="form-text text-danger">
+                    <span *ngIf="initialInfoForm.get('code').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.age" for="field_age">Age</mat-label>
+                        <input matInput type="number" name="age" id="field_age"
+                               formControlName="age">
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('age').invalid && (initialInfoForm.get('age').dirty || initialInfoForm.get('age').touched)"
+                            class="form-text text-danger">
+                    <span *ngIf="initialInfoForm.get('age').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.sex">Sex</mat-label>
+                        <mat-select name="sex" formControlName="sex">
+                            <mat-option *ngFor="let s of sexArray" [value]="s">
+                                {{s}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('sex').invalid && (initialInfoForm.get('sex').dirty || initialInfoForm.get('sex').touched)"
+                            class="form-text text-danger">
+                        <span *ngIf="initialInfoForm.get('sex').errors.required"
+                              jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.ocupation" for="field_ocupation">Ocupation
+                        </mat-label>
+                        <mat-select name="ocupation" formControlName="ocupation">
+                            <mat-option *ngFor="let s of ocupationArray" [value]="s">
+                                {{s}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('ocupation').invalid && (initialInfoForm.get('ocupation').dirty || initialInfoForm.get('ocupation').touched)"
+                            class="form-text text-danger">
+                    <span *ngIf="initialInfoForm.get('ocupation').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.scholarship" for="field_scholarship">Escolaridad
+                        </mat-label>
+                        <mat-select name="scholarship" formControlName="scholarship">
+                            <mat-option *ngFor="let s of scholarshipArray" [value]="s">
+                                {{s}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('scholarship').invalid && (initialInfoForm.get('scholarship').dirty || initialInfoForm.get('ocupation').touched)"
+                            class="form-text text-danger">
+                    <span *ngIf="initialInfoForm.get('scholarship').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label jhiTranslate="rehabicorApp.patient.lastEventOcurred"
+                                   for="field_lastEventOcurred">
+                            Last Event Ocurred
+                        </mat-label>
+                        <input matInput type="number" id="field_lastEventOcurred"
+                               name="lastEventOcurred" formControlName="lastEventOcurred" placeholder="En meses">
+                        <mat-hint
+                            *ngIf="initialInfoForm.get('lastEventOcurred').invalid && (initialInfoForm.get('lastEventOcurred').dirty || initialInfoForm.get('lastEventOcurred').touched)"
+                            class="form-text text-danger">
+                    <span *ngIf="initialInfoForm.get('lastEventOcurred').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-button (click)="previousState()">
+                        <span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="diagnosisForm">
+            <form name="diagnosisForm" role="form" [formGroup]="diagnosisForm">
+                <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+                <ng-template matStepLabel>Características clínicas</ng-template>
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="20px"
+                     fxLayoutGap.xs="10px" style="margin: 10px 0 10px 0">
+                    <mat-card fxFlex="50">
+                        <mat-card-header>
+                            <mat-card-title class="primary-color"> Diagnóstico de Ingreso</mat-card-title>
+                        </mat-card-header>
+                        <div fxLayout="column">
+                            <mat-checkbox flex [checked]="incomeDiagnose.checked"
+                                          (change)="valueChange(incomeDiagnoses,i,$event)"
+                                          *ngFor="let incomeDiagnose of incomeDiagnoses;let i=index">{{incomeDiagnose.description}}</mat-checkbox>
+                        </div>
+                    </mat-card>
+                    <mat-card fxFlex="50">
+                        <mat-card-header>
+                            <mat-card-title class="primary-color">Comorbilidades</mat-card-title>
+                        </mat-card-header>
+                        <div fxLayout="column">
+                            <mat-checkbox flex [checked]="comorbiditie.checked"
+                                          (change)="valueChange(comorbidities,i,$event)"
+                                          *ngFor="let comorbiditie of comorbidities;let i=index">{{comorbiditie.description}}</mat-checkbox>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="20px"
+                     fxLayoutGap.xs="10px" style="margin: 10px 0 10px 0">
+                    <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label jhiTranslate="rehabicorApp.initialAssessment.smoking">Tabaquismo</mat-label>
+                        <mat-select name="smoking" formControlName="smoking">
+                            <mat-option *ngFor="let s of smokingOptions" [value]="s">
+                                {{s}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint
+                            *ngIf="diagnosisForm.get('smoking').invalid && (diagnosisForm.get('smoking').dirty || diagnosisForm.get('smoking').touched)"
+                            class="form-text text-danger">
+                        <span *ngIf="diagnosisForm.get('smoking').errors.required"
+                              jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label jhiTranslate="rehabicorApp.initialAssessment.cardiovascularRisk">Riesgo
+                            cardiovascular asociado al ejercicio
+                        </mat-label>
+                        <mat-select name="cardiovascularRisk" formControlName="cardiovascularRisk">
+                            <mat-option *ngFor="let s of cardiovascularRiskOptions" [value]="s">
+                                {{s}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint
+                            *ngIf="diagnosisForm.get('cardiovascularRisk').invalid && (diagnosisForm.get('cardiovascularRisk').dirty || diagnosisForm.get('cardiovascularRisk').touched)"
+                            class="form-text text-danger">
+                        <span *ngIf="diagnosisForm.get('cardiovascularRisk').errors.required"
+                              jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-button (click)="previousState()">
+                        <span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-button matStepperPrevious>Atrás</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="measuresForm">
+            <form name="measuresForm" role="form" [formGroup]="measuresForm">
+                <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+                <ng-template matStepLabel>Parametros de medición</ng-template>
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="20px"
+                     fxLayoutGap.xs="0px">
+                    <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.weight" for="field_weight">
+                                Weight
+                            </mat-label>
+                            <input matInput type="number" step="0.1" name="weight" id="field_weight"
+                                   formControlName="weight" (change)="calculateIMC()">
+                            <span matSuffix>kilogramos</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('weight').invalid && (measuresForm.get('weight').dirty || measuresForm.get('weight').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('weight').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.size" for="field_size">Size
+                            </mat-label>
+                            <input matInput type="number" step="0.1" name="size" id="field_size"
+                                   formControlName="size" (change)="calculateIMC()">
+                            <span matSuffix>m</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('size').invalid && (measuresForm.get('size').dirty || measuresForm.get('size').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('size').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.iMC" for="field_iMC">IMC
+                            </mat-label>
+                            <input [disabled]='true' disabled matInput type="number" step="0.1" name="iMC" id="field_iMC"
+                                   formControlName="iMC" >
+                            <span matSuffix>Kg/m2</span>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.lDL" for="field_lDL">L DL
+                            </mat-label>
+                            <input matInput type="number" step="0.1" name="lDL" id="field_lDL"
+                                   formControlName="lDL">
+                            <span matSuffix>mg/dL</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('lDL').invalid && (measuresForm.get('lDL').dirty || measuresForm.get('lDL').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('lDL').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.hDL" for="field_hDL">H DL
+                            </mat-label>
+                            <input matInput type="number" step="0.1" name="hDL" id="field_hDL"
+                                   formControlName="hDL">
+                            <span matSuffix>mg/dL</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('hDL').invalid && (measuresForm.get('hDL').dirty || measuresForm.get('hDL').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('hDL').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.hbiac" for="field_hbiac">Hbiac
+                            </mat-label>
+                            <input matInput type="number" step="0.1" name="hbiac" id="field_hbiac"
+                                   formControlName="hbiac">
+                            <span matSuffix>%</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('hbiac').invalid && (measuresForm.get('hbiac').dirty || measuresForm.get('hbiac').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('hbiac').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label jhiTranslate="rehabicorApp.initialAssessment.baselineFunctionalCapacity"
+                                       for="field_baselineFunctionalCapacity">Baseline Functional Capacity
+                            </mat-label>
+                            <input matInput type="number" name="baselineFunctionalCapacity"
+                                   id="field_baselineFunctionalCapacity"
+                                   formControlName="baselineFunctionalCapacity">
+                            <span matSuffix>METS</span>
+                            <mat-hint
+                                *ngIf="measuresForm.get('baselineFunctionalCapacity').invalid && (measuresForm.get('baselineFunctionalCapacity').dirty || measuresForm.get('baselineFunctionalCapacity').touched)"
+                                class="form-text text-danger">
+                    <span *ngIf="measuresForm.get('baselineFunctionalCapacity').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-button (click)="previousState()">
+                        <span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-button matStepperPrevious>Atrás</button>
+                    <button mat-raised-button color="accent" type="submit" [disabled]="measuresForm.invalid || isSaving"
+                            (click)="save()">
+                        <span jhiTranslate="entity.action.save"> Save</span>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+</mat-card>

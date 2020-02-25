@@ -26,7 +26,10 @@ export class DepressiveSymptomsSessionService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IDepressiveSymptomsSession>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-
+    queryBySession(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IDepressiveSymptomsSession[]>(this.resourceUrl + '/by-session', { params: options, observe: 'response' });
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IDepressiveSymptomsSession[]>(this.resourceUrl, { params: options, observe: 'response' });

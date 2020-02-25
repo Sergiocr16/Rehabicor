@@ -1,118 +1,287 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-final-assessment-heading" jhiTranslate="rehabicorApp.finalAssessment.home.createOrEditLabel">Create or edit a Final Assessment</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!finalAssessment.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="finalAssessment.id" readonly />
+<!--<div class="row justify-content-center">-->
+<!--    <div class="col-8">-->
+<!--        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">-->
+<!--            <h2 id="jhi-final-assessment-heading" jhiTranslate="rehabicorApp.finalAssessment.home.createOrEditLabel">Create or edit a Final Assessment</h2>-->
+<!--            <div>-->
+<!--                <jhi-alert-error></jhi-alert-error>-->
+<!--                <div class="form-group" [hidden]="!editForm.get('id').value">-->
+<!--                    <label for="id" jhiTranslate="global.field.id">ID</label>-->
+<!--                    <input type="text" class="form-control" id="id" name="id" formControlName="id"-->
+<!--                        readonly />-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.smoking" for="field_smoking">Smoking</label>-->
+<!--                    <input type="text" class="form-control" name="smoking" id="field_smoking"-->
+<!--                           formControlName="smoking"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.weight" for="field_weight">Weight</label>-->
+<!--                    <input type="text" class="form-control" name="weight" id="field_weight"-->
+<!--                           formControlName="weight"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.size" for="field_size">Size</label>-->
+<!--                    <input type="text" class="form-control" name="size" id="field_size"-->
+<!--                           formControlName="size"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.iMC" for="field_iMC">I MC</label>-->
+<!--                    <input type="text" class="form-control" name="iMC" id="field_iMC"-->
+<!--                           formControlName="iMC"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hbiac" for="field_hbiac">Hbiac</label>-->
+<!--                    <input type="text" class="form-control" name="hbiac" id="field_hbiac"-->
+<!--                           formControlName="hbiac"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.baselineFunctionalCapacity" for="field_baselineFunctionalCapacity">Baseline Functional Capacity</label>-->
+<!--                    <input type="text" class="form-control" name="baselineFunctionalCapacity" id="field_baselineFunctionalCapacity"-->
+<!--                           formControlName="baselineFunctionalCapacity"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.lDL" for="field_lDL">L DL</label>-->
+<!--                    <input type="text" class="form-control" name="lDL" id="field_lDL"-->
+<!--                           formControlName="lDL"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hDL" for="field_hDL">H DL</label>-->
+<!--                    <input type="text" class="form-control" name="hDL" id="field_hDL"-->
+<!--                           formControlName="hDL"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.cardiovascularRisk" for="field_cardiovascularRisk">Cardiovascular Risk</label>-->
+<!--                    <input type="text" class="form-control" name="cardiovascularRisk" id="field_cardiovascularRisk"-->
+<!--                           formControlName="cardiovascularRisk"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.isWorking" for="field_isWorking">Is Working</label>-->
+<!--                    <input type="checkbox" class="form-control" name="isWorking" id="field_isWorking"-->
+<!--                           formControlName="isWorking"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.deceased" for="field_deceased">Deceased</label>-->
+<!--                    <input type="checkbox" class="form-control" name="deceased" id="field_deceased"-->
+<!--                           formControlName="deceased"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.abandonment" for="field_abandonment">Abandonment</label>-->
+<!--                    <input type="checkbox" class="form-control" name="abandonment" id="field_abandonment"-->
+<!--                           formControlName="abandonment"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.abandonmentMedicCause" for="field_abandonmentMedicCause">Abandonment Medic Cause</label>-->
+<!--                    <input type="checkbox" class="form-control" name="abandonmentMedicCause" id="field_abandonmentMedicCause"-->
+<!--                           formControlName="abandonmentMedicCause"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hospitalized" for="field_hospitalized">Hospitalized</label>-->
+<!--                    <input type="checkbox" class="form-control" name="hospitalized" id="field_hospitalized"-->
+<!--                           formControlName="hospitalized"/>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.deleted" for="field_deleted">Deleted</label>-->
+<!--                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"-->
+<!--                           formControlName="deleted"/>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.patient" for="field_patient">Patient</label>-->
+<!--                    <select class="form-control" id="field_patient" name="patient" formControlName="patientId">-->
+<!--                        <option [ngValue]="null"></option>-->
+<!--                        <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+<!--                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>-->
+<!--                </button>-->
+<!--                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">-->
+<!--                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<mat-card class="mat-card-form margin-top-20" style="padding-top: 0">
+    <div id="myUserLabel" class="form-title primary-color"
+         fxHide.xs="true">
+        {{title}}
+    </div>
+    <form name="editForm" role="form" [formGroup]="editForm">
+        <span ng-hide="true">{{setInvalidForm(isSaving)}}</span>
+        <!--    <ng-template matStepLabel>Parametros de medición</ng-template>-->
+        <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between none"
+             fxLayoutGap.xs="0px">
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex>
+                <mat-form-field appearance="outline">
+                    <mat-label for="field_weight">
+                        Peso Basal
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="weight" id="field_weight"
+                           formControlName="weight" (change)="calculateIMC()">
+                    <span matSuffix>kilogramos</span>
+                    <mat-hint
+                        *ngIf="editForm.get('weight').invalid && (editForm.get('weight').dirty || editForm.get('weight').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('weight').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label jhiTranslate="rehabicorApp.initialAssessment.size" for="field_size">Size
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="size" id="field_size"
+                           formControlName="size" (change)="calculateIMC()">
+                    <span matSuffix>m</span>
+                    <mat-hint
+                        *ngIf="editForm.get('size').invalid && (editForm.get('size').dirty || editForm.get('size').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('size').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label jhiTranslate="rehabicorApp.initialAssessment.iMC" for="field_iMC">IMC
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="iMC" id="field_iMC"
+                           formControlName="iMC">
+                    <span matSuffix>Kg/m2</span>
+                    <mat-hint
+                        *ngIf="editForm.get('iMC').invalid && (editForm.get('iMC').dirty || editForm.get('iMC').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('iMC').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label jhiTranslate="rehabicorApp.initialAssessment.hbiac" for="field_hbiac">Hbiac
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="hbiac" id="field_hbiac"
+                           formControlName="hbiac">
+                    <span matSuffix>%</span>
+                    <mat-hint
+                        *ngIf="editForm.get('hbiac').invalid && (editForm.get('hbiac').dirty || editForm.get('hbiac').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('hbiac').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label for="field_baselineFunctionalCapacity">
+                        Capacidad Funcional
+                    </mat-label>
+                    <input matInput type="number"  name="baselineFunctionalCapacity" id="field_baselineFunctionalCapacity"
+                           formControlName="baselineFunctionalCapacity">
+                    <span matSuffix>METS</span>
+                    <mat-hint
+                        *ngIf="editForm.get('baselineFunctionalCapacity').invalid && (editForm.get('baselineFunctionalCapacity').dirty || editForm.get('baselineFunctionalCapacity').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('baselineFunctionalCapacity').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex>
+                <mat-form-field appearance="outline">
+                    <mat-label for="field_lDL">
+                        LDL
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="lDL" id="field_lDL"
+                           formControlName="lDL">
+                    <span matSuffix>mg/dL</span>
+                    <mat-hint
+                        *ngIf="editForm.get('lDL').invalid && (editForm.get('lDL').dirty || editForm.get('lDL').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('lDL').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label for="field_hDL">
+                        HDL
+                    </mat-label>
+                    <input matInput type="number" step="0.1" name="hDL" id="field_hDL"
+                           formControlName="hDL">
+                    <span matSuffix>mg/dL</span>
+                    <mat-hint
+                        *ngIf="editForm.get('hDL').invalid && (editForm.get('hDL').dirty || editForm.get('hDL').touched)"
+                        class="form-text text-danger">
+                    <span *ngIf="editForm.get('hDL').errors.required"
+                          jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label jhiTranslate="rehabicorApp.initialAssessment.smoking">Tabaquismo</mat-label>
+                    <mat-select name="smoking" formControlName="smoking">
+                        <mat-option *ngFor="let s of smokingOptions" [value]="s">
+                            {{s}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint
+                        *ngIf="editForm.get('smoking').invalid && (editForm.get('smoking').dirty || editForm.get('smoking').touched)"
+                        class="form-text text-danger">
+                        <span *ngIf="editForm.get('smoking').errors.required"
+                              jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    </mat-hint>
+                </mat-form-field>
+
+
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox flex name="isWorking" formControlName="isWorking"
+                                  id="field_isWorking"
+                                  labelPosition="'after'">
+                        Labora activamente
+                    </mat-checkbox>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.smoking" for="field_smoking">Smoking</label>
-                    <input type="text" class="form-control" name="smoking" id="field_smoking"
-                        [(ngModel)]="finalAssessment.smoking" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.weight" for="field_weight">Weight</label>
-                    <input type="text" class="form-control" name="weight" id="field_weight"
-                        [(ngModel)]="finalAssessment.weight" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.size" for="field_size">Size</label>
-                    <input type="text" class="form-control" name="size" id="field_size"
-                        [(ngModel)]="finalAssessment.size" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.iMC" for="field_iMC">I MC</label>
-                    <input type="text" class="form-control" name="iMC" id="field_iMC"
-                        [(ngModel)]="finalAssessment.iMC" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hbiac" for="field_hbiac">Hbiac</label>
-                    <input type="text" class="form-control" name="hbiac" id="field_hbiac"
-                        [(ngModel)]="finalAssessment.hbiac" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.baselineFunctionalCapacity" for="field_baselineFunctionalCapacity">Baseline Functional Capacity</label>
-                    <input type="text" class="form-control" name="baselineFunctionalCapacity" id="field_baselineFunctionalCapacity"
-                        [(ngModel)]="finalAssessment.baselineFunctionalCapacity" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.lDL" for="field_lDL">L DL</label>
-                    <input type="text" class="form-control" name="lDL" id="field_lDL"
-                        [(ngModel)]="finalAssessment.lDL" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hDL" for="field_hDL">H DL</label>
-                    <input type="text" class="form-control" name="hDL" id="field_hDL"
-                        [(ngModel)]="finalAssessment.hDL" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.cardiovascularRisk" for="field_cardiovascularRisk">Cardiovascular Risk</label>
-                    <input type="text" class="form-control" name="cardiovascularRisk" id="field_cardiovascularRisk"
-                        [(ngModel)]="finalAssessment.cardiovascularRisk" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.isWorking" for="field_isWorking">Is Working</label>
-                    <input type="checkbox" class="form-control" name="isWorking" id="field_isWorking"
-                        [(ngModel)]="finalAssessment.isWorking" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.deceased" for="field_deceased">Deceased</label>
-                    <input type="checkbox" class="form-control" name="deceased" id="field_deceased"
-                        [(ngModel)]="finalAssessment.deceased" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.abandonment" for="field_abandonment">Abandonment</label>
-                    <input type="checkbox" class="form-control" name="abandonment" id="field_abandonment"
-                        [(ngModel)]="finalAssessment.abandonment" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.abandonmentMedicCause" for="field_abandonmentMedicCause">Abandonment Medic Cause</label>
-                    <input type="checkbox" class="form-control" name="abandonmentMedicCause" id="field_abandonmentMedicCause"
-                        [(ngModel)]="finalAssessment.abandonmentMedicCause" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.hospitalized" for="field_hospitalized">Hospitalized</label>
-                    <input type="checkbox" class="form-control" name="hospitalized" id="field_hospitalized"
-                        [(ngModel)]="finalAssessment.hospitalized" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.deleted" for="field_deleted">Deleted</label>
-                    <input type="checkbox" class="form-control" name="deleted" id="field_deleted"
-                        [(ngModel)]="finalAssessment.deleted" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.reevaluation" for="field_reevaluation">Reevaluation</label>
-                    <input type="checkbox" class="form-control" name="reevaluation" id="field_reevaluation"
-                        [(ngModel)]="finalAssessment.reevaluation" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.executionDate" for="field_executionDate">Execution Date</label>
-                    <div class="d-flex">
-                        <input id="field_executionDate" type="datetime-local" class="form-control" name="executionDate" [(ngModel)]="executionDate" placeholder="YYYY-MM-DD HH:mm"
-                        />
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox flex name="abandonment" formControlName="abandonment" id="field_abandonment"
+                                  labelPosition="'before'">
+                        Abandonó el ejercicio
+                    </mat-checkbox>
+                    <div class="margin-left-20" *ngIf="editForm.get('abandonment').value">
+                        <mat-radio-group aria-label="Select an option" required name="abandonmentMedicCause" formControlName="abandonmentMedicCause" id="field_abandonmentMedicCause" fxLayout="column">
+                            <mat-radio-button value="1">Causa médica</mat-radio-button>
+                            <mat-radio-button value="2">Causa médica - Hospitalización</mat-radio-button>
+                            <mat-radio-button value="3">Causa no médica</mat-radio-button>
+                        </mat-radio-group>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="rehabicorApp.finalAssessment.patient" for="field_patient">Patient</label>
-                    <select class="form-control" id="field_patient" name="patient" [(ngModel)]="finalAssessment.patientId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
-                    </select>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox flex name="deceased" formControlName="deceased" id="field_deceased"
+                                  labelPosition="'before'">
+                        Mortalidad
+                    </mat-checkbox>
                 </div>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button (click)="previousState()">
+                <span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="editForm.invalid || isSaving"
+                    (click)="save()">
+                <span jhiTranslate="entity.action.save"> Save</span>
+            </button>
+        </div>
+    </form>
+</mat-card>

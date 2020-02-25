@@ -13,11 +13,12 @@ import {
     mayorEventRoute,
     mayorEventPopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...mayorEventRoute, ...mayorEventPopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         MayorEventComponent,
         MayorEventDetailComponent,

@@ -1,66 +1,157 @@
+<!--<div>-->
+<!--    <h2 id="page-heading">-->
+<!--        <span jhiTranslate="rehabicorApp.rehabilitationGroup.home.title">Rehabilitation Groups</span>-->
+<!--        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rehabilitation-group" [routerLink]="['/rehabilitation-group/new']">-->
+<!--            <fa-icon [icon]="'plus'"></fa-icon>-->
+<!--            <span  jhiTranslate="rehabicorApp.rehabilitationGroup.home.createLabel">-->
+<!--            Create a new Rehabilitation Group-->
+<!--            </span>-->
+<!--        </button>-->
+<!--    </h2>-->
+<!--    <jhi-alert-error></jhi-alert-error>-->
+<!--    <jhi-alert></jhi-alert>-->
+<!--    <br/>-->
+<!--    <div class="alert alert-warning" *ngIf="rehabilitationGroups?.length === 0">-->
+<!--        <span jhiTranslate="rehabicorApp.rehabilitationGroup.home.notFound">No rehabilitationGroups found</span>-->
+<!--    </div>-->
+<!--    <div class="table-responsive" *ngIf="rehabilitationGroups?.length > 0">-->
+<!--        <table class="table table-striped" aria-describedby="page-heading">-->
+<!--            <thead>-->
+<!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">-->
+<!--            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="name"><span jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate">Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="programStatus"><span jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+<!--            <th scope="col"></th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">-->
+<!--            <tr *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">-->
+<!--                <td><a [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]">{{rehabilitationGroup.id}}</a></td>-->
+<!--                <td>{{rehabilitationGroup.name}}</td>-->
+<!--                <td>{{rehabilitationGroup.creationDate | date:'medium'}}</td>-->
+<!--                <td>{{rehabilitationGroup.programStatus}}</td>-->
+<!--                <td>{{rehabilitationGroup.deleted}}</td>-->
+<!--                <td>-->
+<!--                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">-->
+<!--                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId , 'view' ]" >{{rehabilitationGroup.rehabilitationCenterId}}</a>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="text-right">-->
+<!--                    <div class="btn-group">-->
+<!--                        <button type="submit"-->
+<!--                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]"-->
+<!--                                class="btn btn-info btn-sm">-->
+<!--                            <fa-icon [icon]="'eye'"></fa-icon>-->
+<!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+<!--                        </button>-->
+<!--                        <button type="submit"-->
+<!--                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'edit']"-->
+<!--                                class="btn btn-primary btn-sm">-->
+<!--                            <fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+<!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
+<!--                        </button>-->
+<!--                        <button (click)="delete(rehabilitationGroup)"-->
+<!--                                queryParamsHandling="merge"-->
+<!--                                class="btn btn-danger btn-sm">-->
+<!--                            <fa-icon [icon]="'times'"></fa-icon>-->
+<!--                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div>-->
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="rehabicorApp.rehabilitationGroup.home.title">Rehabilitation Groups</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rehabilitation-group" [routerLink]="['/rehabilitation-group/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="rehabicorApp.rehabilitationGroup.home.createLabel">
-            Create new Rehabilitation Group
-            </span>
-        </button>
+    <h2 id="page-heading" class="margin-top-20">
+        <span class="primary-color table-title" >Grupos de rehabilitación</span>
     </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="rehabilitationGroups">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="creationDate"><span jhiTranslate="rehabicorApp.rehabilitationGroup.creationDate">Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="programStatus"><span jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-            <tr *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">
-                <td><a [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]">{{rehabilitationGroup.id}}</a></td>
-                <td>{{rehabilitationGroup.name}}</td>
-                <td>{{rehabilitationGroup.creationDate | date:'medium'}}</td>
-                <td>{{rehabilitationGroup.programStatus}}</td>
-                <td>{{rehabilitationGroup.deleted}}</td>
-                <td>
-                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">
-                        <a [routerLink]="['../rehabilitation-center', rehabilitationGroup.rehabilitationCenterId , 'view' ]" >{{rehabilitationGroup.rehabilitationCenterId}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'rehabilitation-group', { outlets: { popup: rehabilitationGroup.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div *ngIf="!ready" fxLayout="column" fxLayoutAlign="center center" style="height: 400px">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="ready">
+        <jhi-no-content *ngIf="rehabilitationGroups?.length === 0"
+                        [text]="'No hay grupos de rehabilitación registrados'"
+                        [icon]="'supervised_user_circle'"></jhi-no-content>
+        <div class="table-responsive" *ngIf="rehabilitationGroups?.length > 0">
+            <table class="table table-bordered tableMaterialDesign" aria-describedby="page-heading">
+                <thead class="bold" style="background-color: #fafafa;">
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                    <th scope="col" jhiSortBy="name"><span
+                        jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="programStatus"><span
+                        jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="programStatus"><span>Número de pacientes</span>
+                    </th>
+                    <!--                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                    <!--                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                    <th scope="col">Opciones</th>
+                </tr>
+                </thead>
+                <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                       [infiniteScrollDistance]="0">
+                <tr *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">
+                    <!--                <td><a [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]">{{rehabilitationGroup.id}}</a></td>-->
+                    <td>{{rehabilitationGroup.name}}</td>
+                    <td>
+                        <span *ngIf="rehabilitationGroup.programStatus==0">Sin iniciar</span>
+                        <span *ngIf="rehabilitationGroup.programStatus==1">En proceso</span>
+                        <span *ngIf="rehabilitationGroup.programStatus==2">Finalizado</span>
+                    </td>
+                    <td>{{rehabilitationGroup.patients.length}}</td>
+                    <!--                <td>{{rehabilitationGroup.deleted}}</td>-->
+                    <!--                <td>-->
+                    <!--                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">-->
+                    <!--                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId , 'view' ]" >{{rehabilitationGroup.rehabilitationCenterId}}</a>-->
+                    <!--                    </div>-->
+                    <!--                </td>-->
+                    <td class="text-right">
+                        <div fxLayoutAlign="center center">
+                            <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center">
+                                <mat-icon aria-hidden="false" class="text-icon big-icon">more_vert</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item *jhiHasAnyAuthority="['ROLE_MANAGER']"
+                                        [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'edit']">
+                                    <mat-icon>create</mat-icon>
+                                    <span jhiTranslate="entity.action.edit">Editar</span>
+                                </button>
+                                <button mat-menu-item *jhiHasAnyAuthority="['ROLE_MANAGER']"
+                                        [routerLink]="['/evaluation', rehabilitationGroup.id, 'view' ]">
+                                    <mat-icon>fitness_center</mat-icon>
+                                    <span>Realizar evaluación</span>
+                                </button>
+                                <button mat-menu-item
+                                        [routerLink]="['/panel-data', rehabilitationGroup.id, 'view' ]">
+                                    <mat-icon>assessment</mat-icon>
+                                    <span>Consultar panel de datos</span>
+                                </button>
+                                <button mat-menu-item
+                                        [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'clinical-characteristics' ]">
+                                    <mat-icon>donut_small</mat-icon>
+                                    <span>Características del grupo</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+<button *jhiHasAnyAuthority="['ROLE_MANAGER']" [routerLink]="['/rehabilitation-group/new']" mat-fab class="md-fab-bottom-right"
+        matTooltip="Registrar grupo de rehabilitación"
+        [matTooltipPosition]="'before'">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+</button>

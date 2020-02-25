@@ -38,6 +38,13 @@ export class SessionService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    queryByPatient(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ISession[]>(this.resourceUrl + '/by-patient', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http

@@ -13,11 +13,12 @@ import {
     comorbiditieRoute,
     comorbiditiePopupRoute
 } from './';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTITY_STATES = [...comorbiditieRoute, ...comorbiditiePopupRoute];
 
 @NgModule({
-    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [RehabicorSharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         ComorbiditieComponent,
         ComorbiditieDetailComponent,

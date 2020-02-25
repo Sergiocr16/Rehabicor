@@ -27,6 +27,13 @@ export class LoginService {
         });
     }
 
+    identity() {
+        return this.accountService.identity();
+    }
+
+    isAuthenticated(): boolean {
+        return this.accountService.isAuthenticated();
+    }
     loginWithToken(jwt, rememberMe) {
         return this.authServerProvider.loginWithToken(jwt, rememberMe);
     }

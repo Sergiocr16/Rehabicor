@@ -1,57 +1,131 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="session">
-            <h2><span jhiTranslate="rehabicorApp.session.detail.title">Session</span> {{session.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="rehabicorApp.session.code">Code</span></dt>
-                <dd>
-                    <span>{{session.code}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.executionDate">Execution Date</span></dt>
-                <dd>
-                    <span>{{session.executionDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.abscence">Abscence</span></dt>
-                <dd>
-                    <span>{{session.abscence}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.hospitalization">Hospitalization</span></dt>
-                <dd>
-                    <span>{{session.hospitalization}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.status">Status</span></dt>
-                <dd>
-                    <span>{{session.status}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.deleted">Deleted</span></dt>
-                <dd>
-                    <span>{{session.deleted}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.currentlyWorking">Currently Working</span></dt>
-                <dd>
-                    <span>{{session.currentlyWorking}}</span>
-                </dd>
-                <dt><span jhiTranslate="rehabicorApp.session.patient">Patient</span></dt>
-                <dd>
-                    <div *ngIf="session.patientId">
-                        <a [routerLink]="['/patient', session.patientId, 'view']">{{session.patientId}}</a>
-                    </div>
-                </dd>
-            </dl>
+<!--<div class="row justify-content-center">-->
+<!--    <div class="col-8">-->
+<!--        <div *ngIf="session">-->
+<!--            <h2><span jhiTranslate="cardioRehabCrApp.session.detail.title">Session</span> {{session.id}}</h2>-->
+<!--            <hr>-->
+<!--            <jhi-alert-error></jhi-alert-error>-->
+<!--            <dl class="row-md jh-entity-details">-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.code">Code</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.code}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.executionDate">Execution Date</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.executionDate}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.abscence">Abscence</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.abscence}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.hospitalization">Hospitalization</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.hospitalization}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.status">Status</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.status}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.deleted">Deleted</span></dt>-->
+<!--                <dd>-->
+<!--                    <span>{{session.deleted}}</span>-->
+<!--                </dd>-->
+<!--                <dt><span jhiTranslate="cardioRehabCrApp.session.patient">Patient</span></dt>-->
+<!--                <dd>-->
+<!--                    <div *ngIf="session.patientId">-->
+<!--                        <a [routerLink]="['/patient', session.patientId, 'view']">{{session.patientId}}</a>-->
+<!--                    </div>-->
+<!--                </dd>-->
+<!--            </dl>-->
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+<!--            <button type="submit"-->
+<!--                    (click)="previousState()"-->
+<!--                    class="btn btn-info">-->
+<!--                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>-->
+<!--            </button>-->
 
-            <button type="button"
-                    [routerLink]="['/session', session.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
-        </div>
-    </div>
-</div>
+<!--            <button type="button"-->
+<!--                    [routerLink]="['/session', session.id, 'edit']"-->
+<!--                    class="btn btn-primary">-->
+<!--                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2 id="page-heading" class="margin-top-20">
+            <span class="primary-color table-title">
+           <mat-icon (click)="previousState()" class="text-icon pointer">arrow_back</mat-icon>
+               Paciente {{patient.code}}, Sesión {{session.code}}</span>
+            </h2>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-left:38px"><span>Fecha de evaluación: {{session.executionDate | date}}</span>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="center stretch">
+            <mat-card-header>
+                <mat-card-title class="primary-color">a. Ausencia</mat-card-title>
+            </mat-card-header>
+            <div fxLayout="column" class="margin-left-20">
+                <mat-checkbox class="disabled" flex
+                              labelPosition="'after'" [checked]="session.abscence">
+                    ¿El paciente está ausente?
+                </mat-checkbox>
+            </div>
+            <div>
+                <mat-card-header>
+                    <mat-card-title class="primary-color">b. Dolor agudo no específico</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex [checked]="nonSpecificPain.exist"
+                                  *ngFor="let nonSpecificPain of nonSpecificPainSessions;let i=index">{{nonSpecificPain.description}}</mat-checkbox>
+                </div>
+
+                <mat-card-header>
+                    <mat-card-title class="primary-color">c. Consulta a urgencias</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex  [checked]="session.hospitalization">
+                        ¿El paciente ha sido hospitalizado?
+                    </mat-checkbox>
+                </div>
+
+                <mat-card-header>
+                    <mat-card-title class="primary-color">d. Eventos menores</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex [checked]="minorEvent.exist"
+                                  *ngFor="let minorEvent of minorEventSessions;let i=index">{{minorEvent.description}}</mat-checkbox>
+                </div>
+
+                <mat-card-header>
+                    <mat-card-title class="primary-color">e. Eventos mayores</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex [checked]="mayorEvent.exist"
+                                  *ngFor="let mayorEvent of mayorEventSessions;let i=index">{{mayorEvent.description}}</mat-checkbox>
+                </div>
+
+                <mat-card-header>
+                    <mat-card-title class="primary-color">f. Síntomas Depresivos</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex [checked]="depressiveSymptom.exist"
+                                  *ngFor="let depressiveSymptom of depressiveSymptomsSessions;let i=index">{{depressiveSymptom.description}}</mat-checkbox>
+                </div>
+
+                <mat-card-header>
+                    <mat-card-title class="primary-color">g. Labora activamente</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="column" class="margin-left-20">
+                    <mat-checkbox class="disabled" flex [checked]="session.currentlyWorking"
+                                  labelPosition="'after'">
+                        ¿El paciente labora activamente?
+                    </mat-checkbox>
+                </div>
+
+            </div>
+    </mat-card-content>
+</mat-card>
