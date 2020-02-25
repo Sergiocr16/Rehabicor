@@ -54,7 +54,7 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: rehabicorcr@gmail.com
-        password: 12cardio34
+        password: fzyrbfssitwkgwck
         protocol: smtp
         tls: true
     thymeleaf:

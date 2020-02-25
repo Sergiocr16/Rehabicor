@@ -30,7 +30,34 @@ export class JhiMainComponent implements OnInit {
         private route: ActivatedRoute,
         private bpo: BreakpointObserver,
         private loginService: LoginService
-    ) {}
+    ) {
+        this.loadedAccount = this.loginService.isAuthenticated();
+        this.loginService.identity().then((account: Account) => {
+            this.loadedAccount = true;
+            if (account) {
+                this.setAccountLogin(account.login);
+            }
+        });
+        const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
+        this.bpo
+            .observe(breakpoints)
+            .pipe(map(bst => bst.matches))
+            .subscribe(matched => {
+                this.determineSidenavMode();
+                this.determineLayoutGap();
+            });
+
+        this.router.events.subscribe((event: NavigationStart) => {
+            if (event instanceof NavigationEnd) {
+                this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
+            }
+            if (event instanceof NavigationError && event.error.status === 404) {
+                this.router.navigate(['/404']);
+            }
+            const state = event.url.split('?')[0];
+            this.isCreatingNewPassWord = state === '/reset/finish';
+        });
+    }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         // let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'cardioRehabCrApp';
