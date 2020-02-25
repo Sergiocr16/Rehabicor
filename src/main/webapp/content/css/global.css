@@ -640,6 +640,10 @@ mat-form-field {
     background-color: #3f51b5 !important;
 }
 
+.graph-height {
+    height: 300px;
+}
+
 @media only screen and (max-width: 600px) {
     .table-title {
         font-size: 22px;
@@ -647,6 +651,10 @@ mat-form-field {
     }
     .no-content-title {
         font-size: 16px !important;
+    }
+
+    .title-small {
+        font-size: 11px !important;
     }
 }
 

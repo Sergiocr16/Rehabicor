@@ -17,8 +17,8 @@
         <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
                                   Instrumento de panel de datos <mat-icon class="text-icon">equalizer</mat-icon></span>
 
-        <div style="display: block" style="margin-bottom: 20px">
-            <canvas baseChart height="100"
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+            <canvas baseChart
                     [datasets]="barChartDataStadistics"
                     [labels]="barChartLabelsStadistics"
                     [options]="barChartOptionsStadistics"
@@ -28,10 +28,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
                      <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
                                   Distribución de eventos por sesión</span>
-            <canvas baseChart height="100"
+            <canvas baseChart
                     [datasets]="barChartDataDistribution"
                     [labels]="barChartLabelsDistribution"
                     [options]="barChartOptionsDistribution"
@@ -62,7 +62,8 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <canvas baseChart height="100" *ngIf="displayEventsSessionsGraph"
+            <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+            <canvas baseChart *ngIf="displayEventsSessionsGraph"
                     [datasets]="barChartDataEventsPerSessionDistribution"
                     [labels]="barChartEventsPerSessionDistributionLabels"
                     [options]="barChartOptionsEventsPerSessionDistribution"
@@ -70,6 +71,8 @@
                     [chartType]="barChartEventsPerSessionDistributionType"
                     [colors]="barChartEventsPerSessionDistributionColors">
             </canvas>
+            </div>
+
         </div>
         <div style="display: block;margin-top:20px" fxLayout="column">
               <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
@@ -92,7 +95,9 @@
                         <h6>Eventos menores</h6>
                         <jhi-no-content *ngIf="barChartDataSessionMinor.length === 0" [text]="'No ocurrio nigún evento menor'"
                                         [icon]="'arrow_downward'"></jhi-no-content>
-                        <canvas *ngIf="barChartDataSessionMinor.length>0" baseChart height="100"
+
+                        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                        <canvas *ngIf="barChartDataSessionMinor.length>0" baseChart
                                 [data]="barChartDataSessionMinor"
                                 [labels]="barChartLabelsSessionMinor"
                                 [options]="barChartOptionsSessionMinor"
@@ -100,6 +105,8 @@
                                 [chartType]="barChartTypeSessionMinor"
                                 [colors]="lineChartColorsSessionMinor">
                         </canvas>
+                        </div>
+
                     </mat-card>
                 </div>
                 <div *ngIf="selectedSesion>=0" fxFlex="100">
@@ -107,7 +114,8 @@
                         <h6>Eventos mayores</h6>
                         <jhi-no-content *ngIf="barChartDataSessionMayor.length === 0" [text]="'No ocurrio nigún evento mayor'"
                                         [icon]="'arrow_upward'"></jhi-no-content>
-                        <canvas *ngIf="barChartDataSessionMayor.length>0" baseChart height="100"
+                        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                        <canvas *ngIf="barChartDataSessionMayor.length>0" baseChart
                                 [data]="barChartDataSessionMayor"
                                 [labels]="barChartLabelsSessionMayor"
                                 [options]="barChartOptionsSessionMayor"
@@ -115,6 +123,7 @@
                                 [chartType]="barChartTypeSessionMayor"
                                 [colors]="lineChartColorsSessionMayor">
                         </canvas>
+                        </div>
                     </mat-card>
                 </div>
             </div>

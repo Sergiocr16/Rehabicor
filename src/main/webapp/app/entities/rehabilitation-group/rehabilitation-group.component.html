@@ -84,14 +84,14 @@
                 <thead class="bold" style="background-color: #fafafa;">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
                     <th scope="col" jhiSortBy="name"><span
-                        jhiTranslate="rehabicorApp.rehabilitationGroup.name">Name</span>
+                        >Nombre</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="programStatus"><span
-                        jhiTranslate="rehabicorApp.rehabilitationGroup.programStatus">Program Status</span>
+                        >Estado</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="programStatus"><span>Número de pacientes</span>
+                    <th scope="col" jhiSortBy="programStatus"><span>Pacientes</span>
                     </th>
                     <!--                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="rehabicorApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
                     <!--                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="rehabicorApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->

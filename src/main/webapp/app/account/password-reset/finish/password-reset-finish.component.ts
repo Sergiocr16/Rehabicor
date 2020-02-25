@@ -7,6 +7,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { PasswordResetFinishService } from './password-reset-finish.service';
 import { JhiMainComponent } from 'app/layouts';
+import { AccountService, LoginService } from 'app/core';
 
 @Component({
     selector: 'jhi-password-reset-finish',
@@ -35,7 +36,8 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
         private renderer: Renderer,
         private fb: FormBuilder,
         private router: Router,
-        private main: JhiMainComponent
+        private main: JhiMainComponent,
+        private loginService: LoginService
     ) {}
 
     ngOnInit() {
@@ -52,6 +54,7 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
     }
 
     goLogin() {
+        this.loginService.logout();
         this.router.navigate(['/']);
         this.main.isCreatingNewPassWord = false;
     }
