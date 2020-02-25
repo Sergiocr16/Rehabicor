@@ -33,7 +33,7 @@ export const comorbiditieRoute: Routes = [
         path: '',
         component: ComorbiditieComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.comorbiditie.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const comorbiditieRoute: Routes = [
             comorbiditie: ComorbiditieResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.comorbiditie.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const comorbiditieRoute: Routes = [
             comorbiditie: ComorbiditieResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.comorbiditie.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const comorbiditieRoute: Routes = [
             comorbiditie: ComorbiditieResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.comorbiditie.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const comorbiditiePopupRoute: Routes = [
             comorbiditie: ComorbiditieResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.comorbiditie.home.title'
         },
         canActivate: [UserRouteAccessService],

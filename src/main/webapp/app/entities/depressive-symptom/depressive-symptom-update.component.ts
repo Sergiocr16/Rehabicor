@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,7 +18,7 @@ import { GlobalVariablesService } from 'app/shared/util/global-variables.service
     selector: 'jhi-depressive-symptom-update',
     templateUrl: './depressive-symptom-update.component.html'
 })
-export class DepressiveSymptomUpdateComponent implements OnInit {
+export class DepressiveSymptomUpdateComponent implements OnInit, OnDestroy {
     isSaving: boolean;
     title;
     modalSuccessMessage;
@@ -127,5 +127,8 @@ export class DepressiveSymptomUpdateComponent implements OnInit {
 
     trackRehabilitationCenterById(index: number, item: IRehabilitationCenter) {
         return item.id;
+    }
+    ngOnDestroy() {
+        this.global.leavingForm();
     }
 }

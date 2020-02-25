@@ -19,4 +19,4 @@ const ENTITY_STATES = [...rehabilitationGroupEvaluationRoute];
     ],
     entryComponents: []
 })
-export class CardioRehabCrRehabilitationGroupModule {}
+export class RehabicorRehabilitationGroupModule {}

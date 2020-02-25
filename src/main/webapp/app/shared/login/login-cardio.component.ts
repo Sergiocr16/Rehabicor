@@ -9,6 +9,8 @@ import { ModalService } from 'app/shared/util/modal.service';
 import { PasswordResetInitService } from 'app/account/password-reset/init/password-reset-init.service';
 import { EMAIL_NOT_FOUND_TYPE } from 'app/shared/constants/error.constants';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
+import { JhiMainComponent } from 'app/layouts';
 
 @Component({
     selector: 'jhi-login',
@@ -37,7 +39,9 @@ export class LoginComponent implements AfterViewInit {
         private renderer: Renderer,
         private router: Router,
         private fb: FormBuilder,
-        private passwordResetInitService: PasswordResetInitService
+        private passwordResetInitService: PasswordResetInitService,
+        public mainComponent: JhiMainComponent,
+        public global: GlobalVariablesService
     ) {}
 
     ngAfterViewInit() {
@@ -60,6 +64,8 @@ export class LoginComponent implements AfterViewInit {
                     name: 'authenticationSuccess',
                     content: 'Sending Authentication Success'
                 });
+                this.mainComponent.setAccountLogin(this.loginForm.get('username').value);
+                this.global.loadRehabId();
 
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // since login is successful, go to stored previousState and clear previousState

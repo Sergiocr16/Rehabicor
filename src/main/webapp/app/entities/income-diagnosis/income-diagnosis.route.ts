@@ -33,7 +33,7 @@ export const incomeDiagnosisRoute: Routes = [
         path: '',
         component: IncomeDiagnosisComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.incomeDiagnosis.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const incomeDiagnosisRoute: Routes = [
             incomeDiagnosis: IncomeDiagnosisResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.incomeDiagnosis.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const incomeDiagnosisRoute: Routes = [
             incomeDiagnosis: IncomeDiagnosisResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.incomeDiagnosis.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const incomeDiagnosisRoute: Routes = [
             incomeDiagnosis: IncomeDiagnosisResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.incomeDiagnosis.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const incomeDiagnosisPopupRoute: Routes = [
             incomeDiagnosis: IncomeDiagnosisResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.incomeDiagnosis.home.title'
         },
         canActivate: [UserRouteAccessService],

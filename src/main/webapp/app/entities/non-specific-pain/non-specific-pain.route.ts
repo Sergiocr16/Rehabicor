@@ -33,7 +33,7 @@ export const nonSpecificPainRoute: Routes = [
         path: '',
         component: NonSpecificPainComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.nonSpecificPain.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const nonSpecificPainRoute: Routes = [
             nonSpecificPain: NonSpecificPainResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.nonSpecificPain.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const nonSpecificPainRoute: Routes = [
             nonSpecificPain: NonSpecificPainResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.nonSpecificPain.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const nonSpecificPainRoute: Routes = [
             nonSpecificPain: NonSpecificPainResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.nonSpecificPain.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const nonSpecificPainPopupRoute: Routes = [
             nonSpecificPain: NonSpecificPainResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'rehabicorApp.nonSpecificPain.home.title'
         },
         canActivate: [UserRouteAccessService],

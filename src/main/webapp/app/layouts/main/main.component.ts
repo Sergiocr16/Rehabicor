@@ -21,6 +21,7 @@ export class JhiMainComponent implements OnInit {
     fixedInViewport = true;
     title = '';
     isCreatingNewPassWord = false;
+    account: any;
 
     constructor(
         private gv: GlobalVariablesService,
@@ -36,7 +37,6 @@ export class JhiMainComponent implements OnInit {
         // if (routeSnapshot.firstChild) {
         //   title = this.getPageTitle(routeSnapshot.firstChild) || title;
         // }
-
         return 'RehabiCor';
     }
 
@@ -44,6 +44,9 @@ export class JhiMainComponent implements OnInit {
         this.loadedAccount = this.loginService.isAuthenticated();
         this.loginService.identity().then((account: Account) => {
             this.loadedAccount = true;
+            if (account) {
+                this.setAccountLogin(account.login);
+            }
         });
         const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
         this.bpo
@@ -74,6 +77,9 @@ export class JhiMainComponent implements OnInit {
         return false;
     }
 
+    setAccountLogin(username) {
+        this.account = username;
+    }
     private determineSidenavMode(): void {
         if (this.isExtraSmallDevice() || this.isSmallDevice()) {
             this.fixedInViewport = false;

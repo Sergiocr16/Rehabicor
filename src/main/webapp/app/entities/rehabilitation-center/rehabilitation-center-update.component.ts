@@ -47,6 +47,7 @@ export class RehabilitationCenterUpdateComponent implements OnInit, OnDestroy {
             this.confirmMessage = !rehabilitationCenter.id ? 'new' : 'update';
             this.global.setTitle(this.title);
         });
+        this.global.enteringForm();
     }
 
     updateForm(rehabilitationCenter: IRehabilitationCenter) {

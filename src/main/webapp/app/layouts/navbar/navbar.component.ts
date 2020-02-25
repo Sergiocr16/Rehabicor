@@ -7,6 +7,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { JhiMainComponent } from 'app/layouts';
 
 @Component({
     selector: 'jhi-navbar',
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit {
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private jhiMainComponent: JhiMainComponent
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -54,7 +56,11 @@ export class NavbarComponent implements OnInit {
     collapseNavbar() {
         this.isNavbarCollapsed = true;
     }
-
+    closeNavBar() {
+        if (this.jhiMainComponent.isExtraSmallDevice()) {
+            this.jhiMainComponent.collapseNavBar();
+        }
+    }
     isAuthenticated() {
         return this.accountService.isAuthenticated();
     }

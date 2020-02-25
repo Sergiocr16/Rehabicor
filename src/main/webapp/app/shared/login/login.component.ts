@@ -5,6 +5,9 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
+import { Account } from 'app/core';
+import { JhiMainComponent } from 'app/layouts';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -24,7 +27,9 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        public global: GlobalVariablesService,
+        public mainComponent: JhiMainComponent
     ) {
         this.credentials = {};
     }
@@ -56,12 +61,12 @@ export class JhiLoginModalComponent implements AfterViewInit {
                 if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
                     this.router.navigate(['']);
                 }
-
+                this.mainComponent.setAccountLogin(this.username);
                 this.eventManager.broadcast({
                     name: 'authenticationSuccess',
                     content: 'Sending Authentication Success'
                 });
-
+                this.global.loadRehabId();
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // since login is successful, go to stored previousState and clear previousState
                 const redirect = this.stateStorageService.getUrl();
