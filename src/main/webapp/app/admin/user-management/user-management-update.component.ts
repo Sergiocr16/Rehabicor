@@ -56,7 +56,7 @@ export class UserMgmtUpdateComponent implements OnInit, OnDestroy {
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user.body ? user.body : user;
-            if (user.body.id != null) {
+            if (user.body != null) {
                 this.appUserService.findByUser(user.body.id).subscribe(appUser => {
                     this.appUser = appUser.body;
                     this.updateForm(this.user, this.appUser);
