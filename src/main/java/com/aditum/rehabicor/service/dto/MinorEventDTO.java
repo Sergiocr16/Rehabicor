@@ -17,7 +17,6 @@ public class MinorEventDTO implements Serializable {
 
     private Boolean deleted;
 
-
     private Long rehabilitationCenterId;
 
     public Long getId() {

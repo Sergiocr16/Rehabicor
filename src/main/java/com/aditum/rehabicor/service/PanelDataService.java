@@ -472,14 +472,14 @@ public class PanelDataService {
     public GroupCharacteristicsDTO groupCharacteristics(RehabilitationGroupDTO rehabilitationGroup) {
         GroupCharacteristicsDTO groupCharacteristics = new GroupCharacteristicsDTO();
 
-        List<IncomeDiagnosisDTO> incomeDiagnosisList = this.incomeDiagnosisService.findAllNoPage(rehabilitationGroup.getId());
+        List<IncomeDiagnosisDTO> incomeDiagnosisList = this.incomeDiagnosisService.findAllNoPage(rehabilitationGroup.getRehabilitationCenterId());
         for (int i = 0; i < incomeDiagnosisList.size(); i++) {
             IncomeDiagnosisDTO incomeDiagnosisDTO = incomeDiagnosisList.get(i);
             incomeDiagnosisDTO.setRehabilitationCenterId(Long.parseLong(0 + ""));
             groupCharacteristics.getIncomeDiagnosisDistribution().add(incomeDiagnosisDTO);
         }
 
-        List<ComorbiditieDTO> comorbiditieList = this.comorbiditieService.findAllNoPage(rehabilitationGroup.getId());
+        List<ComorbiditieDTO> comorbiditieList = this.comorbiditieService.findAllNoPage(rehabilitationGroup.getRehabilitationCenterId());
         for (int i = 0; i < comorbiditieList.size(); i++) {
             ComorbiditieDTO comorbiditieDTO = comorbiditieList.get(i);
             comorbiditieDTO.setRehabilitationCenterId(Long.parseLong(0 + ""));

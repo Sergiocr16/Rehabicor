@@ -24,7 +24,7 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
 
     constructor(route: ActivatedRoute, protected service: RehabilitationGroupService, main: JhiMainComponent) {
         const id = route.snapshot.params['id'];
-        this.height = main.isExtraSmallDevice() ? 400 : 200;
+        this.height = main.isExtraSmallDevice() ? 400 : 300;
         this.labelPos = main.isExtraSmallDevice() ? 'top' : 'left';
 
         if (id) {

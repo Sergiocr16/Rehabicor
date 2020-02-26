@@ -89,8 +89,8 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
         private global: GlobalVariablesService,
         private main: JhiMainComponent
     ) {
-        this.height = this.main.isExtraSmallDevice() ? 400 : 200;
-        this.labelPos = this.main.isExtraSmallDevice() ? 'top' : this.labelPos;
+        this.height = this.main.isExtraSmallDevice() ? 400 : 300;
+        this.labelPos = this.main.isExtraSmallDevice() ? 'top' : 'left';
     }
 
     renderGraphMinorDistribution(rehabilitationGroup) {

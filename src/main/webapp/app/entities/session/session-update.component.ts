@@ -229,7 +229,7 @@ export class SessionUpdateComponent implements OnInit, OnDestroy {
             const obj = {
                 id: null,
                 description: o.description,
-                minorEventId: o.id,
+                minorEventRelation: o.id,
                 exist: o.checked,
                 sessionId: null
             };
@@ -244,7 +244,7 @@ export class SessionUpdateComponent implements OnInit, OnDestroy {
             const obj = {
                 id: null,
                 description: o.description,
-                mayorEventId: o.id,
+                mayorEventRelation: o.id,
                 exist: o.checked,
                 sessionId: null
             };
@@ -259,7 +259,7 @@ export class SessionUpdateComponent implements OnInit, OnDestroy {
             const obj = {
                 id: null,
                 description: o.description,
-                depressiveSymptomId: o.id,
+                depressiveSymptomRelation: o.id,
                 exist: o.checked,
                 sessionId: null
             };
@@ -274,7 +274,7 @@ export class SessionUpdateComponent implements OnInit, OnDestroy {
             const obj = {
                 id: null,
                 description: o.description,
-                nonSpecificPainId: o.id,
+                nonSpecificPainRelation: o.id,
                 exist: o.checked,
                 sessionId: null
             };
