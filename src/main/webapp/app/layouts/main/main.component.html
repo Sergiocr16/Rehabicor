@@ -13,30 +13,30 @@
 <div *ngIf="isAuthenticated() && !isCreatingNewPassWord">
     <mat-toolbar class="mat-elevation-z6" color="primary" fxLayout="row" class="app-toolbar">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxHide.xs="true"  fxHide.sm="true">
+            <div *ngIf="!isInForm()" fxHide.xs="true" >
                 <button mat-icon-button (click)="opened = !opened">
                     <mat-icon aria-hidden="false" class="text-icon">menu</mat-icon>
                 </button>
                 <img src="./../../../content/images/logo.png" alt="" height="50px">
             </div>
-            <div *ngIf="!isInForm()" fxHide.lg="true" fxHide.xl="true">
+            <div *ngIf="isInForm()" fxHide.xs="true">
                 <button mat-icon-button (click)="opened = !opened">
                     <mat-icon aria-hidden="false" class="text-icon">menu</mat-icon>
                 </button>
                 <img src="./../../../content/images/logo.png" alt="" height="45px">
             </div>
-            <div *ngIf="isInForm()" fxHide.xl="true" fxHide.lg="true" fxHide.md="true" fxHide.sm="true">
+            <div *ngIf="isInForm()" fxHide.lg="true" fxHide.xl="true" fxHide.sm="true" fxHide.md="true">
                 <button mat-icon-button (click)="previousState()">
                     <mat-icon aria-hidden="false" class="text-icon">arrow_back</mat-icon>
                 </button>
                 {{getTitle()}}
             </div>
             <div>
-                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center" fxHide.xs="true" fxHide.sm="true">
+                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center"  fxHide.xs="true" *ngIf="isInForm()">
                     <mat-icon aria-hidden="false" class="text-icon big-icon">account_circle</mat-icon>
                 </button>
-                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center" fxHide.lg="true"
-                        fxHide.xl="true" *ngIf="!isInForm()">
+                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" fxLayoutAlign="center center"
+                         *ngIf="!isInForm()">
                     <mat-icon aria-hidden="false" class="text-icon big-icon">account_circle</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
