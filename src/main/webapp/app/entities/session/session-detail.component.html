@@ -87,8 +87,12 @@
                     <mat-card-title class="primary-color">c. Consulta a urgencias</mat-card-title>
                 </mat-card-header>
                 <div fxLayout="column" class="margin-left-20">
-                    <mat-checkbox class="disabled" flex  [checked]="session.hospitalization">
-                        ¿El paciente ha sido hospitalizado?
+                    <mat-checkbox class="disabled" flex [checked]="session.hospitalization">
+                        ¿El paciente consultó emergencias?
+                    </mat-checkbox>
+                    <mat-checkbox flex class="disabled" name="deleted" formControlName="deleted" *ngIf="session.hospitalization"
+                                  id="deleted" [checked]="session.deleted">
+                        ¿El paciente fue hospitalizado?
                     </mat-checkbox>
                 </div>
 

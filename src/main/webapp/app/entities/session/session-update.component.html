@@ -65,8 +65,14 @@
                 <div fxLayout="column" class="margin-left-20">
                     <mat-checkbox flex name="hospitalization" formControlName="hospitalization"
                                   id="field_hospitalization" (labelPosition)="after">
-                        ¿El paciente ha sido hospitalizado?
+                        ¿El paciente consultó emergencias?
                     </mat-checkbox>
+                    <div class="margin-left-20" *ngIf="editForm.get('hospitalization').value">
+                        <mat-checkbox flex name="deleted" formControlName="deleted"
+                                      id="deleted" (labelPosition)="after">
+                            ¿El paciente fue hospitalizado?
+                        </mat-checkbox>
+                    </div>
                 </div>
 
                 <mat-card-header>

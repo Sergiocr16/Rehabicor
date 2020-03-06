@@ -269,9 +269,9 @@ public class PanelDataService {
 
     private Integer suspendedSmokingPercentage(PatientDTO patient, InitialAssessmentDTO initialAssessment, FinalAssessmentDTO finalAssessment) {
         if (patient.getRehabStatus() >= 2) {
-            Boolean smokingBefore = initialAssessment.getSmoking() == "Activo";
-            Boolean smokingAfter = finalAssessment.getSmoking() == "Activo";
-            if (smokingBefore && !smokingAfter) {
+            Boolean smokingBefore = initialAssessment.getSmoking().equals("Activo");
+            Boolean smokingAfter = finalAssessment.getSmoking().equals("Inactivo");
+            if (smokingBefore && smokingAfter) {
                 return 1;
             }
         }

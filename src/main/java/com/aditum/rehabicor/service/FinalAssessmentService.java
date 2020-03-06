@@ -3,6 +3,7 @@ package com.aditum.rehabicor.service;
 import com.aditum.rehabicor.domain.FinalAssessment;
 import com.aditum.rehabicor.repository.FinalAssessmentRepository;
 import com.aditum.rehabicor.service.dto.FinalAssessmentDTO;
+import com.aditum.rehabicor.service.dto.PatientDTO;
 import com.aditum.rehabicor.service.mapper.FinalAssessmentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +28,12 @@ public class FinalAssessmentService {
 
     private final FinalAssessmentMapper finalAssessmentMapper;
 
-    public FinalAssessmentService(FinalAssessmentRepository finalAssessmentRepository, FinalAssessmentMapper finalAssessmentMapper) {
+    private final PatientService patientService;
+
+    public FinalAssessmentService(PatientService patientService, FinalAssessmentRepository finalAssessmentRepository, FinalAssessmentMapper finalAssessmentMapper) {
         this.finalAssessmentRepository = finalAssessmentRepository;
         this.finalAssessmentMapper = finalAssessmentMapper;
+        this.patientService = patientService;
     }
 
     /**
@@ -42,6 +46,14 @@ public class FinalAssessmentService {
         log.debug("Request to save FinalAssessment : {}", finalAssessmentDTO);
         FinalAssessment finalAssessment = finalAssessmentMapper.toEntity(finalAssessmentDTO);
         finalAssessment = finalAssessmentRepository.save(finalAssessment);
+        PatientDTO patientDTO = this.patientService.findOne(finalAssessment.getPatient().getId()).get();
+        if(finalAssessmentDTO.isDeceased()){
+            patientDTO.setDeceased(true);
+        }
+        if(finalAssessmentDTO.isAbandonment()){
+            patientDTO.setAbandonment(true);
+        }
+        this.patientService.save(patientDTO);
         return finalAssessmentMapper.toDto(finalAssessment);
     }
 
