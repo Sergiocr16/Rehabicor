@@ -13,7 +13,7 @@
 <div *ngIf="isAuthenticated() && !isCreatingNewPassWord">
     <mat-toolbar class="mat-elevation-z6" color="primary" fxLayout="row" class="app-toolbar">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-            <div *ngIf="!isInForm()" fxHide.xs="true" >
+            <div *ngIf="!isInForm()" >
                 <button mat-icon-button (click)="opened = !opened">
                     <mat-icon aria-hidden="false" class="text-icon">menu</mat-icon>
                 </button>
