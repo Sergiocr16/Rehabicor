@@ -7,6 +7,7 @@ import { ModalService } from 'app/shared/util/modal.service';
 import { GlobalVariablesService } from 'app/shared/util/global-variables.service';
 import { MayorEventService } from 'app/entities/mayor-event/mayor-event.service';
 import { IMayorEvent } from 'app/shared/model/mayor-event.model';
+import { JhiMainComponent } from 'app/layouts';
 
 @Component({
     selector: 'jhi-rehabilitation-group-detail',
@@ -59,6 +60,9 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
     barChartLegendSessionMayor = false;
     barChartDataSessionMayor;
     lineChartColorsSessionMayor = [];
+
+    height: any;
+    labelPos: any;
     // barChartOptions: ChartOptions = {
     //   responsive: true,
     //   // We use these empty structures as placeholders for dynamic theming.
@@ -82,12 +86,17 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
         protected minorEventService: MinorEventService,
         protected mayorEventService: MayorEventService,
         protected modal: ModalService,
-        private global: GlobalVariablesService
-    ) {}
+        private global: GlobalVariablesService,
+        private main: JhiMainComponent
+    ) {
+        this.height = this.main.isExtraSmallDevice() ? 400 : 300;
+        this.labelPos = this.main.isExtraSmallDevice() ? 'top' : 'left';
+    }
 
     renderGraphMinorDistribution(rehabilitationGroup) {
         this.barChartOptionsDistribution = {
             responsive: true,
+            maintainAspectRatio: false,
             // We use these empty structures as placeholders for dynamic theming.
             scales: { xAxes: [{}], yAxes: [{}] },
             plugins: {
@@ -166,6 +175,7 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
         this.eventsGraph = data;
         this.barChartOptionsEventsPerSessionDistribution = {
             responsive: true,
+            maintainAspectRatio: false,
             // We use these empty structures as placeholders for dynamic theming.
             scales: { xAxes: [{}], yAxes: [{}] },
             plugins: {
@@ -197,6 +207,7 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
         this.eventsGraph = data;
         this.barChartOptionsEventsPerSessionDistribution = {
             responsive: true,
+            maintainAspectRatio: false,
             // We use these empty structures as placeholders for dynamic theming.
             scales: { xAxes: [{}], yAxes: [{}] },
             plugins: {
@@ -227,8 +238,9 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
         const session = this.rehabilitationGroup.panelData.distributionMinorEvents[this.selectedSesion];
         this.barChartOptionsSessionMinor = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -251,8 +263,9 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
 
         this.barChartOptionsSessionMayor = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -277,7 +290,8 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
 
     renderGraphStadisctics(rehabilitationGroup) {
         this.barChartOptionsStadistics = {
-            responsive: true
+            responsive: true,
+            maintainAspectRatio: false
             // // We use these empty structures as placeholders for dynamic theming.
             // scales: {xAxes: [{}], yAxes: [{}]},
             // plugins: {
@@ -303,7 +317,7 @@ export class RehabilitationGroupDetailPanelDataComponent implements OnInit {
             'Adherencia al ejercicio físico'
         ];
 
-        this.barChartTypeStadistics = 'horizontalBar';
+        this.barChartTypeStadistics = this.main.isExtraSmallDevice() ? 'bar' : 'horizontalBar';
         this.barChartLegendStadistics = true;
         this.barChartDataStadistics = [
             {

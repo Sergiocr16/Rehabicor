@@ -11,7 +11,7 @@
                         [text]="'No hay grupos de rehabilitación registrados'"
                         [icon]="'supervised_user_circle'"></jhi-no-content>
         <div *ngIf="rehabilitationGroups?.length > 0">
-            <mat-card *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">
+            <mat-card *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId" style="margin-bottom: 10px;">
                 <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="margin-left:0px!important">
                     <mat-card-title>
                         <mat-icon class="text-icon">face</mat-icon>

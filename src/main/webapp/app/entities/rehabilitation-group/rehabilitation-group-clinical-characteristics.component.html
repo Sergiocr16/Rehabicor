@@ -1,10 +1,10 @@
-<mat-card *ngIf="ready">
+<mat-card *ngIf="ready" style="padding-bottom: 40px">
     <mat-card-header>
         <mat-card-title>
             <h2 id="page-heading" class="margin-top-20">
             <span class="primary-color table-title">
            <mat-icon (click)="previousState()" class="text-icon pointer">arrow_back</mat-icon>
-                Características Clínicas Grupo {{rehabilitationGroup.name}}</span>
+                Características Clínicas {{rehabilitationGroup.name}}</span>
             </h2>
         </mat-card-title>
         <mat-card-subtitle style="margin-left:38px"><span>Creado el {{rehabilitationGroup.creationDate | date}}</span>
@@ -12,23 +12,23 @@
     </mat-card-header>
     <mat-card-content fxLayout="column" >
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
-            <div fxLayout="column">
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">face</mat-icon>Pacientes evaluados:  {{rehabilitationGroup.patients.length}}</h6>
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">accessibility_new</mat-icon>Edad promedio:  {{characteristics.averageAge}}</h6>
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">local_hotel</mat-icon>Promedio de último evento coronarios en meses:  {{characteristics.averageLastEvent}}</h6>
+            <div fxLayout="column" style="width: 100%">
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">face</mat-icon>Pacientes evaluados:  {{rehabilitationGroup.patients.length}}</h6>
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">accessibility_new</mat-icon>Edad promedio:  {{characteristics.averageAge}}</h6>
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">local_hotel</mat-icon>Promedio de último evento coronarios en meses:  {{characteristics.averageLastEvent}}</h6>
             </div>
-            <div fxLayout="column">
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">smoking_rooms</mat-icon>Porcentaje de tabaquismo:  {{characteristics.tabaquismPercentaje}}%</h6>
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">timeline</mat-icon>Promedio de Hb1Ac:  {{characteristics.averageHb1Ac}}%</h6>
-                <h6><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">directions_run</mat-icon>Promedio capacidad funcional:  {{characteristics.averageFunctionalCapacity}} METS</h6>
+            <div fxLayout="column" style="width: 100%">
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">smoking_rooms</mat-icon>Porcentaje de tabaquismo:  {{characteristics.tabaquismPercentaje}}%</h6>
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">timeline</mat-icon>Promedio de Hb1Ac:  {{characteristics.averageHb1Ac}}%</h6>
+                <h6 class="title-small"><mat-icon class="text-icon" style="margin: 20px 10px 20px 16px;">directions_run</mat-icon>Promedio capacidad funcional:  {{characteristics.averageFunctionalCapacity}} METS</h6>
             </div>
         </div>
 
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color " style="font-size: 18px;font-weight:bold;">
                                   Distribución de genero</span>
-            <canvas baseChart height="100"
+            <canvas baseChart class="graph-height"
                     [data]="genderGraphic.data"
                     [labels]="genderGraphic.labels"
                     [options]="genderGraphic.options"
@@ -38,10 +38,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color " style="font-size: 18px;font-weight:bold;">
                                   Distribución de escolaridad</span>
-            <canvas baseChart height="100"
+            <canvas baseChart height="{{height}}"
                     [data]="scholarityGraphic.data"
                     [labels]="scholarityGraphic.labels"
                     [options]="scholarityGraphic.options"
@@ -51,10 +51,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color " style="font-size: 18px;font-weight:bold;">
                                   Distribución de IMC</span>
-            <canvas baseChart height="100"
+            <canvas baseChart height="{{height}}"
                     [data]="imcGraphic.data"
                     [labels]="imcGraphic.labels"
                     [options]="imcGraphic.options"
@@ -64,10 +64,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color " style="font-size: 18px;font-weight:bold;">
                                   Distribución de riesgo cardiovascular</span>
-            <canvas baseChart height="100"
+            <canvas baseChart height="{{height}}"
                     [data]="cardioVascularRiskGraphic.data"
                     [labels]="cardioVascularRiskGraphic.labels"
                     [options]="cardioVascularRiskGraphic.options"
@@ -77,10 +77,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color" style="font-size: 18px;font-weight:bold;">
                                   Distribución de comorbilidades</span>
-            <canvas baseChart height="100"
+            <canvas baseChart height="{{height}}"
                     [data]="comorbiditiesGraphic.data"
                     [labels]="comorbiditiesGraphic.labels"
                     [options]="comorbiditiesGraphic.options"
@@ -90,10 +90,10 @@
             </canvas>
         </div>
 
-        <div style="display: block;margin-top:20px" >
-                     <span class="primary-color margin-left-20" style="font-size: 18px;font-weight:bold;">
+        <div style="display: block;margin-top:50px;display: block" [style.height.px]="height">
+                     <span class="primary-color " style="font-size: 18px;font-weight:bold;">
                                   Distribución de diagnóstico de ingreso</span>
-            <canvas baseChart height="100"
+            <canvas baseChart height="{{height}}"
                     [data]="incomeDiagnosisGraphic.data"
                     [labels]="incomeDiagnosisGraphic.labels"
                     [options]="incomeDiagnosisGraphic.options"

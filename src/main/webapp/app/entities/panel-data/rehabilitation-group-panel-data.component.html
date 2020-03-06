@@ -1,86 +1,103 @@
-
 <div>
     <h2 id="page-heading" class="margin-top-20" style="margin-bottom: 15px">
         <span class="primary-color table-title">Instrumento de Panel de datos</span>
     </h2>
-    <jhi-no-content *ngIf="rehabilitationGroups?.length === 0" [text]="'No hay grupos de rehabilitación registrados'"
-                    [icon]="'supervised_user_circle'"></jhi-no-content>
-    <div *ngIf="rehabilitationGroups?.length > 0">
-        <mat-card *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">
-            <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="margin-left:0px!important">
-                <mat-card-title>
-                    <mat-icon class="text-icon">face</mat-icon>
-                    Grupo: {{rehabilitationGroup.name}}
-                    <mat-card-subtitle style="margin-left: 3px;
-                                       margin-top: 15px;"><span>Pacientes evaluados: {{rehabilitationGroup.patients.length}}</span>
-                    </mat-card-subtitle>
-                </mat-card-title>
-                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-                <div fxLayoutAlign="center center">
-                    <button [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'clinical-characteristics' ]" mat-flat-button color="primary"><mat-icon>donut_small</mat-icon> Características clínicas</button>
-                </div>
-                <div fxLayoutAlign="center center">
-                    <button [routerLink]="['/panel-data', rehabilitationGroup.id , 'view' ]" mat-flat-button color="accent"><mat-icon>assessment</mat-icon> Ver panel de datos</button>
-                </div>
-                </div>
-            </mat-card-header>
-        </mat-card>
+    <div *ngIf="!ready" fxLayout="column" fxLayoutAlign="center center" style="height: 400px">
+        <mat-spinner></mat-spinner>
     </div>
-<!--    <div class="table-responsive" *ngIf="rehabilitationGroups?.length > 0">-->
-<!--        <table class="table table-bordered tableMaterialDesign" aria-describedby="page-heading">-->
-<!--            <thead class="bold" style="background-color: #fafafa;">-->
-<!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">-->
-<!--                <th scope="col" jhiSortBy="name"><span-->
-<!--                    jhiTranslate="cardioRehabCrApp.rehabilitationGroup.name">Name</span>-->
-<!--                    <fa-icon [icon]="'sort'"></fa-icon>-->
-<!--                </th>-->
-<!--                <th scope="col" jhiSortBy="programStatus"><span-->
-<!--                    jhiTranslate="cardioRehabCrApp.rehabilitationGroup.programStatus">Program Status</span>-->
-<!--                    <fa-icon [icon]="'sort'"></fa-icon>-->
-<!--                </th>-->
-<!--                <th scope="col" jhiSortBy="programStatus"><span>Número de pacientes</span>-->
-<!--                </th>-->
-<!--                &lt;!&ndash;                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;-->
-<!--                <th scope="col">Opciones</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"-->
-<!--                   [infiniteScrollDistance]="0">-->
-<!--            <tr *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">-->
-<!--                &lt;!&ndash;                <td><a [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]">{{rehabilitationGroup.id}}</a></td>&ndash;&gt;-->
-<!--                <td>{{rehabilitationGroup.name}}</td>-->
-<!--                <td>-->
-<!--                    <span *ngIf="rehabilitationGroup.programStatus==0">Sin iniciar</span>-->
-<!--                    <span *ngIf="rehabilitationGroup.programStatus==1">En proceso</span>-->
-<!--                    <span *ngIf="rehabilitationGroup.programStatus==2">Finalizado</span>-->
-<!--                </td>-->
-<!--                <td>{{rehabilitationGroup.patients.length}}</td>-->
-<!--                &lt;!&ndash;                <td>{{rehabilitationGroup.deleted}}</td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">&ndash;&gt;-->
-<!--                &lt;!&ndash;                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId , 'view' ]" >{{rehabilitationGroup.rehabilitationCenterId}}</a>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </td>&ndash;&gt;-->
-<!--                <td class="text-right">-->
-<!--                    <div class="btn-group">-->
-<!--                        <button type="submit"-->
-<!--                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]"-->
-<!--                                class="btn btn-info btn-sm">-->
-<!--                            <fa-icon [icon]="'eye'"></fa-icon>-->
-<!--                            <span class="d-none d-md-inline">Realizar evaluación</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <div fxLayoutAlign="center center">-->
-<!--                        <button mat-menu-item [routerLink]="['/panel-data/', rehabilitationGroup.id, 'view']">-->
-<!--                            <mat-icon>dashboard</mat-icon>-->
-<!--                            <span>Ver panel de datos</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
+
+    <div *ngIf="ready">
+        <jhi-no-content *ngIf="rehabilitationGroups?.length === 0"
+                        [text]="'No hay grupos de rehabilitación registrados'"
+                        [icon]="'supervised_user_circle'"></jhi-no-content>
+        <div *ngIf="rehabilitationGroups?.length > 0">
+            <mat-card *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId" style="margin-bottom: 10px;">
+                <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="margin-left:0px!important">
+                    <mat-card-title>
+                        <mat-icon class="text-icon">face</mat-icon>
+                        Grupo: {{rehabilitationGroup.name}}
+                        <mat-card-subtitle style="margin-left: 3px;
+                                       margin-top: 15px;">
+                            <span>Pacientes evaluados: {{rehabilitationGroup.patients.length}}</span>
+                        </mat-card-subtitle>
+                    </mat-card-title>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                        <div fxLayoutAlign="center center">
+                            <button
+                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'clinical-characteristics' ]"
+                                mat-flat-button color="primary">
+                                <mat-icon>donut_small</mat-icon>
+                                Características clínicas
+                            </button>
+                        </div>
+                        <div fxLayoutAlign="center center">
+                            <button [routerLink]="['/panel-data', rehabilitationGroup.id , 'view' ]" mat-flat-button
+                                    color="accent">
+                                <mat-icon>assessment</mat-icon>
+                                Ver panel de datos
+                            </button>
+                        </div>
+                    </div>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+
+    <!--    <div class="table-responsive" *ngIf="rehabilitationGroups?.length > 0">-->
+    <!--        <table class="table table-bordered tableMaterialDesign" aria-describedby="page-heading">-->
+    <!--            <thead class="bold" style="background-color: #fafafa;">-->
+    <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">-->
+    <!--                <th scope="col" jhiSortBy="name"><span-->
+    <!--                    jhiTranslate="cardioRehabCrApp.rehabilitationGroup.name">Name</span>-->
+    <!--                    <fa-icon [icon]="'sort'"></fa-icon>-->
+    <!--                </th>-->
+    <!--                <th scope="col" jhiSortBy="programStatus"><span-->
+    <!--                    jhiTranslate="cardioRehabCrApp.rehabilitationGroup.programStatus">Program Status</span>-->
+    <!--                    <fa-icon [icon]="'sort'"></fa-icon>-->
+    <!--                </th>-->
+    <!--                <th scope="col" jhiSortBy="programStatus"><span>Número de pacientes</span>-->
+    <!--                </th>-->
+    <!--                &lt;!&ndash;                <th scope="col"  jhiSortBy="deleted"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.deleted">Deleted</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                <th scope="col"  jhiSortBy="rehabilitationCenterId"><span jhiTranslate="cardioRehabCrApp.rehabilitationGroup.rehabilitationCenter">Rehabilitation Center</span> <fa-icon [icon]="'sort'"></fa-icon></th>&ndash;&gt;-->
+    <!--                <th scope="col">Opciones</th>-->
+    <!--            </tr>-->
+    <!--            </thead>-->
+    <!--            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"-->
+    <!--                   [infiniteScrollDistance]="0">-->
+    <!--            <tr *ngFor="let rehabilitationGroup of rehabilitationGroups ;trackBy: trackId">-->
+    <!--                &lt;!&ndash;                <td><a [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]">{{rehabilitationGroup.id}}</a></td>&ndash;&gt;-->
+    <!--                <td>{{rehabilitationGroup.name}}</td>-->
+    <!--                <td>-->
+    <!--                    <span *ngIf="rehabilitationGroup.programStatus==0">Sin iniciar</span>-->
+    <!--                    <span *ngIf="rehabilitationGroup.programStatus==1">En proceso</span>-->
+    <!--                    <span *ngIf="rehabilitationGroup.programStatus==2">Finalizado</span>-->
+    <!--                </td>-->
+    <!--                <td>{{rehabilitationGroup.patients.length}}</td>-->
+    <!--                &lt;!&ndash;                <td>{{rehabilitationGroup.deleted}}</td>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    <div *ngIf="rehabilitationGroup.rehabilitationCenterId">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                        <a [routerLink]="['/rehabilitation-center', rehabilitationGroup.rehabilitationCenterId , 'view' ]" >{{rehabilitationGroup.rehabilitationCenterId}}</a>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    </div>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+    <!--                <td class="text-right">-->
+    <!--                    <div class="btn-group">-->
+    <!--                        <button type="submit"-->
+    <!--                                [routerLink]="['/rehabilitation-group', rehabilitationGroup.id, 'view' ]"-->
+    <!--                                class="btn btn-info btn-sm">-->
+    <!--                            <fa-icon [icon]="'eye'"></fa-icon>-->
+    <!--                            <span class="d-none d-md-inline">Realizar evaluación</span>-->
+    <!--                        </button>-->
+    <!--                    </div>-->
+    <!--                    <div fxLayoutAlign="center center">-->
+    <!--                        <button mat-menu-item [routerLink]="['/panel-data/', rehabilitationGroup.id, 'view']">-->
+    <!--                            <mat-icon>dashboard</mat-icon>-->
+    <!--                            <span>Ver panel de datos</span>-->
+    <!--                        </button>-->
+    <!--                    </div>-->
+    <!--                </td>-->
+    <!--            </tr>-->
+    <!--            </tbody>-->
+    <!--        </table>-->
+    <!--    </div>-->
 </div>
 

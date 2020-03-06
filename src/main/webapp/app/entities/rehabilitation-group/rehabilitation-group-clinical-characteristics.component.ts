@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { RehabilitationGroupService } from 'app/entities/rehabilitation-group/rehabilitation-group.service';
+import { JhiMainComponent } from 'app/layouts';
 
 @Component({
     selector: 'jhi-rehabilitation-group-clinical-characteristics',
@@ -18,9 +19,14 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     cardioVascularRiskGraphic: any;
     comorbiditiesGraphic: any;
     incomeDiagnosisGraphic: any;
+    height: number;
+    labelPos: any;
 
-    constructor(route: ActivatedRoute, protected service: RehabilitationGroupService) {
+    constructor(route: ActivatedRoute, protected service: RehabilitationGroupService, main: JhiMainComponent) {
         const id = route.snapshot.params['id'];
+        this.height = main.isExtraSmallDevice() ? 400 : 300;
+        this.labelPos = main.isExtraSmallDevice() ? 'top' : 'left';
+
         if (id) {
             this.service
                 .findClinicalCharasteristics(id)
@@ -92,8 +98,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderCardioVascularRiskGraphic() {
         this.cardioVascularRiskGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -115,8 +122,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderIMCGraphic() {
         this.imcGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -140,8 +148,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderScholarityGraphic() {
         this.scholarityGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -178,8 +187,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderGenderGraphic() {
         this.genderGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -200,8 +210,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderComorbiditesGraphic() {
         this.comorbiditiesGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
@@ -222,8 +233,9 @@ export class RehabilitationGroupClinicalCharacteristicsComponent implements OnIn
     renderIncomeDiagnosisGraphic() {
         this.incomeDiagnosisGraphic.options = {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'left'
+                position: this.labelPos
             },
             plugins: {
                 datalabels: {}
