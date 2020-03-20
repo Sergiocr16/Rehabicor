@@ -22,6 +22,7 @@ export class LoginComponent implements AfterViewInit {
     error: string;
     errorEmailNotExists: string;
     success: string;
+    createAccount = false;
     loginForm = this.fb.group({
         username: [''],
         password: [''],
@@ -101,6 +102,10 @@ export class LoginComponent implements AfterViewInit {
                 }
             }
         );
+    }
+
+    toogleCreateAccount() {
+        this.createAccount = !this.createAccount;
     }
     requestResetPassword() {
         this.reseting = true;
